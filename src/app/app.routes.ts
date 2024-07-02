@@ -11,18 +11,18 @@ export const routes: Routes = [
         path: '',
         component: UserComponent,
         children: [
-          { path: '', component: HomeComponent },
-          { path: 'login', component: LoginComponent },
-          { path: 'register', component: RegisterComponent },
+            { path: '', component: HomeComponent },
+            { path: 'login', component: LoginComponent },
+            { path: 'register', component: RegisterComponent },
         ]
-      },
-      {
+    },
+    {
         path: 'admin',
-        component:AdminComponent,
+        component: AdminComponent,
         children: [
-          { path: 'dashboard', component: DashboardComponent }
+            { path: 'dashboard', component: DashboardComponent }
         ]
-      },
+    },
     //   {path:'**', component:Error404Component},
 
 ];
