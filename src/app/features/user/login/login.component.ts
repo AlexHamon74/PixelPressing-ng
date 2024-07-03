@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         (token) => {
           console.log('Token received:', token); // Pour déboguer
           this.authService.saveToken(token.token);
-          this.router.navigate(['admin/dashboard']); // Redirection après connexion réussie
+          this.router.navigate(['home']);
         },
         error => {
           console.error('Login failed', error);
