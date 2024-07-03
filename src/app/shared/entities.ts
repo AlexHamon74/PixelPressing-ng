@@ -6,3 +6,9 @@ export interface ICredentials {
 export interface IToken {
     token: string;
 }
+
+export interface itemsInterface{
+    id: number;
+    name: string;
+    image:string;
+}

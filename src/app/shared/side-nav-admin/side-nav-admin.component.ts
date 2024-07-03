@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-side-nav-admin',
@@ -11,8 +12,12 @@ import { RouterLink } from '@angular/router';
 })
 export class SideNavAdminComponent {
 
-  isExpanded: boolean = false;
+  authService = inject(AuthService)
+  logout(){
+  this.authService.logout();
+}
 
+  isExpanded: boolean = false;
   toggleSidebar() {
     this.isExpanded = !this.isExpanded;
   }

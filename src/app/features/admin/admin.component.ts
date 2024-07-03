@@ -1,7 +1,7 @@
 
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { SideNavAdminComponent } from './side-nav-admin/side-nav-admin.component';
+import { SideNavAdminComponent } from '../../shared/side-nav-admin/side-nav-admin.component';
 
 @Component({
   selector: 'app-admin',

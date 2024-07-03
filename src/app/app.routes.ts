@@ -6,6 +6,7 @@ import { DashboardComponent } from './features/admin/dashboard/dashboard.compone
 import { UserComponent } from './features/user/user.component';
 import { AdminComponent } from './features/admin/admin.component';
 import { authGuard } from './core/guards/auth.guard';
+import { ItemListComponent } from './features/admin/items/item-list/item-list.component';
 
 export const routes: Routes = [
     {
@@ -21,7 +22,8 @@ export const routes: Routes = [
         path: 'admin',
         component: AdminComponent,
         children: [
-            { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] }
+            { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
+            { path: 'item-list', component: ItemListComponent, canActivate: [authGuard] },
         ]
     },
       {path:'**', redirectTo:'' },
