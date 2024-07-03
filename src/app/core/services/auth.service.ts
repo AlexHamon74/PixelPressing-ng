@@ -1,10 +1,36 @@
-import { Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable, signal } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { IToken } from '../../shared/entities';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private url = 'http://localhost:8000/api';
+  http = inject(HttpClient);
+  router = inject(Router)
 
-  currentUser = signal<undefined | null>(undefined);
+  login(credentials: { username: string; password: string }): Observable<IToken> {
+    return this.http.post<IToken>(`${this.url}/login_check`, credentials);
+  }
 
+  saveToken(token: string): void {
+    localStorage.setItem('token', token);
+  }
+
+  isLogged(): boolean {
+    const token = localStorage.getItem('token');
+    return !!token;
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    this.router.navigate(['login']);
+  }
 }
