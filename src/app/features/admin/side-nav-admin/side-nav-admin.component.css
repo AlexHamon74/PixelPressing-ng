@@ -15,11 +15,6 @@ li {
     list-style: none;
 }
 
-h1 {
-    font-weight: 600;
-    font-size: 1.5rem;
-}
-
 /* body {
     font-family: 'Poppins', sans-serif;
 } */
@@ -44,6 +39,7 @@ h1 {
     background-color: #0e2238;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 #sidebar.expand {

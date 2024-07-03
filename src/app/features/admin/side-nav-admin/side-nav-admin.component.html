@@ -1,60 +1,57 @@
-<div class="wrapper">
-    <aside id="sidebar" [ngClass]="{'expand': isExpanded}">
-        <div class="d-flex">
-            <button class="toggle-btn" (click)="toggleSidebar()" type="button">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-            <div class="sidebar-logo">
-                <a href="#">PixelPressing</a>
-            </div>
-        </div>
-        <ul class="sidebar-nav">
-            <li class="sidebar-item">
-                <a routerLink="dashboard" class="sidebar-link">
-                    <i class="fa-solid fa-table-columns"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                    data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                    <i class="fa-solid fa-users"></i>
-                    <span>Utilisateurs</span>
-                </a>
-                <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Clients</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Employée</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
-                    <i class="fa-solid fa-shirt"></i>
-                    <span>Articles</span>
-                </a>
-            </li>
-            <li class="sidebar-item mb-5">
-                <a href="#" class="sidebar-link">
-                    <i class="fa-solid fa-hand-holding-heart"></i>
-                    <span>Services</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <span>Se deconnecter</span>
-                </a>
-            </li>
-        </ul>
-    </aside>
-    <div class="main p-3">
-        <div class="text-center">
-            <h1>
-                Sidebar Bootstrap 5
-            </h1>
+<aside id="sidebar" [ngClass]="{'expand': isExpanded}">
+    <div class="d-flex">
+        <button class="toggle-btn" (click)="toggleSidebar()" type="button">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="sidebar-logo">
+            <a routerLink="dashboard">PixelPressing</a>
         </div>
     </div>
-</div>
+    <ul class="sidebar-nav">
+        <li class="sidebar-item">
+            <a routerLink="dashboard" class="sidebar-link">
+                <i class="fa-solid fa-table-columns"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth"
+                aria-expanded="false" aria-controls="auth">
+                <i class="fa-solid fa-users"></i>
+                <span>Utilisateurs</span>
+            </a>
+            <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">Clients</a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">Employée</a>
+                </li>
+            </ul>
+        </li>
+        <li class="sidebar-item">
+            <a href="#" class="sidebar-link">
+                <i class="fa-solid fa-shirt"></i>
+                <span>Articles</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="#" class="sidebar-link">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <span>Services</span>
+            </a>
+        </li>
+        <li class="sidebar-item mb-5">
+            <a href="#" class="sidebar-link">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <span>Commandes</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="#" class="sidebar-link">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Se deconnecter</span>
+            </a>
+        </li>
+    </ul>
+</aside>

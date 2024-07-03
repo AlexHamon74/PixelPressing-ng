@@ -7,7 +7,7 @@ import { SideNavAdminComponent } from './side-nav-admin/side-nav-admin.component
   selector: 'app-admin',
   standalone: true,
   imports: [RouterLink, RouterOutlet, SideNavAdminComponent],
-  template: '<app-side-nav-admin /> <router-outlet />',
+  template: '<router-outlet />',
   styleUrl: 'admin.component.css'
 })
 export class AdminComponent {
