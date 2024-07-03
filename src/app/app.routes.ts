@@ -5,6 +5,7 @@ import { RegisterComponent } from './features/user/register/register.component';
 import { DashboardComponent } from './features/admin/dashboard/dashboard.component';
 import { UserComponent } from './features/user/user.component';
 import { AdminComponent } from './features/admin/admin.component';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -20,9 +21,9 @@ export const routes: Routes = [
         path: 'admin',
         component: AdminComponent,
         children: [
-            { path: 'dashboard', component: DashboardComponent }
+            { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] }
         ]
     },
-    //   {path:'**', component:Error404Component},
+      {path:'**', redirectTo:'' },
 
 ];
