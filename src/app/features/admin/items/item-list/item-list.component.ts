@@ -25,7 +25,19 @@ export class ItemListComponent implements OnInit{
   getItems(){
     this.dataItems = this.service.fetchAll().subscribe(data => {
       console.log(this.items = data);
-      this.items = data
-    })
+      this.items = data })
+  };
+
+  confirmDelete(item: itemsInterface) {
+    if (confirm(`Are you sure you want to delete ${item.name}?`)) {
+      this.deleteItem(item.id);
+    }
   }
+
+  deleteItem(id: number) {
+    this.service.deleteItem(id).subscribe(() => {
+      this.items = this.items.filter(item => item.id !== id);
+    });
+  }
+
 }

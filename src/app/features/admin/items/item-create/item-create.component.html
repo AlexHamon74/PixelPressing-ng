@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <h1 class="h2 display-5"> Créer un nouvel article </h1>
 
-            <form [formGroup]="createItemForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="createItemForm" (ngSubmit)="onSubmit()" data-bs-theme="dark">
 
                     <div class="mb-3">
                         <label for="name">Nom</label>
@@ -13,8 +13,12 @@
 
                     <div class="mb-3">
                         <label for="category">Categorie</label>
-                        <input id="category" type="text" formControlName="category" class="form-control">
+                        <select id="category" formControlName="category" class="form-select">
+                            <option selected>Open this select menu</option>
+                            <option *ngFor="let category of categories" value="/api/categories/{{category.id}}">{{ category.name }}</option>
+                        </select>
                     </div>
+                      
 
                     <div class="mb-3">
                         <label for="price">Prix</label>
@@ -26,7 +30,7 @@
                         <input id="image" type="text" formControlName="image" class="form-control">
                     </div>
 
-                <button class="btn btn-primary" type="submit" [disabled]="createItemForm.invalid">Valider</button>
+                <button class="btn btn-primary" type="submit">Valider</button>
             </form>
 
         </div>

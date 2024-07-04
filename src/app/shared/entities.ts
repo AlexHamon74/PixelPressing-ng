@@ -23,3 +23,10 @@ export interface itemsInterface{
     price: number;
     image:string;
 }
+
+export interface categoryInterface{
+    id: number;
+    name: string;
+    description: string;
+    image:string;
+}
