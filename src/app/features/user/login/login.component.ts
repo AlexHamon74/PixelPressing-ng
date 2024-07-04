@@ -18,15 +18,13 @@ export class LoginComponent {
   router = inject(Router);
 
     public loginForm: FormGroup = new FormGroup({
-      credentials: new FormGroup({
         username: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [Validators.required, ])
-      })
     });
  
   onSubmit() {
     if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value.credentials;
+      const { username, password } = this.loginForm.value;
       this.authService.login({ username, password }).subscribe(
         (token) => {
           console.log('Token received:', token);

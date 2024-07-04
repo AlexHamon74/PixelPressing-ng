@@ -16,7 +16,6 @@ export class RegisterComponent {
   router = inject(Router);
 
   public registerForm:FormGroup = new FormGroup ({
-
     email: new FormControl('', [Validators.required, ]),
     password: new FormControl('', [Validators.required, ]),
     name: new FormControl('', [Validators.required, ]),
@@ -24,7 +23,6 @@ export class RegisterComponent {
     adress: new FormControl('', [Validators.required, ]),
     gender: new FormControl('', [Validators.required, ]),
     birthdate: new FormControl('', [Validators.required, ]),
-    
   })
 
   onSubmit() {
