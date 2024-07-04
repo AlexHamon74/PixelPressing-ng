@@ -1,23 +1,22 @@
-import { Component, inject, OnInit, runInInjectionContext } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { SideNavAdminComponent } from '../../../../shared/side-nav-admin/side-nav-admin.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { categoryInterface } from '../../../../shared/entities';
+import { CategoryService } from '../../../../core/services/category.service';
 import { ItemService } from '../../../../core/services/item.service';
 import { Router } from '@angular/router';
-import { categoryInterface, itemsInterface } from '../../../../shared/entities';
-import { Subscription } from 'rxjs';
-import { CategoryService } from '../../../../core/services/category.service';
-import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-item-create',
+  selector: 'app-item-edit',
   standalone: true,
-  imports: [SideNavAdminComponent, ReactiveFormsModule, NgFor],
-  templateUrl: './item-create.component.html',
-  styleUrl: './item-create.component.css'
+  imports: [SideNavAdminComponent, ReactiveFormsModule],
+  templateUrl: './item-edit.component.html',
+  styleUrl: './item-edit.component.css'
 })
-export class ItemCreateComponent implements OnInit{
-  
-  createItemForm!: FormGroup;
+export class ItemEditComponent implements OnInit{
+
+  editItemForm!: FormGroup;
   itemService = inject(ItemService);
   router = inject(Router);
 
@@ -27,7 +26,7 @@ export class ItemCreateComponent implements OnInit{
 
 
   ngOnInit() {
-    this.createItemForm = new FormGroup({
+    this.editItemForm = new FormGroup({
         name: new FormControl('', [Validators.required]),
         category: new FormControl('', [Validators.required]),
         price: new FormControl('', [Validators.required]),
@@ -36,13 +35,9 @@ export class ItemCreateComponent implements OnInit{
     this.getCategories();
   }
 
-  onSubmit() {
-    this.itemService.createItem(this.createItemForm.value).subscribe({
-      next: () => {
-        // Redirection après la création (optionnel)
-        this.router.navigate(['../item-list']);
-      },
-    });
+
+  onSubmit(){
+
   }
 
   getCategories(){
@@ -50,4 +45,5 @@ export class ItemCreateComponent implements OnInit{
       console.log(this.categories);
       this.categories = data })
   };
+
 }

@@ -25,4 +25,13 @@ export class ItemService {
   deleteItem(id: number): Observable<void> {
     return this.http.delete<void>(`${this.url}/${id}`);
   }
+
+  updateItem(updatedItem: itemsInterface): Observable<itemsInterface> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/ld+json' });
+    return this.http.put<itemsInterface>(`${this.url}/${updatedItem.id}`, updatedItem, { headers });
+  }
+
+  getItemById(id: number): Observable<itemsInterface> {
+    return this.http.get<itemsInterface>(`${this.url}/${id}`);
+  }
 }

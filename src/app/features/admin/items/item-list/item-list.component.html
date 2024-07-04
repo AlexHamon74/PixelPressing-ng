@@ -21,7 +21,7 @@
                     <td>{{item.name}}</td>
                     <td>{{item.price}} €</td>
                     <td>{{item.category}}</td>
-                    <td><button class="btn btn-success">Editer</button></td>
+                    <td><button routerLink="../item-edit/{{item.id}}" class="btn btn-success">Editer</button></td>
                     <td><button (click)="confirmDelete(item)" class="btn btn-danger">Supprimer</button></td>
                   </tr>
                 </tbody>

@@ -8,6 +8,7 @@ import { AdminComponent } from './features/admin/admin.component';
 import { authGuard } from './core/guards/auth.guard';
 import { ItemListComponent } from './features/admin/items/item-list/item-list.component';
 import { ItemCreateComponent } from './features/admin/items/item-create/item-create.component';
+import { ItemEditComponent } from './features/admin/items/item-edit/item-edit.component';
 
 export const routes: Routes = [
     {
@@ -26,6 +27,7 @@ export const routes: Routes = [
             { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
             { path: 'item-list', component: ItemListComponent, canActivate: [authGuard] },
             { path: 'item-create', component: ItemCreateComponent, canActivate: [authGuard] },
+            { path: 'item-edit/:id', component: ItemEditComponent, canActivate: [authGuard] },
         ]
     },
       {path:'**', redirectTo:'' },
