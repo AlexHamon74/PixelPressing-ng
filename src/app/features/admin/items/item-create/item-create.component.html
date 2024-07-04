@@ -1,1 +1,35 @@
-<p>item-create works!</p>
+<div class="wrapper">
+    <app-side-nav-admin></app-side-nav-admin>
+    <div class="main p-4 bg-dark text-light">
+        <div class="container-fluid">
+            <h1 class="h2 display-5"> Créer un nouvel article </h1>
+
+            <form [formGroup]="createItemForm" (ngSubmit)="onSubmit()">
+
+                    <div class="mb-3">
+                        <label for="name">Nom</label>
+                        <input id="name" type="text" formControlName="name" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="category">Categorie</label>
+                        <input id="category" type="text" formControlName="category" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="price">Prix</label>
+                        <input id="price" type="number" formControlName="price" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="image">Image</label>
+                        <input id="image" type="text" formControlName="image" class="form-control">
+                    </div>
+
+                <button class="btn btn-primary" type="submit" [disabled]="createItemForm.invalid">Valider</button>
+            </form>
+
+        </div>
+
+    </div>
+</div>

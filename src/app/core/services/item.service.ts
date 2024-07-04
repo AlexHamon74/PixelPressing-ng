@@ -16,4 +16,8 @@ export class ItemService {
       map(response => response['hydra:member'])
     )
   }
+
+  createItem(newItem: itemsInterface): Observable<itemsInterface> {
+    return this.http.post<itemsInterface>(this.url, newItem)
+  }
 }

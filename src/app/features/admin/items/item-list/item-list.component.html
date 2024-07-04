@@ -1,11 +1,31 @@
 <div class="wrapper">
     <app-side-nav-admin></app-side-nav-admin>
-    <div class="main p-3">
-        <h1 class="mb-5 h2 display-5"> Nos Articles </h1>
-        <div class="row">
-            <div class="col-3" *ngFor="let item of items">
-                {{item.name}}
-            </div>
+    <div class="main p-4 bg-dark">
+      <div class="container-fluid">
+        <h1 class="h2 display-5 text-light"> Nos Articles </h1>
+        <button routerLink="../item-create" class="btn btn-primary mb-5">Créer un nouvel article</button>
+            <table class="table-dark table text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Editer</th>
+                    <th scope="col">Supprimer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr  *ngFor="let item of items">
+                    <th scope="row">{{item.id}}</th>
+                    <td>{{item.name}}</td>
+                    <td>{{item.price}} €</td>
+                    <td>{{item.category}}</td>
+                    <td><button class="btn btn-success">Editer</button></td>
+                    <td><button class="btn btn-danger">Supprimer</button></td>
+                  </tr>
+                </tbody>
+              </table>
         </div>
     </div>
 </div>
