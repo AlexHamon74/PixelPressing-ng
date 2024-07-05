@@ -5,11 +5,12 @@ import { ItemService } from '../../../../core/services/item.service';
 import { NgFor } from '@angular/common';
 import { categoryInterface, itemsInterface } from '../../../../shared/entities';
 import { CategoryService } from '../../../../core/services/category.service';
+import { ModalDeleteComponent } from '../../../../shared/modal-delete/modal-delete.component';
 
 @Component({
   selector: 'app-item-list',
   standalone: true,
-  imports: [RouterLink, SideNavAdminComponent, NgFor],
+  imports: [RouterLink, SideNavAdminComponent, NgFor, ModalDeleteComponent],
   templateUrl: './item-list.component.html',
   styleUrl: './item-list.component.css'
 })
@@ -51,16 +52,18 @@ export class ItemListComponent implements OnInit {
 
 
   // FONCTION POUR DELETE UN ITEM
-  // POUR ALLER PLUS LOINS INSERER UN MODALE POUR CONFIRMER LA SUPRESSION
+  currentItem: itemsInterface | null = null;
   confirmDelete(item: itemsInterface) {
-    if (confirm(`Etes-vous sûr de vouloir supprimer : ${item.name}?`)) {
-      this.deleteItem(item.id);
-    };
-  };
+    this.currentItem = item;
+  }
 
-  deleteItem(id: number) {
-    this.itemService.deleteItem(id).subscribe(() => {
-      this.items = this.items.filter(item => item.id !== id);
-    });
+  deleteItem() {
+    if (this.currentItem) {
+      this.itemService.deleteItem(this.currentItem.id).subscribe(() => {
+        // Après la suppression réussie, mettre à jour la liste des items
+        this.getItems();
+        this.currentItem = null; // Réinitialiser currentItem après la suppression
+      });
+    }
   }
 }
