@@ -16,15 +16,16 @@ export interface IUser {
     birthdate:string;
 }
 
-export interface itemsInterface{
+export interface itemsInterface {
     id: number;
     name: string;
-    category: string;
+    category: categoryInterface | undefined;
     price: number;
-    image:string;
+    image: string;
 }
 
 export interface categoryInterface{
+    split: any;
     id: number;
     name: string;
     description: string;
