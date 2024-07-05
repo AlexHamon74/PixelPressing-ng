@@ -3,12 +3,13 @@ import { inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IToken, IUser } from '../../shared/entities';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private url = 'http://localhost:8000/api';
+  private url = environment.apiURL;
   http = inject(HttpClient);
   router = inject(Router)
 

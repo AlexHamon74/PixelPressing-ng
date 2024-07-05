@@ -8,11 +8,11 @@ import { categoryInterface } from '../../shared/entities';
 })
 export class CategoryService {
 
-  private url = 'http://localhost:8000/api/categories';
+  private url = 'http://localhost:8000/api';
   http = inject(HttpClient);
 
   fetchAll(): Observable<categoryInterface[]>{
-    return this.http.get<any>(this.url).pipe(
+    return this.http.get<any>(`${this.url}/categories`).pipe(
       map(response => response['hydra:member'])
     )
   }
