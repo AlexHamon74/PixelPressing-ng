@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SideNavAdminComponent } from '../../../../shared/side-nav-admin/side-nav-admin.component';
 import { ItemService } from '../../../../core/services/item.service';
@@ -19,10 +19,14 @@ export class ItemListComponent implements OnInit {
   //On déclare les variables
   items: itemsInterface[] = [];
   categories: categoryInterface[] = [];
+  currentItem: itemsInterface | null = null;
 
   //On inject les services
   itemService = inject(ItemService);
   categoryService = inject(CategoryService);
+
+  @ViewChild(ModalDeleteComponent) modalDeleteComponent!: ModalDeleteComponent;
+
 
   //Methode pour initialiser le composant
   ngOnInit(): void {
@@ -50,20 +54,15 @@ export class ItemListComponent implements OnInit {
     });
   };
 
-
-  // FONCTION POUR DELETE UN ITEM
-  currentItem: itemsInterface | null = null;
+  //Fonction pour définir l'élément actuel à supprimer
   confirmDelete(item: itemsInterface) {
     this.currentItem = item;
   }
 
+  //Fonction pour supprimer l'élément actuel
   deleteItem() {
-    if (this.currentItem) {
-      this.itemService.deleteItem(this.currentItem.id).subscribe(() => {
-        // Après la suppression réussie, mettre à jour la liste des items
-        this.getItems();
-        this.currentItem = null; // Réinitialiser currentItem après la suppression
-      });
-    }
+    this.currentItem = null;
+    this.getItems();
+    this.modalDeleteComponent.closeModal();
   }
 }
