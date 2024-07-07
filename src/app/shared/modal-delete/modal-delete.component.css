@@ -1,0 +1,14 @@
+.modal-dark {
+    background-color: #343a40; /* Couleur de fond foncée */
+    color: #ffffff; /* Texte en blanc */
+    border: none; /* Retirer les bordures si nécessaire */
+}
+
+.modal-dark .modal-header,
+.modal-dark .modal-footer {
+    border-color: #444; /* Bordure foncée */
+}
+
+.modal-dark .btn-close {
+    filter: invert(1); /* Inverse les couleurs de la croix de fermeture */
+}
