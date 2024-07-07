@@ -1,5 +1,3 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap'); */
-
 ::after,
 ::before {
     box-sizing: border-box;
@@ -13,22 +11,6 @@ a {
 
 li {
     list-style: none;
-}
-
-/* body {
-    font-family: 'Poppins', sans-serif;
-} */
-
-.wrapper {
-    display: flex;
-}
-
-.main {
-    min-height: 100vh;
-    width: 100%;
-    overflow: hidden;
-    transition: all 0.35s ease-in-out;
-    background-color: #fafbfe;
 }
 
 #sidebar {

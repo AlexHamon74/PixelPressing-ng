@@ -1,6 +1,6 @@
 <div class="wrapper">
-    <app-side-nav-admin></app-side-nav-admin>
-    <div class="main p-4 bg-dark">
+  <app-side-nav-admin></app-side-nav-admin>
+  <div class="main p-4 bg-dark">
       <div class="container-fluid table-responsive">
         <h1 class="h2 display-5 text-light"> Nos Articles </h1>
         <button [routerLink]="['/admin/item-create']" class="btn btn-primary mb-5">Créer un nouvel article</button>
@@ -19,7 +19,7 @@
                   <tr  *ngFor="let item of items">
                     <th scope="row">{{item.id}}</th>
                     <td>{{item.name}}</td>
-                    <td>{{item.price}}€</td>
+                    <td>{{item.price}} €</td>
                     <td>{{item.category?.name}}</td>
                     <td><button [routerLink]="(['/admin/item-edit', item.id])" class="btn btn-success">Editer</button></td>
                     <td><button (click)="confirmDelete(item)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">Supprimer</button></td>

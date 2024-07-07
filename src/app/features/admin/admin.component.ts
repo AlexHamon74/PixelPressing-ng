@@ -8,7 +8,6 @@ import { SideNavAdminComponent } from '../../shared/side-nav-admin/side-nav-admi
   standalone: true,
   imports: [RouterLink, RouterOutlet, SideNavAdminComponent],
   template: '<router-outlet />',
-  styleUrl: 'admin.component.css'
 })
 export class AdminComponent {
 

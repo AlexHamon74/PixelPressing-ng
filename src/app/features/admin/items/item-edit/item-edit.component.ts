@@ -13,7 +13,8 @@ import { NgFor } from '@angular/common';
   standalone: true,
   imports: [SideNavAdminComponent, ReactiveFormsModule, NgFor],
   templateUrl: './item-edit.component.html',
-  styleUrl: './item-edit.component.css'
+  styleUrl: '../../admin-style.css'
+
 })
 export class ItemEditComponent implements OnInit, OnDestroy {
 

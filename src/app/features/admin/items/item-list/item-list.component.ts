@@ -12,7 +12,7 @@ import { ModalDeleteComponent } from '../../../../shared/modal-delete/modal-dele
   standalone: true,
   imports: [RouterLink, SideNavAdminComponent, NgFor, ModalDeleteComponent],
   templateUrl: './item-list.component.html',
-  styleUrl: './item-list.component.css'
+  styleUrl: '../../admin-style.css'
 })
 export class ItemListComponent implements OnInit {
 
