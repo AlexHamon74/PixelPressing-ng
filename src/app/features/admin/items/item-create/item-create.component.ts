@@ -20,12 +20,12 @@ export class ItemCreateComponent implements OnInit, OnDestroy{
   
   //On déclare les variables
   createItemForm!: FormGroup;
-  itemService = inject(ItemService);
-  router = inject(Router);
-
-  //On inject les services
   dataCategories !: Subscription;
   categories: categoryInterface[] = [];
+  
+  //On inject les services
+  router = inject(Router);
+  itemService = inject(ItemService);
   categoryService = inject(CategoryService);
 
   //Methode pour initialiser le composant

@@ -31,3 +31,11 @@ export interface categoryInterface{
     description: string;
     image:string;
 }
+
+export interface serviceInterface{
+    id: number;
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+}

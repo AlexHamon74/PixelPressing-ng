@@ -9,6 +9,9 @@ import { authGuard } from './core/guards/auth.guard';
 import { ItemListComponent } from './features/admin/items/item-list/item-list.component';
 import { ItemCreateComponent } from './features/admin/items/item-create/item-create.component';
 import { ItemEditComponent } from './features/admin/items/item-edit/item-edit.component';
+import { ServiceListComponent } from './features/admin/servicesItem/service-list/service-list.component';
+import { ServiceCreateComponent } from './features/admin/servicesItem/service-create/service-create.component';
+import { ServiceEditComponent } from './features/admin/servicesItem/service-edit/service-edit.component';
 
 export const routes: Routes = [
     {
@@ -25,9 +28,13 @@ export const routes: Routes = [
         component: AdminComponent,
         children: [
             { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
+
             { path: 'item-list', component: ItemListComponent, canActivate: [authGuard] },
             { path: 'item-create', component: ItemCreateComponent, canActivate: [authGuard] },
             { path: 'item-edit/:id', component: ItemEditComponent, canActivate: [authGuard] },
+            { path: 'service-list', component: ServiceListComponent, canActivate: [authGuard] },
+            { path: 'service-create', component: ServiceCreateComponent, canActivate: [authGuard] },
+            { path: 'service-edit/:id', component: ServiceEditComponent, canActivate: [authGuard] },
         ]
     },
       {path:'**', redirectTo:'' },

@@ -1,0 +1,36 @@
+<div class="wrapper">
+    <app-side-nav-admin></app-side-nav-admin>
+    <div class="main p-4 bg-dark text-light">
+        <div class="container-fluid">
+            <h1 class="h2 display-5"> Créer un nouveau Service </h1>
+
+            <form [formGroup]="createServiceForm" (ngSubmit)="onSubmit()" data-bs-theme="dark">
+
+                    <div class="mb-3">
+                        <label for="name">Nom</label>
+                        <input id="name" type="text" formControlName="name" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description">Description</label>
+                        <input id="description" type="text" formControlName="description" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="image">Image</label>
+                        <input id="image" type="text" formControlName="image" class="form-control">
+                    </div>
+                      
+
+                    <div class="mb-3">
+                        <label for="price">Prix</label>
+                        <input id="price" type="number" formControlName="price" class="form-control">
+                    </div>
+
+                <button class="btn btn-primary" type="submit">Valider</button>
+            </form>
+
+        </div>
+
+    </div>
+</div>
