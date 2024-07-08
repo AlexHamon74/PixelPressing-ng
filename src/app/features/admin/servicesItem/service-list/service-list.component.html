@@ -20,10 +20,11 @@
                         <td>{{service.name}}</td>
                         <td>{{service.price}} €</td>
                         <td><button [routerLink]="(['/admin/service-edit', service.id])" class="btn btn-success">Editer</button></td>
-                        <td><button class="btn btn-danger">Supprimer</button></td>
+                        <td><button (click)="confirmDelete(service)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">Supprimer</button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+<app-modal-delete [currentService]="currentService" (objectDeleted)="onServiceDeleted()"></app-modal-delete>

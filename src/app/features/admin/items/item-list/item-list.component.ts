@@ -60,8 +60,7 @@ export class ItemListComponent implements OnInit {
   }
 
   //Fonction pour supprimer l'élément actuel
-  deleteItem() {
-    this.currentItem = null;
+  onItemDeleted() {
     this.getItems();
     this.modalDeleteComponent.closeModal();
   }

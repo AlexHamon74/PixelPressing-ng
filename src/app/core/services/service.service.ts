@@ -32,4 +32,8 @@ export class ServiceService {
     return this.http.put<serviceInterface>(`${this.url}/services/${updateService.id}`, updateService, {headers})
   };
 
+  deleteService(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/services/${id}`);
+  };
+
 }

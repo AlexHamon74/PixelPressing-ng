@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Inject, Input, Output, inject } from '@angular/core';
-import { itemsInterface } from '../entities';
+import { itemsInterface, serviceInterface } from '../entities';
 import { ItemService } from '../../core/services/item.service';
+import { ServiceService } from '../../core/services/service.service';
 
 @Component({
   selector: 'app-modal-delete',
@@ -11,9 +12,11 @@ import { ItemService } from '../../core/services/item.service';
 })
 export class ModalDeleteComponent {
   @Input() currentItem: itemsInterface | null = null;
-  @Output() itemDeleted = new EventEmitter<void>();
+  @Input() currentService: serviceInterface | null = null;
+  @Output() objectDeleted = new EventEmitter<void>();
 
   itemService = inject(ItemService);
+  serviceService = inject(ServiceService);
 
   //Fonction pour fermer le modal
   closeModal() {
@@ -29,11 +32,15 @@ export class ModalDeleteComponent {
     }
   }
 
-  //Fonction pour supprimer l'élément actuel
-  deleteItem() {
+  // Fonction pour supprimer l'élément actuel
+  deleteObject() {
     if (this.currentItem) {
       this.itemService.deleteItem(this.currentItem.id).subscribe(() => {
-        this.itemDeleted.emit();
+        this.objectDeleted.emit();
+      });
+    } else if (this.currentService) {
+      this.serviceService.deleteService(this.currentService.id).subscribe(() => {
+        this.objectDeleted.emit();
       });
     }
   }
