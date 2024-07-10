@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
-        <a class="navbar-brand" routerLink="">Logo</a>
+        <a class="navbar-brand" routerLink="">
+            <img src="img/logoPressing.webp" alt="Logo Pressing" class="">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,19 +10,37 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="">Home</a>
+                    <a class="nav-link" routerLink="">Accueil</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="">Nos Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="">Commander</a>
+                </li>
+                <li class="nav-item" *ngIf="authService.isLogged() && (authService.hasRole('ROLE_ADMIN') || authService.hasRole('ROLE_EMPLOYEE'))">
+                    <a class="nav-link" routerLink="admin/dashboard">Dashboard</a>
+                </li>
+
+
                 <li class="nav-item" *ngIf="!authService.isLogged()">
                     <a class="nav-link" routerLink="login">Login</a>
                 </li>
                 <li class="nav-item" *ngIf="!authService.isLogged()">
                     <a class="nav-link" routerLink="register">Register</a>
                 </li>
-                <li class="nav-item" *ngIf="authService.isLogged() && (authService.hasRole('ROLE_ADMIN') || authService.hasRole('ROLE_EMPLOYEE'))">
-                    <a class="nav-link" routerLink="admin/dashboard">Dashboard</a>
+                <li class="nav-item dropdown" *ngIf="authService.isLogged()">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown link
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Mon profil</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" (click)="logout()">Se deconnecter</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item" *ngIf="authService.isLogged()">
-                    <button class="nav-link btn" (click)="logout()">Logout</button>
+                    <i class="fa-solid fa-cart-shopping"></i>
                 </li>
             </ul>
         </div>
