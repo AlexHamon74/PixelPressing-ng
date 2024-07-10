@@ -1,14 +1,14 @@
 import { CanActivate, Router } from "@angular/router";
 import { AuthService } from "../services/auth.service";
 import { inject, Injectable } from "@angular/core";
-
 @Injectable({
-  providedIn: 'root' // Ensure AuthGuard is provided at root level
+  providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  //Cette fonction vérifie si le user est connecté et qual est son rôle
   canActivate(): boolean {
     if (this.authService.isLogged()) {
       const userRoles = this.authService.getUserRoles();
