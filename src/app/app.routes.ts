@@ -5,7 +5,7 @@ import { RegisterComponent } from './features/user/register/register.component';
 import { DashboardComponent } from './features/admin/dashboard/dashboard.component';
 import { UserComponent } from './features/user/user.component';
 import { AdminComponent } from './features/admin/admin.component';
-import { authGuard } from './core/guards/auth.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 import { ItemListComponent } from './features/admin/items/item-list/item-list.component';
 import { ItemCreateComponent } from './features/admin/items/item-create/item-create.component';
 import { ItemEditComponent } from './features/admin/items/item-edit/item-edit.component';
@@ -27,14 +27,14 @@ export const routes: Routes = [
         path: 'admin',
         component: AdminComponent,
         children: [
-            { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
+            { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
 
-            { path: 'item-list', component: ItemListComponent, canActivate: [authGuard] },
-            { path: 'item-create', component: ItemCreateComponent, canActivate: [authGuard] },
-            { path: 'item-edit/:id', component: ItemEditComponent, canActivate: [authGuard] },
-            { path: 'service-list', component: ServiceListComponent, canActivate: [authGuard] },
-            { path: 'service-create', component: ServiceCreateComponent, canActivate: [authGuard] },
-            { path: 'service-edit/:id', component: ServiceEditComponent, canActivate: [authGuard] },
+            { path: 'item-list', component: ItemListComponent, canActivate: [AuthGuard] },
+            { path: 'item-create', component: ItemCreateComponent, canActivate: [AuthGuard] },
+            { path: 'item-edit/:id', component: ItemEditComponent, canActivate: [AuthGuard] },
+            { path: 'service-list', component: ServiceListComponent, canActivate: [AuthGuard] },
+            { path: 'service-create', component: ServiceCreateComponent, canActivate: [AuthGuard] },
+            { path: 'service-edit/:id', component: ServiceEditComponent, canActivate: [AuthGuard] },
         ]
     },
       {path:'**', redirectTo:'' },

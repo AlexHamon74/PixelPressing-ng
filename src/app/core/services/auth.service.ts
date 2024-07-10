@@ -34,6 +34,20 @@ export class AuthService {
     localStorage.removeItem('token');
     this.router.navigate(['login']);
   }
+  hasRole(role: string): boolean {
+    const userRoles = this.getUserRoles();
+    return userRoles.includes(role);
+  }
+  
+  getUserRoles(): string[] {
+    const token = this.getToken();
+    if (!token) {
+      return [];
+    }
+    // Exemple : décodez le token JWT pour récupérer les rôles
+    const decodedToken = JSON.parse(atob(token.split('.')[1]));
+    return decodedToken.roles; // Supposons que les rôles sont stockés sous forme de tableau dans le token
+  }
 
   register(user:IUser): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/ld+json' });

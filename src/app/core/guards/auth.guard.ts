@@ -1,16 +1,29 @@
-import { CanActivateFn, Router } from "@angular/router";
+import { CanActivate, Router } from "@angular/router";
 import { AuthService } from "../services/auth.service";
-import { inject } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 
+@Injectable({
+  providedIn: 'root' // Ensure AuthGuard is provided at root level
+})
+export class AuthGuard implements CanActivate {
 
-export const authGuard: CanActivateFn = () => {
-    const authService = inject(AuthService);
-    const router = inject(Router);
-  
-    if (authService.isLogged()) {
-      return true;
+  constructor(private authService: AuthService, private router: Router) {}
+
+  canActivate(): boolean {
+    if (this.authService.isLogged()) {
+      const userRoles = this.authService.getUserRoles();
+      // Vérifie si l'utilisateur a le rôle ROLE_ADMIN ou ROLE_EMPLOYEE
+      if (userRoles.includes('ROLE_ADMIN') || userRoles.includes('ROLE_EMPLOYEE')) {
+        return true;
+      } else {
+        // Redirection vers une page non autorisée ou un autre traitement
+        this.router.navigate(['/']);
+        return false;
+      }
     } else {
-      router.navigate(['/login']);
+      // Si l'utilisateur n'est pas connecté, redirige vers la page de connexion
+      this.router.navigate(['/login']);
       return false;
     }
-  };
+  }
+}
