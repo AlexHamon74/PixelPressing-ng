@@ -1,13 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
-.color-blue{
-    color:#072366 ;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+h1, h2, h3, h4, h5, h6{
+    font-family: "Poppins", sans-serif;
 }
-.bg-color-blue{
-    background-color: #6785FF;;
+p, a, button{
+    font-family: "Space Mono", monospace;
 }
-.bg-color-blue-light{
+
+
+
+.color-blue {
+    color: #072366;
+}
+.bg-color-dark-blue {
+    background-color: #072366;
+}
+
+.bg-color-blue {
+    background-color: #6785FF;
+}
+
+.bg-color-blue-light {
     background-color: #E8EDFF;
 }
-.color-grey{
-    color: 57667E;
+
+.color-grey {
+    color: #57667E;
 }
