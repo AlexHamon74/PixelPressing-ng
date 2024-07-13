@@ -1,41 +1,76 @@
-<div class="container my-5">
-    <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
-  
-        <div class="form-group">
-            <label for="gender">Gender</label>
-            <input type="text" id="gender" class="form-control" formControlName=gender>
-        </div>
+<div class="wrapper">
+    <section class="register">
+        <div class="container">
+            <h1 class="display-2 mb-4">Créer un compte</h1>
+            <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
 
-        <div class="form-group">
-            <label for="firstname">FirstName</label>
-            <input type="text" id="firstname" class="form-control" formControlName=firstname>
-        </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-4">
+                            <label for="firstname">FirstName</label>
+                            <input type="text" id="firstname" class="form-control" formControlName=firstname>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-4">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" class="form-control" formControlName=name>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-4">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" formControlName=email>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-4">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" id="password" class="form-control" formControlName=password>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-4">
+                            <label for="gender">Gender</label>
+                            <input type="text" id="gender" class="form-control" formControlName=gender>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-4">
+                            <label for="birthdate">Birthdate</label>
+                            <input type="date" id="birthdate" class="form-control" formControlName=birthdate>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" class="form-control" formControlName=name>
-        </div>
+                <div class="mb-4">
+                    <label for="adress">Adress</label>
+                    <input type="text" id="adress" class="form-control" formControlName=adress>
+                </div>
 
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" class="form-control" formControlName=email>
+                <button type="submit" class="btn-custom">Créer un compte</button>
+            </form>
         </div>
-
-        <div class="form-group">
-            <label for="password">Mot de passe</label>
-            <input type="password" id="password" class="form-control" formControlName=password>
-        </div>
-
-        <div class="form-group">
-            <label for="adress">Adress</label>
-            <input type="text" id="adress" class="form-control" formControlName=adress>
-        </div>
-
-        <div class="form-group">
-            <label for="birthdate">Birthdate</label>
-            <input type="date" id="birthdate" class="form-control" formControlName=birthdate>
-        </div>
-
-        <button type="submit" class="btn btn-primary mt-4">Créer un compte</button>
-    </form>
+    </section>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
 </div>
