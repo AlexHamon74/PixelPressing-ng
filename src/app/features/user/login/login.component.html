@@ -1,16 +1,36 @@
-<div class="container">
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        
-        <div class="mb-3">
-            <label for="email">Email</label>
-            <input id="email" formControlName="username" class="form-control">
+<div class="wrapper">
+    <section class="login">
+        <div class="container">
+            <h1 class="display-2 mb-4">Connexion</h1>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+                <div class="mb-4">
+                    <label for="email">Email</label>
+                    <input id="email" formControlName="username" class="form-control">
+                </div>
+
+                <div class="mb-4">
+                    <label for="password">Password</label>
+                    <input id="password" type="password" formControlName="password" class="form-control">
+                </div>
+
+                <button class="btn-custom" type="submit">Login</button>
+            </form>
         </div>
-    
-        <div class="mb-3">
-            <label for="password">Password</label>
-            <input id="password" type="password" formControlName="password" class="form-control">
-        </div>
-  
-    <button class="btn btn-primary" type="submit">Login</button>
-  </form>
+    </section>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
+    <div class="dotdiv"><span class="dot"></span></div>
 </div>
