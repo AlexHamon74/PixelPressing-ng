@@ -66,3 +66,9 @@
     height: 100%;
     padding: 60px 0;
 }
+
+.clock{
+    font-size: 120px;
+    text-align: center;
+    display: block;
+}
