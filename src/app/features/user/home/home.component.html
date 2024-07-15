@@ -53,37 +53,26 @@
 
 <section class="services py-5">
     <div class="container">
-        <h2 class="text-center display-5 pb-5">Nos services</h2>
-        <div class="row text-white">
+        <h2 class="text-center display-5 pb-5">Nos Services</h2>
+        <div class="row row-custom text-white">
 
-            <div class="col-lg-6 col-12 pe-lg-0">
-                <img src="img/service1.png" class="img-fluid w-100" alt="">
+            <div class="col-lg-6 col-12">
+                <img src="img/service1.png" class="img-fluid w-100 h-100" alt="">
             </div>
 
-            <div class="col-lg-6 col-12 ps-lg-0">
+            <div *ngFor="let categorie of categories" class="col-lg-6 col-12">
                 <div class="position-relative hover-rotate">
                     <img src="img/service-bg.png" class="img-fluid w-100" alt="">
                     <div class="service-bg-content text-center">
-                        <img src="img/service-icon.png" class="img-fluid effect" alt="">
-                        <h3 class="py-4">Pressing</h3>
-                        <p>The automated process starts as soon as your clothes go into the machine. The outcome is gleaming clothes!!</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-12 pe-lg-0 order-lg-0 order-1">
-                <div class="position-relative hover-rotate">
-                    <img src="img/service-bg.png" class="img-fluid w-100" alt="">
-                    <div class="service-bg-content text-center">
-                        <img src="img/service-icon.png" class="img-fluid effect" alt="">
-                        <h3 class="py-4">Blanchisserie</h3>
-                        <p>The automated process starts as soon as your clothes go into the machine. The outcome is gleaming clothes!!</p>
+                        <img src="img/{{categorie.image}}" class="img-fluid effect" alt="{{categorie.image}}">
+                        <h3 class="py-4">{{categorie.name}}</h3>
+                        <p>{{categorie.description}}</p>
                     </div>
                 </div>
             </div>
             
-            <div class="col-lg-6 col-12 order-0 ps-lg-0 order-lg-1 order-0">
-                <img src="img/service2.png" class="img-fluid w-100" alt="">
+            <div class="col-lg-6 col-12 order-0 order-lg-1">
+                <img src="img/service2.png" class="img-fluid w-100 h-100" alt="">
             </div>
         </div>
     </div>

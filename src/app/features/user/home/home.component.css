@@ -58,6 +58,10 @@
 .hover-rotate:hover .effect {
     transform: rotateY(180deg);
 }
+.row-custom>* {
+    padding-left: 0;
+    padding-right: 0;
+}
 
 /* STYLE SECTION CALL */
 .call{
