@@ -2,7 +2,6 @@
     height: 88vh;
     width: 100%;
     background: linear-gradient(180deg, #6785FF, 5%, #072366, 50%, #030423);
-    position: absolute;
     display: flex;
 }
 
