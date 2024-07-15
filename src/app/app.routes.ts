@@ -12,6 +12,7 @@ import { ItemEditComponent } from './features/admin/items/item-edit/item-edit.co
 import { ServiceListComponent } from './features/admin/servicesItem/service-list/service-list.component';
 import { ServiceCreateComponent } from './features/admin/servicesItem/service-create/service-create.component';
 import { ServiceEditComponent } from './features/admin/servicesItem/service-edit/service-edit.component';
+import { CommanderComponent } from './features/user/commander/commander.component';
 
 export const routes: Routes = [
     {
@@ -21,6 +22,7 @@ export const routes: Routes = [
             { path: '', component: HomeComponent },
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent },
+            { path: 'commander', component: CommanderComponent },
         ]
     },
     {

@@ -14,7 +14,7 @@
                     <a class="nav-lien" routerLink="">Nos Services</a>
                 </li>
                 <li class="nav-item my-lg-0 my-2">
-                    <a class="nav-lien" routerLink="">Commander</a>
+                    <a class="nav-lien" routerLink="commander">Commander</a>
                 </li>
                 <li class="nav-item" *ngIf="authService.isLogged() && (authService.hasRole('ROLE_ADMIN') || authService.hasRole('ROLE_EMPLOYEE'))">
                     <a class="nav-lien" routerLink="admin/dashboard">Dashboard</a>
