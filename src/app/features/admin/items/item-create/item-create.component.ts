@@ -57,11 +57,16 @@ export class ItemCreateComponent implements OnInit, OnDestroy{
 
   //On soumet le formulaire pour créer un nouvel item
   onSubmit() {
-    this.itemService.createItem(this.createItemForm.value).subscribe({
-      next: () => {
-        this.router.navigate(['/admin/item-list']);
-      },
-    });
+    if(this.createItemForm.valid){
+      this.itemService.createItem(this.createItemForm.value).subscribe({
+        next: () => {
+          this.router.navigate(['/admin/item-list']);
+        },
+      });
+    }else{
+      alert('Il y a un probleme');
+    }
+
   };
 
 }

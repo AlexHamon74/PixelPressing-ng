@@ -18,40 +18,24 @@ export class ItemListComponent implements OnInit {
 
   //On déclare les variables
   items: itemsInterface[] = [];
-  categories: categoryInterface[] = [];
   currentItem: itemsInterface | null = null;
 
   //On inject les services
   itemService = inject(ItemService);
-  categoryService = inject(CategoryService);
 
   @ViewChild(ModalDeleteComponent) modalDeleteComponent!: ModalDeleteComponent;
 
 
   //Methode pour initialiser le composant
   ngOnInit(): void {
-    this.getCategories();
+    this.getItems();
   };
 
   //Je recupere tous les items
   getItems() {
-    this.itemService.fetchAll().subscribe(items => {
-      this.items = items.map(item => {
-        //Si catégorie existe on split '/' pour recuperer le reste dans pop()
-        const categoryId = +item.category?.split('/').pop();
-        //Ici je cherche a comparer l'id de catégories dans la liste des categories
-        const category = this.categories.find(cat => cat.id === categoryId);
-        return { ...item, category };
-      });
-    });
-  };
-
-  //Je recupere toutes les catégories et j'appel les items
-  getCategories() {
-    this.categoryService.fetchAll().subscribe(categories => {
-      this.categories = categories;
-      this.getItems();
-    });
+    this.itemService.fetchAll().subscribe(item => {
+      console.log(this.items = item);
+    })
   };
 
   //Fonction pour définir l'élément actuel à supprimer

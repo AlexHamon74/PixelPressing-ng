@@ -19,9 +19,11 @@ export interface IUser {
 export interface itemsInterface {
     id: number;
     name: string;
-    category: categoryInterface | undefined;
     price: number;
     image: string;
+    category: {
+        name:string;
+    }
 }
 
 export interface categoryInterface{

@@ -14,12 +14,11 @@
                     <div class="mb-3">
                         <label for="category">Categorie</label>
                         <select id="category" formControlName="category" class="form-select">
-                            <option selected>Open this select menu</option>
+                            <option value="" disabled selected>Choisir une catégorie</option>
                             <option *ngFor="let category of categories" value="/api/categories/{{category.id}}">{{ category.name }}</option>
                         </select>
                     </div>
                       
-
                     <div class="mb-3">
                         <label for="price">Prix</label>
                         <input id="price" type="number" formControlName="price" class="form-control">
