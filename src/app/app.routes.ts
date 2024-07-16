@@ -13,6 +13,7 @@ import { ServiceListComponent } from './features/admin/servicesItem/service-list
 import { ServiceCreateComponent } from './features/admin/servicesItem/service-create/service-create.component';
 import { ServiceEditComponent } from './features/admin/servicesItem/service-edit/service-edit.component';
 import { CommanderComponent } from './features/user/commander/commander.component';
+import { CustomerUsersListComponent } from './features/admin/users/customerUsers/customer-users-list/customer-users-list.component';
 
 export const routes: Routes = [
     {
@@ -31,6 +32,7 @@ export const routes: Routes = [
         children: [
             { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
 
+            { path: 'customer-user-list', component: CustomerUsersListComponent, canActivate: [AuthGuard] },
             { path: 'item-list', component: ItemListComponent, canActivate: [AuthGuard] },
             { path: 'item-create', component: ItemCreateComponent, canActivate: [AuthGuard] },
             { path: 'item-edit/:id', component: ItemEditComponent, canActivate: [AuthGuard] },

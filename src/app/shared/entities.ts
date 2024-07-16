@@ -7,6 +7,7 @@ export interface IToken {
     token: string;
 }
 export interface IUser {
+    id: number;
     email:string;
     password:string;
     name:string;
@@ -14,6 +15,7 @@ export interface IUser {
     gender:string;
     adress:string;
     birthdate:string;
+    roles: [];
 }
 
 export interface itemsInterface {
