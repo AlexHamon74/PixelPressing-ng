@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { categoryInterface } from '../../../shared/entities';
 import { CategoryService } from '../../../core/services/category.service';
@@ -6,7 +6,7 @@ import { CategoryService } from '../../../core/services/category.service';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, NgClass],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
