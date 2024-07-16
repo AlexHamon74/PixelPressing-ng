@@ -29,7 +29,7 @@ export class CustomerUsersListComponent implements OnInit{
 
   //Je récupère tous les users
   getUsers(){
-    this.userService.fetchAll().subscribe(user => {
+    this.userService.fetchAllCustomers().subscribe(user => {
       this.users = user;
     });
   };

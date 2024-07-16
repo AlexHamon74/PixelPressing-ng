@@ -12,9 +12,10 @@ export class UserService {
   private url = environment.apiURL;
   http = inject(HttpClient);
 
-  fetchAll(): Observable<IUser[]>{
+  fetchAllCustomers(): Observable<IUser[]>{
     return this.http.get<any>(`${this.url}/users`).pipe(
-      map(response => response['hydra:member'])
+      map(response => response['hydra:member']),
+      map(users => users.filter((user: IUser) => !user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_EMPLOYEE')))
     )
   }
 
