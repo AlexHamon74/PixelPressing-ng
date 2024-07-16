@@ -58,7 +58,7 @@ export class ItemEditComponent implements OnInit, OnDestroy {
     this.itemService.getItemById(this.itemId!).subscribe(item => {
       this.editItemForm.patchValue({
         name: item.name,
-        category: item.category,
+        category: `/api/categories/${item.category.id}`,
         price: item.price,
         image: item.image
       });
@@ -75,13 +75,14 @@ export class ItemEditComponent implements OnInit, OnDestroy {
   //On soumet le formulaire de modification
   onSubmit(): void {
     if (this.editItemForm.valid) {
+
       const updatedItem: itemsInterface = this.editItemForm.value;
       updatedItem.id = this.itemId!;
       this.itemService.updateItem(updatedItem).subscribe(() => {
         this.router.navigate(['/admin/item-list']);
       });
+    } else {
+      alert("Le formulaire n'est pas valide.")
     };
   };
-
-
 }

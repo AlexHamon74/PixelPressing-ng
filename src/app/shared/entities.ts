@@ -22,12 +22,12 @@ export interface itemsInterface {
     price: number;
     image: string;
     category: {
+        id:number;
         name:string;
     }
 }
 
 export interface categoryInterface{
-    split: any;
     id: number;
     name: string;
     description: string;
