@@ -7,8 +7,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Etes-vous sûr de vouloir supprimer : 
-                    {{ currentItem?.name || currentService?.name}} ?</p>
+                <p>Etes-vous sûr de vouloir supprimer :<br>
+                    {{ (currentItem?.name || currentService?.name || (currentUser?.name + ' ' + currentUser?.firstname)) }}
+                </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Annuler</button>

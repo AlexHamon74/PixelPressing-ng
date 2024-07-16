@@ -39,9 +39,9 @@ export class CustomerUsersListComponent implements OnInit{
     this.currentUser = user;
   };
 
-    //Fonction pour supprimer l'élément actuel
-    onUserDeleted() {
-      this.getUsers();
-      this.modalDeleteComponent.closeModal();
-    }
+  //Fonction pour supprimer l'élément actuel
+  onUserDeleted() {
+    this.getUsers();
+    this.modalDeleteComponent.closeModal();
+  }
 }

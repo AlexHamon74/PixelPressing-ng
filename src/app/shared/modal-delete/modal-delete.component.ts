@@ -45,7 +45,7 @@ export class ModalDeleteComponent {
       this.serviceService.deleteService(this.currentService.id).subscribe(() => {
         this.objectDeleted.emit();
       });
-    } else if (this.currentItem) {
+    } else if (this.currentUser) {
       this.userService.deleteUser(this.currentUser.id).subscribe(() => {
         this.objectDeleted.emit();
       })
