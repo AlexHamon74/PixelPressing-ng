@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IToken, IUser } from '../../shared/entities';
 import { environment } from '../../../environments/environment';
@@ -13,7 +12,6 @@ export class AuthService {
 
   //Injection des services
   http = inject(HttpClient);
-  router = inject(Router);
 
   //Méthode pour effectuer la connexion
   login(credentials: { username: string; password: string }): Observable<IToken> {
@@ -39,7 +37,6 @@ export class AuthService {
   //Méthode pour se déconnecter
   logout(): void {
     localStorage.removeItem('token');
-    this.router.navigate(['login']);
   };
 
   //Méthode pour vérifier si l'utilisateur a un rôle spécifique

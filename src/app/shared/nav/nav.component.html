@@ -1,45 +1,62 @@
 <nav class="navbar navbar-expand-lg sticky-top border-bottom">
-    <div class="container">
+    <div class="container-fluid">
         <a class="navbar-brand" routerLink=""><img src="img/logoPressing.png" alt="Logo Pressing" class="logo"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item my-lg-0 my-2">
+            <ul class="navbar-nav">
+                <!-- PAGE ACCUEIL -->
+                <li class="nav-item">
                     <a class="nav-lien" routerLink="">Accueil</a>
                 </li>
+
+                <!-- PAGE SERVICES -->
                 <li class="nav-item">
                     <a class="nav-lien" routerLink="">Nos Services</a>
                 </li>
-                <li class="nav-item my-lg-0 my-2">
+
+                <!-- PAGE COMMANDER -->
+                <li class="nav-item">
                     <a class="nav-lien" routerLink="commander">Commander</a>
                 </li>
+
+                <!-- PAGE DASHBOARD -->
                 <li class="nav-item" *ngIf="authService.isLogged() && (authService.hasRole('ROLE_ADMIN') || authService.hasRole('ROLE_EMPLOYEE'))">
                     <a class="nav-lien" routerLink="admin/dashboard">Dashboard</a>
                 </li>
             </ul>
+
             <ul class="navbar-nav ms-auto">
+                <!-- PAGE CONNEXION -->
                 <li class="nav-item" *ngIf="!authService.isLogged()">
-                    <a class="auth mx-lg-2 my-lg-0 my-2 bg-color-dark-blue" routerLink="login">Se connecter</a>
+                    <a class="auth bg-color-dark-blue" routerLink="login">Se connecter</a>
                 </li>
+
+                <!-- PAGE INSCRIPTION -->
                 <li class="nav-item" *ngIf="!authService.isLogged()">
-                    <a class="auth bg-color-blue" routerLink="register">S'inscrire</a>
+                    <a class="auth bg-color-blue my-lg-0 my-2 mx-lg-2 mx-0" routerLink="register">S'inscrire</a>
                 </li>
-                <li class="nav-item dropdown my-lg-0 my-2" *ngIf="authService.isLogged()">
+
+                <!-- BOUTON DROPDOWN -->
+                <li class="nav-item dropdown me-lg-3 me-0" *ngIf="authService.isLogged()">
                     <a class="dropdown-toggle nav-lien" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown link
+                        Prénom
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item color-blue">Mon profil</a></li>
+                        <li><a routerLink="" class="dropdown-item color-blue">Mon profil</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item color-blue" (click)="logout()">Se deconnecter</a></li>
+                        <li><a routerLink="" class="dropdown-item color-blue" (click)="logout()">Se deconnecter</a></li>
                     </ul>
                 </li>
-                <li class="nav-item" *ngIf="authService.isLogged()">
-                    <i class="fa-solid fa-cart-shopping fa-2xl py-custom my-lg-0 my-3" style="color: #072366;"></i>
+
+                <!-- PAGE PANIER -->
+                <li class="nav-item">
+                    <a class="nav-lien-icone" routerLink=""><i class="fa-solid fa-cart-shopping fa-xl" style="color: #072366;"></i>Panier</a>
                 </li>
+
             </ul>
         </div>
     </div>

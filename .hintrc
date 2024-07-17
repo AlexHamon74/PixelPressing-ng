@@ -30,6 +30,12 @@
       {
         "label": "off"
       }
+    ],
+    "axe/structure": [
+      "default",
+      {
+        "listitem": "off"
+      }
     ]
   }
 }
