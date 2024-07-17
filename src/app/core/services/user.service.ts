@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { IUser } from '../../shared/entities';
 
@@ -24,6 +24,11 @@ export class UserService {
       map(response => response['hydra:member']),
       map(users => users.filter((user:IUser) => user.roles.includes('ROLE_EMPLOYEE')))
     );
+  };
+
+  createEmployees(newEmployee: IUser): Observable<IUser>{
+    const headers = new HttpHeaders({ 'Content-Type': 'application/ld+json' });
+    return this.http.post<IUser>(`${this.url}/users`, newEmployee, {headers})
   };
 
   deleteUser(id :number): Observable<void>{

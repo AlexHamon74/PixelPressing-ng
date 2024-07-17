@@ -15,7 +15,7 @@ export interface IUser {
     gender:string;
     adress:string;
     birthdate:string;
-    roles: string;
+    roles: string[];
 }
 
 export interface itemsInterface {
