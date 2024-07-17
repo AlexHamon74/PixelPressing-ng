@@ -16,10 +16,17 @@ export class UserService {
     return this.http.get<any>(`${this.url}/users`).pipe(
       map(response => response['hydra:member']),
       map(users => users.filter((user: IUser) => !user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_EMPLOYEE')))
-    )
-  }
+    );
+  };
+
+  fetchAllEmployees(): Observable<IUser[]>{
+    return this.http.get<any>(`${this.url}/users`).pipe(
+      map(response => response['hydra:member']),
+      map(users => users.filter((user:IUser) => user.roles.includes('ROLE_EMPLOYEE')))
+    );
+  };
 
   deleteUser(id :number): Observable<void>{
     return this.http.delete<void>(`${this.url}/users/${id}`)
-  }
+  };
 }

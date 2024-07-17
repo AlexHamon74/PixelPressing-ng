@@ -14,6 +14,9 @@ import { ServiceCreateComponent } from './features/admin/servicesItem/service-cr
 import { ServiceEditComponent } from './features/admin/servicesItem/service-edit/service-edit.component';
 import { CommanderComponent } from './features/user/commander/commander.component';
 import { CustomerUsersListComponent } from './features/admin/users/customerUsers/customer-users-list/customer-users-list.component';
+import { EmployeeUsersListComponent } from './features/admin/users/employeeUsers/employee-users-list/employee-users-list.component';
+import { EmployeeUsersCreateComponent } from './features/admin/users/employeeUsers/employee-users-create/employee-users-create.component';
+import { EmployeeUsersEditComponent } from './features/admin/users/employeeUsers/employee-users-edit/employee-users-edit.component';
 
 export const routes: Routes = [
     {
@@ -33,9 +36,15 @@ export const routes: Routes = [
             { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
 
             { path: 'customer-user-list', component: CustomerUsersListComponent, canActivate: [AuthGuard] },
+
+            { path: 'employee-user-list', component: EmployeeUsersListComponent, canActivate: [AuthGuard] },
+            { path: 'employee-user-create', component: EmployeeUsersCreateComponent, canActivate: [AuthGuard] },
+            { path: 'employee-user-edit/:id', component: EmployeeUsersEditComponent, canActivate: [AuthGuard] },
+
             { path: 'item-list', component: ItemListComponent, canActivate: [AuthGuard] },
             { path: 'item-create', component: ItemCreateComponent, canActivate: [AuthGuard] },
             { path: 'item-edit/:id', component: ItemEditComponent, canActivate: [AuthGuard] },
+            
             { path: 'service-list', component: ServiceListComponent, canActivate: [AuthGuard] },
             { path: 'service-create', component: ServiceCreateComponent, canActivate: [AuthGuard] },
             { path: 'service-edit/:id', component: ServiceEditComponent, canActivate: [AuthGuard] },

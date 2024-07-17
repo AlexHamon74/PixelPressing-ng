@@ -1,0 +1,42 @@
+<div class="wrapper">
+    <app-side-nav-admin></app-side-nav-admin>
+    <div class="main p-4 bg-dark">
+        <div class="container-fluid table-responsive">
+            <h1 class="h2 display-5 text-light"> Liste des employé(e)s </h1>
+            <button [routerLink]="['/admin/employee-user-create']" class="btn btn-primary mb-5">Créer un(e) nouveau employé(e)</button>
+            <table class="table-dark table text-center table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Adresse</th>
+                        <th scope="col">Date de naissance</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Editer</th>
+                        <th scope="col">Supprimer</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <th scope="row">{{ user.id }}</th>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.firstname }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.adress }}</td>
+                        <td>{{ user.birthdate | date:'dd/MM/yyyy' }}</td>
+                        <td>{{ user.gender }}</td>
+                        <td><button [routerLink]="(['/admin/employee-user-edit', user.id])" class="btn btn-success">Editer</button></td>
+                        <td><button (click)="confirmDelete(user)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">Supprimer</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<app-modal-delete [currentUser]="currentUser" (objectDeleted)="onUserDeleted()"></app-modal-delete>
+
+
+
