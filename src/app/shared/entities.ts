@@ -9,7 +9,7 @@ export interface IToken {
 export interface IUser {
     id: number;
     email:string;
-    password:string;
+    password?:string;
     name:string;
     firstname:string;
     gender:string;

@@ -26,9 +26,18 @@ export class UserService {
     );
   };
 
+  fetchEmployeeById(id: number): Observable<IUser>{
+    return this.http.get<IUser>(`${this.url}/users/${id}`);
+  };
+
   createEmployees(newEmployee: IUser): Observable<IUser>{
     const headers = new HttpHeaders({ 'Content-Type': 'application/ld+json' });
     return this.http.post<IUser>(`${this.url}/users`, newEmployee, {headers})
+  };
+
+  editEmployee(updateEmployee: IUser): Observable<IUser>{
+    const headers = new HttpHeaders({ 'Content-Type': 'application/ld+json' });
+    return this.http.put<IUser>(`${this.url}/users/${updateEmployee.id}`, updateEmployee, {headers});
   };
 
   deleteUser(id :number): Observable<void>{
