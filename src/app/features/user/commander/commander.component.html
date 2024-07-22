@@ -10,10 +10,10 @@
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur itaque vitae sed aliquid quo, optio
             doloremque.</p>
         <div class="row">
-            <div class="col-lg-2">
+            <div class="col-lg-2 col-6" *ngFor="let item of items">
                 <div class="mb-4">
-                    <button class="w-100">
-                        test
+                    <button class="w-100" (click)="selectItem(item)">
+                        {{item.name}}
                     </button>
                 </div>
             </div>
@@ -21,7 +21,7 @@
     </div>
 </section>
 
-<section class="item py-5">
+<section class="item py-5" *ngIf="selectedItem">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
@@ -32,29 +32,38 @@
             <div class="col-lg-6">
 
                 <form action="">
-                    <h3>Chemise</h3>
+                    <h3>{{selectedItem.name}}</h3>
+                    <h4>€{{selectedItem.price}}</h4>
 
-                    <h4>€5</h4>
                     <div class="mb-3">
                         <h5><label for="">Service :</label><br></h5>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Retouches">
-                            <label class="form-check-label" for="inlineCheckbox1">Retouches</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Détachages">
-                            <label class="form-check-label" for="inlineCheckbox2">Détachages</label>
+                        <div *ngFor="let service of services" class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="{{service.id}}" [value]="service.name" [checked]="isServiceChecked(service.name)" [disabled]="isServiceChecked(service.name)">
+                            <label class="form-check-label" for="{{service.id}}">{{service.name}}</label>
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <h5><label for="qty" class="form-label">Quantité :</label></h5>
-                        <input type="number" class="form-control" id="qty">
+                        <h5>Quantité :</h5>
+                        <div class="d-flex gap-5">
+
+                            <div class="border">
+                                <button class="btnRemove">-</button>
+                            </div>
+                            
+                            <div class="border">
+                                <h5 class="py-2 px-4 m-0">0</h5>
+                            </div>
+                            
+                            <div class="border">
+                                <button class="btnAdd">+</button>
+                            </div>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary mb-3">Ajouter au panier</button>
 
-                    <p>description description description description description</p>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus molestias voluptates ducimus praesentium velit? </p>
                 </form>
             </div>
         </div>

@@ -23,6 +23,7 @@ export interface itemsInterface {
     name: string;
     price: number;
     image: string;
+    description: string;
     category: {
         id:number;
         name:string;
@@ -42,4 +43,9 @@ export interface serviceInterface{
     description: string;
     image: string;
     price: number;
+}
+
+export interface commandItemInterface{
+    id: number;
+    quantity: number;
 }
