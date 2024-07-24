@@ -1,15 +1,15 @@
-export interface ICredentials {
+export interface Credentials {
     username: string;
     password: string;
 }
 
-export interface IToken {
+export interface Token {
     token: string;
 }
-export interface IUser {
+
+export interface UserInterface {
     id: number;
     email:string;
-    password?:string;
     name:string;
     firstname:string;
     gender:string;
@@ -18,16 +18,19 @@ export interface IUser {
     roles: string[];
 }
 
+export interface ApiListResponse<T> {
+    '@id': string;
+    'hydra:totalItems': number;
+    'hydra:member': T[];
+}
+
 export interface itemsInterface {
     id: number;
     name: string;
     price: number;
     image: string;
     description: string;
-    category: {
-        id:number;
-        name:string;
-    }
+    category: categoryInterface;
 }
 
 export interface categoryInterface{

@@ -18,21 +18,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let user of users">
-                        <th scope="row">{{ user.id }}</th>
-                        <td>{{ user.name }}</td>
-                        <td>{{ user.firstname }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.adress }}</td>
-                        <td>{{ user.birthdate | date:'dd/MM/yyyy' }}</td>
-                        <td>{{ user.gender }}</td>
-                        <td><button (click)="confirmDelete(user)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">Supprimer</button></td>
+                    <tr>
+                        <th scope="row">0</th>
+                        <td>bob</td>
+                        <td>test</td>
+                        <td>bob.test.com</td>
+                        <td>rue des potiers</td>
+                        <td>18/05/1999</td> <!-- TODO | date:'dd/MM/yyyy' -->
+                        <td>Mr</td>
+                        <td><button class="btn btn-danger">Supprimer</button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-<app-modal-delete [currentUser]="currentUser" (objectDeleted)="onUserDeleted()"></app-modal-delete>
 
 

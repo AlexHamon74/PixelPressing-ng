@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Inject, Input, Output, inject } from '@angular/core';
-import { itemsInterface, IUser, serviceInterface } from '../entities';
+import { itemsInterface, serviceInterface, UserInterface } from '../entities';
 import { ItemService } from '../../core/services/item.service';
 import { ServiceService } from '../../core/services/service.service';
 import { UserService } from '../../core/services/user.service';
@@ -14,7 +14,7 @@ import { UserService } from '../../core/services/user.service';
 export class ModalDeleteComponent {
   @Input() currentItem: itemsInterface | null = null;
   @Input() currentService: serviceInterface | null = null;
-  @Input() currentUser: IUser | null = null;
+  @Input() currentUser: UserInterface | null = null;
   @Output() objectDeleted = new EventEmitter<void>();
 
   itemService = inject(ItemService);
@@ -45,10 +45,6 @@ export class ModalDeleteComponent {
       this.serviceService.deleteService(this.currentService.id).subscribe(() => {
         this.objectDeleted.emit();
       });
-    } else if (this.currentUser) {
-      this.userService.deleteUser(this.currentUser.id).subscribe(() => {
-        this.objectDeleted.emit();
-      })
     }
   }
 }

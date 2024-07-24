@@ -1,0 +1,17 @@
+.myProfile{
+    position: relative;
+    background-image: url(../../../../../public/img/bg-myProfile.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* opacity: 0.6; */
+    padding: 50px 0;
+}
+.myProfile-info{
+    background-color: white;
+    color: black;
+}

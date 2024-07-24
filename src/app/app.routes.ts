@@ -17,6 +17,7 @@ import { CustomerUsersListComponent } from './features/admin/users/customerUsers
 import { EmployeeUsersListComponent } from './features/admin/users/employeeUsers/employee-users-list/employee-users-list.component';
 import { EmployeeUsersCreateComponent } from './features/admin/users/employeeUsers/employee-users-create/employee-users-create.component';
 import { EmployeeUsersEditComponent } from './features/admin/users/employeeUsers/employee-users-edit/employee-users-edit.component';
+import { MyProfileComponent } from './features/user/my-profile/my-profile.component';
 
 export const routes: Routes = [
     {
@@ -27,6 +28,7 @@ export const routes: Routes = [
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent },
             { path: 'commander', component: CommanderComponent },
+            { path: 'profile', component: MyProfileComponent },
         ]
     },
     {

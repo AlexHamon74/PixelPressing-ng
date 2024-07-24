@@ -1,46 +1,55 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
-import { IUser } from '../../shared/entities';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ApiListResponse, UserInterface } from '../../shared/entities';
+import { AuthService } from './auth.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
   private url = environment.apiURL;
+
   http = inject(HttpClient);
+  authService = inject(AuthService);
 
-  fetchAllCustomers(): Observable<IUser[]>{
-    return this.http.get<any>(`${this.url}/users`).pipe(
-      map(response => response['hydra:member']),
-      map(users => users.filter((user: IUser) => !user.roles.includes('ROLE_ADMIN') && !user.roles.includes('ROLE_EMPLOYEE')))
-    );
+  //Méthode pour récupérer le token depuis le localStorage
+  getToken(): string | null {
+    return localStorage.getItem('token');
   };
 
-  fetchAllEmployees(): Observable<IUser[]>{
-    return this.http.get<any>(`${this.url}/users`).pipe(
-      map(response => response['hydra:member']),
-      map(users => users.filter((user:IUser) => user.roles.includes('ROLE_EMPLOYEE')))
-    );
+  //Méthode pour récupérer les rôles de l'utilisateur à partir du token
+  getUserRoles() {
+    const token = this.getToken();
+    if (token) {
+      const tokenPayload: any = jwtDecode(token);
+      const roles = tokenPayload.roles;
+      return roles;
+    }
   };
 
-  fetchEmployeeById(id: number): Observable<IUser>{
-    return this.http.get<IUser>(`${this.url}/users/${id}`);
+  //Méthode pour récupérer l'id de l'utilisateur à partir du token
+  getUserId(){
+    const token = this.getToken();
+    if (token) {
+      const tokenPayload: any = jwtDecode(token);
+      const id = tokenPayload.id;
+      return id;
+    }
   };
 
-  createEmployees(newEmployee: IUser): Observable<IUser>{
-    const headers = new HttpHeaders({ 'Content-Type': 'application/ld+json' });
-    return this.http.post<IUser>(`${this.url}/users`, newEmployee, {headers})
+  //Méthode pour récupérer un user/id
+  getUserById(): Observable<UserInterface> {
+    const userId = this.getUserId();
+    return this.http.get<UserInterface>(this.url + '/users/' + userId);
   };
 
-  editEmployee(updateEmployee: IUser): Observable<IUser>{
-    const headers = new HttpHeaders({ 'Content-Type': 'application/ld+json' });
-    return this.http.put<IUser>(`${this.url}/users/${updateEmployee.id}`, updateEmployee, {headers});
+  //Méthode pour récupérer tous les users
+  fetchAllUser(): Observable<ApiListResponse<UserInterface>> {
+    return this.http.get<ApiListResponse<UserInterface>>(this.url + '/users')
   };
 
-  deleteUser(id :number): Observable<void>{
-    return this.http.delete<void>(`${this.url}/users/${id}`)
-  };
+  
 }

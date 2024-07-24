@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
@@ -27,8 +26,8 @@ export class LoginComponent {
       const { username, password } = this.loginForm.value;
       this.authService.login({ username, password }).subscribe(
         (token) => {
-          console.log('Token received:', token);
-          this.authService.saveToken(token.token);
+          console.log('Token received:', token.token);
+          this.authService.saveToken(token);
           this.router.navigate(['home']);
         },
         error => {
