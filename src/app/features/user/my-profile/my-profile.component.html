@@ -1,5 +1,43 @@
-<section class="myProfile">
-    <div class="myProfile-info container">
-        <h1>test</h1>
+<section class="myProfile ">
+    <div class="myProfile-card container shadow">
+        <div class="row">
+            <div class="myProfile-card-left col-4 py-5 px-lg-5 text-center">
+                <img src="img/userImage.png" class="img-fluid" alt="User Image">
+                <div class="py-5">
+                    <h1>{{user.firstname}}</h1>
+                    <h2>{{user.name}}</h2>
+                </div>
+                <button class="btn btn-primary">Modifier</button>
+            </div>
+            <div class="myProfile-card-right col-8 p-5">
+                <h3>Mes Informations</h3>
+                <hr>
+                <div class="row">
+                    <div class="col-lg-6 mb-4">
+                        <h3>Email:</h3>
+                        <h4>{{user.email}}</h4>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <h3>Adresse:</h3>
+                        <h4>{{user.adress}}</h4>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-lg-6 mb-4">
+                        <h3>Genre:</h3>
+                        <h4>{{user.gender}}</h4>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <h3>Date de naissance:</h3>
+                        <h4>{{user.birthdate | date:'dd/MM/yyyy'}}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h3>Mes commandes:</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>

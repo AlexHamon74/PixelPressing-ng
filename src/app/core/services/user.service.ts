@@ -51,5 +51,10 @@ export class UserService {
     return this.http.get<ApiListResponse<UserInterface>>(this.url + '/users')
   };
 
+  //Méthode pour mettre à jour les infos d'un user
+  updateUser(user : UserInterface): Observable<UserInterface> {
+    return this.http.put<UserInterface>(this.url + '/users/' + user.id, user);
+  };
+
   
 }
