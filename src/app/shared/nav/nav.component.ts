@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { NgIf } from '@angular/common';
 import { UserService } from '../../core/services/user.service';
@@ -18,6 +18,7 @@ export class NavComponent implements OnInit {
 
   authService = inject(AuthService);
   userService = inject(UserService);
+  router = inject(Router);
 
   //Méthode appelée lors de l'initialisation du composant
   ngOnInit(): void {
@@ -29,6 +30,10 @@ export class NavComponent implements OnInit {
   //Méthode pour se déconnecter
   logout() {
     this.authService.logout();
+    this.router.navigate(['home']);
+    setTimeout(() => {
+      location.reload();
+    }, 1);
   };
 
   //Méthode pour savoir si le user est connecté

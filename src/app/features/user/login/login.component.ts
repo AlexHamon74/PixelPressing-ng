@@ -29,6 +29,9 @@ export class LoginComponent {
           console.log('Token received:', token.token);
           this.authService.saveToken(token);
           this.router.navigate(['home']);
+          setTimeout(() => {
+            location.reload();
+          }, 1);
         },
         error => {
           console.error('Login failed', error);

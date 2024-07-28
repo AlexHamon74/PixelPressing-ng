@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit{
   categoryService = inject(CategoryService);
 
   ngOnInit(): void {
-      this.getCategories();
+    this.getCategories();
   }
 
   getCategories(){
