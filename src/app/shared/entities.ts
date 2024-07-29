@@ -56,7 +56,7 @@ export interface commandItemInterface{
     quantity: number;
 }
 
-export interface command{
+export interface commandInteface{
     id: number;
     user: UserInterface;
     createdAt: string;
