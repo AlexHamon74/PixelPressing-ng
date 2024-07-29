@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { UserInterface } from '../../../shared/entities';
 import { UserService } from '../../../core/services/user.service';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -18,7 +18,6 @@ export class MyProfileComponent implements OnInit{
 
   //On injecte nos services
   userService = inject(UserService);
-  router = inject(Router);
 
   //Méthode appelée lors de l'initialisation du composant
   ngOnInit(): void {
@@ -31,6 +30,5 @@ export class MyProfileComponent implements OnInit{
       this.user = data;
     })
   }
-
 
 }

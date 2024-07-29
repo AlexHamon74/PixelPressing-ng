@@ -18,6 +18,8 @@ import { EmployeeUsersListComponent } from './features/admin/users/employeeUsers
 import { EmployeeUsersCreateComponent } from './features/admin/users/employeeUsers/employee-users-create/employee-users-create.component';
 import { EmployeeUsersEditComponent } from './features/admin/users/employeeUsers/employee-users-edit/employee-users-edit.component';
 import { MyProfileComponent } from './features/user/my-profile/my-profile.component';
+import { MyProfileEditComponent } from './features/user/my-profile-edit/my-profile-edit.component';
+import { AuthAdminGuard } from './core/guards/auth-admin.guard';
 
 export const routes: Routes = [
     {
@@ -28,30 +30,31 @@ export const routes: Routes = [
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent },
             { path: 'commander', component: CommanderComponent },
-            { path: 'profile', component: MyProfileComponent },
+            { path: 'myProfile', component: MyProfileComponent, canActivate: [AuthGuard] },
+            { path: 'myProfile-edit', component: MyProfileEditComponent, canActivate: [AuthGuard] },
         ]
     },
     {
         path: 'admin',
         component: AdminComponent,
         children: [
-            { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+            { path: 'dashboard', component: DashboardComponent, canActivate: [AuthAdminGuard] },
 
-            { path: 'customer-user-list', component: CustomerUsersListComponent, canActivate: [AuthGuard] },
+            { path: 'customer-user-list', component: CustomerUsersListComponent, canActivate: [AuthAdminGuard] },
 
-            { path: 'employee-user-list', component: EmployeeUsersListComponent, canActivate: [AuthGuard] },
-            { path: 'employee-user-create', component: EmployeeUsersCreateComponent, canActivate: [AuthGuard] },
-            { path: 'employee-user-edit/:id', component: EmployeeUsersEditComponent, canActivate: [AuthGuard] },
+            { path: 'employee-user-list', component: EmployeeUsersListComponent, canActivate: [AuthAdminGuard] },
+            { path: 'employee-user-create', component: EmployeeUsersCreateComponent, canActivate: [AuthAdminGuard] },
+            { path: 'employee-user-edit/:id', component: EmployeeUsersEditComponent, canActivate: [AuthAdminGuard] },
 
-            { path: 'item-list', component: ItemListComponent, canActivate: [AuthGuard] },
-            { path: 'item-create', component: ItemCreateComponent, canActivate: [AuthGuard] },
-            { path: 'item-edit/:id', component: ItemEditComponent, canActivate: [AuthGuard] },
+            { path: 'item-list', component: ItemListComponent, canActivate: [AuthAdminGuard] },
+            { path: 'item-create', component: ItemCreateComponent, canActivate: [AuthAdminGuard] },
+            { path: 'item-edit/:id', component: ItemEditComponent, canActivate: [AuthAdminGuard] },
             
-            { path: 'service-list', component: ServiceListComponent, canActivate: [AuthGuard] },
-            { path: 'service-create', component: ServiceCreateComponent, canActivate: [AuthGuard] },
-            { path: 'service-edit/:id', component: ServiceEditComponent, canActivate: [AuthGuard] },
+            { path: 'service-list', component: ServiceListComponent, canActivate: [AuthAdminGuard] },
+            { path: 'service-create', component: ServiceCreateComponent, canActivate: [AuthAdminGuard] },
+            { path: 'service-edit/:id', component: ServiceEditComponent, canActivate: [AuthAdminGuard] },
         ]
     },
-      {path:'**', redirectTo:'' },
+      {path:'**', redirectTo:'/' },
 
 ];

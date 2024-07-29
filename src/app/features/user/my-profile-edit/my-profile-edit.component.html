@@ -1,0 +1,63 @@
+<section class="myProfile ">
+    <div class="myProfile-card container shadow">
+        <form (ngSubmit)="onSubmit()" [formGroup]="myProfileEditForm">
+
+            <div class="row">
+                <div class="myProfile-card-left col-4 py-5 px-lg-5 text-center">
+                    <img src="img/userImage.png" class="img-fluid" alt="User Image">
+                    <div class="py-5">
+                        <label for="name">
+                            <h1>Nom:</h1>
+                        </label>
+                        <input type="text" id="name" class="form-control" formControlName="name">
+
+                        <label for="firstname">
+                            <h2>Prénom:</h2>
+                        </label>
+                        <input type="text" id="firstname" class="form-control" formControlName="firstname">
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+                <div class="myProfile-card-right col-8 p-5">
+                    <h3>Mes Informations</h3>
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <label for="email">
+                                <h3>Email:</h3>
+                            </label>
+                            <input type="email" id="email" class="form-control" formControlName="email">
+
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <label for="adress">
+                                <h3>Adresse:</h3>
+                            </label>
+                            <input type="text" id="adress" class="form-control" formControlName="adress">
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-6 mb-4">
+                            <label for="gender">
+                                <h3>Genre:</h3>
+                            </label>
+                            <input type="text" id="gender" class="form-control" formControlName="gender">
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <label for="birthdate">
+                                <h3>Date de naissance:</h3>
+                            </label>
+                            <input type="text" id="birthdate" class="form-control" formControlName="birthdate">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <h3>Mes commandes:</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

@@ -5,7 +5,7 @@ import { UserService } from "../services/user.service";
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthAdminGuard implements CanActivate {
   router = inject(Router);
   authService = inject(AuthService);
   userService = inject(UserService);
@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
     if (this.authService.isLogged()) {
       const userRoles = this.userService.getUserRoles();
       // Vérifie si l'utilisateur a le rôle ROLE_ADMIN ou ROLE_EMPLOYEE
-      if (userRoles.includes('ROLE_USER')) {
+      if (userRoles.includes('ROLE_ADMIN') || userRoles.includes('ROLE_EMPLOYEE')) {
         return true;
       } else {
         // Redirection vers une page non autorisée ou un autre traitement

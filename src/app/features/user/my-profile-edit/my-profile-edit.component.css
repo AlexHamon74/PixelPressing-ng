@@ -1,0 +1,24 @@
+.myProfile{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f1f1;
+}
+.myProfile-card-left{
+    background: linear-gradient(180deg, #6785FF, 5%, #072366, 50%, #030423);
+}
+.myProfile-card-right{
+    background-color: #fff;
+}
+h3{
+    color: #072366;
+    text-transform: uppercase;
+}
+h1, h2{
+    color: #fff;
+    word-break: break-word;
+    text-transform: uppercase;
+}

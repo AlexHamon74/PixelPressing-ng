@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiListResponse, UserInterface } from '../../shared/entities';
 import { AuthService } from './auth.service';
@@ -53,7 +53,8 @@ export class UserService {
 
   //Méthode pour mettre à jour les infos d'un user
   updateUser(user : UserInterface): Observable<UserInterface> {
-    return this.http.put<UserInterface>(this.url + '/users/' + user.id, user);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/ld+json' });
+    return this.http.put<UserInterface>(this.url + '/users/' + user.id, user, {headers});
   };
 
   
