@@ -1,71 +1,40 @@
-<section class="hero">
-    <div class="container">
-        <h1 class="text-white display-3">Commander <br>en ligne</h1>
-    </div>
-</section>
-
-<section class="choice my-4">
-    <div class="container">
-        <h2>Choisissez votre article:</h2>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur itaque vitae sed aliquid quo, optio
-            doloremque.</p>
+<section class="commander bg-light">
+    <section class="commander-card container shadow p-lg-4 p-3">
+        <h1 class="display-5">Commander en ligne</h1><hr>
         <div class="row">
-            <div class="col-lg-2 col-6" *ngFor="let item of items">
+            <div class="col-4 p-lg-5">
                 <div class="mb-4">
-                    <button class="w-100" (click)="selectItem(item)">
-                        {{item.name}}
-                    </button>
+                    <div class="image border" *ngIf="selectItem">
+                        <img src="img/{{selectedItem?.image}}" alt="" class="img-fluid">
+                    </div>
+                </div>
+                <div class="item-choice">
+                    <div class="row">
+                        <div class="col-lg-4 col-6" *ngFor="let item of items">
+                            <div class="border mb-4">
+                                <img (click)="selectItem(item)" src="img/{{item.image}}" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<section class="item py-5" *ngIf="selectedItem">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="mb-4 border">
-                    <img src="img/Vector.png" class="img-fluid" alt="">
-                </div>
-            </div>
-            <div class="col-lg-6">
-
+            <div class="col-8 p-lg-5">
+                <h2>{{selectedItem?.name}}</h2>
+                <h3>{{selectedItem?.price}}€</h3>
                 <form action="">
-                    <h3>{{selectedItem.name}}</h3>
-                    <h4>€{{selectedItem.price}}</h4>
-
                     <div class="mb-3">
                         <h5><label for="">Service :</label><br></h5>
                         <div *ngFor="let service of services" class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="{{service.id}}" [value]="service.name" [checked]="isServiceChecked(service.name)" [disabled]="isServiceChecked(service.name)">
                             <label class="form-check-label" for="{{service.id}}">{{service.name}}</label>
                         </div>
+                    
                     </div>
-
-                    <div class="mb-3">
-                        <h5>Quantité :</h5>
-                        <div class="d-flex gap-5">
-
-                            <div class="border">
-                                <button class="btnRemove">-</button>
-                            </div>
-                            
-                            <div class="border">
-                                <h5 class="py-2 px-4 m-0">0</h5>
-                            </div>
-                            
-                            <div class="border">
-                                <button class="btnAdd">+</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary mb-3">Ajouter au panier</button>
-
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus molestias voluptates ducimus praesentium velit? </p>
                 </form>
+                <h3>Quantité</h3>
+                <button class="btn btn-primary">Ajouter au panier</button>
+                <p>Lorem ipsum dolor sit amelorum sunt, enim vero! Nostrum quam ratione dolores, illo odit quos.</p>
             </div>
         </div>
-    </div>
+    </section>
 </section>

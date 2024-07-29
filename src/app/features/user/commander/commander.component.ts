@@ -62,7 +62,7 @@ export class CommanderComponent implements OnInit {
   }
 
   removeQty(){
-
+    
   }
 
 }

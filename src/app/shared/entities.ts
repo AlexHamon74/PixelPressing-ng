@@ -50,5 +50,15 @@ export interface serviceInterface{
 
 export interface commandItemInterface{
     id: number;
+    command: string;
+    item: itemsInterface[];
+    service: serviceInterface[];
     quantity: number;
+}
+
+export interface command{
+    id: number;
+    user: UserInterface;
+    createdAt: string;
+    status: string;
 }

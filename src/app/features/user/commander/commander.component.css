@@ -1,33 +1,10 @@
-
-/* STYLE SECTION HERO */
-.hero{
+.commander{
     position: relative;
-    background-image: url(../../../../../public/img/hero3.webp);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
     width: 100%;
-    height: 40vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.hero::before {
-    position: absolute;
-    content: '';
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    right: 0;
-    z-index: 1;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-.hero .container {
-    position: relative;
-    z-index: 1;
-}
-
-.item{
-    background-image: linear-gradient(to right top, #072366, #1d3381, #2f459c, #4057b9, #516ad6, #647be4, #768df1, #889fff, #a0b3ff, #b8c6ff, #d0daff, #e8edff);
+.commander-card{
+    margin: 120px 0;
 }
