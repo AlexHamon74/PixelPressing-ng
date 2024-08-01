@@ -8,32 +8,40 @@
                         <img src="img/{{selectedItem?.image}}" alt="" class="img-fluid">
                     </div>
                 </div>
-                <div class="item-choice">
-                    <div class="row">
-                        <div class="col-lg-4 col-6" *ngFor="let item of items">
-                            <div class="border mb-4">
-                                <img (click)="selectItem(item)" src="img/{{item.image}}" alt="" class="img-fluid">
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="col-8 p-lg-5">
                 <h2>{{selectedItem?.name}}</h2>
                 <h3>{{selectedItem?.price}}€</h3>
-                <form action="">
+
+                <form >
                     <div class="mb-3">
                         <h5><label for="">Service :</label><br></h5>
                         <div *ngFor="let service of services" class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="{{service.id}}" [value]="service.name" [checked]="isServiceChecked(service.name)" [disabled]="isServiceChecked(service.name)">
+                            <input class="form-check-input" type="checkbox" id="{{service.id}}" [value]="service.name" (change)="toggleService(service.name)">>
                             <label class="form-check-label" for="{{service.id}}">{{service.name}}</label>
                         </div>
                     
                     </div>
                 </form>
                 <h3>Quantité</h3>
-                <button class="btn btn-primary">Ajouter au panier</button>
+                <button (click)="addQty()" class="border">+</button>
+                <p>{{quantity}}</p>
+                <button (click)="removeQty()" class="border">-</button>
+
+                <h3>Total: {{totalPrice}}€</h3>
+
+
+                <button (click)="addItemToCart()" type="submit" class="btn btn-primary">Ajouter au panier</button>
                 <p>Lorem ipsum dolor sit amelorum sunt, enim vero! Nostrum quam ratione dolores, illo odit quos.</p>
+            </div>
+        </div>
+        <div class="item-choice">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-6" *ngFor="let item of items">
+                    <div class="mb-4">
+                        <img (click)="selectItem(item)" src="img/{{item.image}}" alt="" class="img-fluid img-choice">
+                    </div>
+                </div>
             </div>
         </div>
     </section>

@@ -48,12 +48,11 @@ export interface serviceInterface{
     price: number;
 }
 
-export interface commandItemInterface{
-    id: number;
-    command: string;
-    item: itemsInterface[];
+export interface cartItemInterface{
+    item: itemsInterface;
     service: serviceInterface[];
     quantity: number;
+    totalPrice: number; 
 }
 
 export interface commandInteface{
