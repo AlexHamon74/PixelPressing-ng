@@ -17,7 +17,13 @@
                     <div class="mb-3">
                         <h5><label for="">Service :</label><br></h5>
                         <div *ngFor="let service of services" class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="{{service.id}}" [value]="service.name" (change)="toggleService(service.name)">>
+                            <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="{{service.id}}"
+                            [checked]="selectedServices.includes(service)"
+                            (change)="toggleService(service)"
+                          >
                             <label class="form-check-label" for="{{service.id}}">{{service.name}}</label>
                         </div>
                     

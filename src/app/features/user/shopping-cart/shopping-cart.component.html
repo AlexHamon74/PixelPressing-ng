@@ -1,23 +1,23 @@
 <section class="shopping-cart bg-light">
     <section class="shopping-cart-card container shadow p-lg-4 p-3">
-      <h1 class="display-5">Mon Panier</h1><hr>
-      <div *ngIf="cartItems.length > 0; else noItems">
-        <div class="cart-item" *ngFor="let item of cartItems">
-          <h2>{{item.item.name}}</h2>
-          <img src="img/{{item.item.image}}" alt="{{item.item.name}}" class="img-fluid">
-          <p>Prix unitaire: {{item.item.price}}€</p>
-          <p>Quantité: {{item.quantity}}</p>
-          <p>Services: {{getServiceNames(item.service)}}</p>
-          <p>Total pour cet article: {{item.totalPrice}}€</p>
-          <hr>
+        <h1 class="display-5">Mon Panier</h1>
+        <hr>
+        <div *ngIf="cartItems.length > 0; else noItems">
+            <div class="cart-item" *ngFor="let item of cartItems">
+                <h2>{{item.item.name}}</h2>
+                <img src="img/{{item.item.image}}" alt="{{item.item.name}}" class="img-fluid">
+                <p>Prix unitaire: {{item.item.price}}€</p>
+                <p>Quantité: {{item.quantity}}</p>
+                <p>Services: {{getServiceNames(item.service)}}</p>
+                <p>Total pour cet article: {{item.totalPrice}}€</p>
+                <hr>
+            </div>
+            <div class="cart-summary">
+                <h3>Total du panier: 0€</h3>
+            </div>
         </div>
-        <div class="cart-summary">
-          <h3>Total du panier: 0€</h3>
-        </div>
-      </div>
-      <ng-template #noItems>
-        <p>Votre panier est vide.</p>
-      </ng-template>
+        <ng-template #noItems>
+            <p>Votre panier est vide.</p>
+        </ng-template>
     </section>
-  </section>
-  
+</section>

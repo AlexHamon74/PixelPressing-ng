@@ -29,9 +29,10 @@ export class AuthService {
     return !!token;
   };
 
-  //Méthode pour se déconnecter
+  //Méthode pour se déconnecter et remove le localStorage
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('cartItems');
   };
 
   //Méthode pour enregistrer un nouvel utilisateur

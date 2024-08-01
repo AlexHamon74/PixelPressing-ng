@@ -1,9 +1,10 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input, OnInit } from '@angular/core';
 import { cartItemInterface, itemsInterface, serviceInterface } from '../../../shared/entities';
 import { ServiceService } from '../../../core/services/service.service';
 import { NgFor, NgIf } from '@angular/common';
 import { ItemService } from '../../../core/services/item.service';
 import { CartService } from '../../../core/services/cart.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-commander',
@@ -21,21 +22,42 @@ export class CommanderComponent implements OnInit {
   services: serviceInterface[] = [];
   items: itemsInterface[] = [];
   selectedItem: itemsInterface | null = null;
-  selectedServices: string[] = [];
+  selectedServices: serviceInterface[] = [];
 
   //On injecte les services
   serviceService = inject(ServiceService);
   itemService = inject(ItemService);
   cartService = inject(CartService);
+  authService = inject(AuthService);
 
 
   //Méthode appélée lors de l'initialisation du composant
   ngOnInit(): void {
-    // this.initializeForm();
-    this.getServices();
     this.getItems();
+    this.getServices();
   };
 
+  //On récupère tous les items
+  getItems() {
+    this.itemService.fetchAll().subscribe(data => {
+      this.items = data;
+      this.displayItemsBase()
+      this.updateTotalPrice();
+      
+    })
+  };
+
+  //Affiche la chemise
+  displayItemsBase(){
+    this.selectedItem = this.items.find(i => i.name === 'Chemise') || null;
+  }
+  
+  //Fonction pour afficher l'item clicker
+  selectItem(item: itemsInterface) {
+    this.selectedItem = item;
+    this.updateTotalPrice();
+  };
+  
   //On récupère tous les services
   getServices() {
     this.serviceService.fetchAll().subscribe(data => {
@@ -43,38 +65,24 @@ export class CommanderComponent implements OnInit {
     })
   };
 
-  //On récupère tous les items
-  getItems() {
-    this.itemService.fetchAll().subscribe(data => {
-      this.items = data;
-      // Sélectionner l'item "Chemise" par défaut
-      this.selectedItem = this.items.find(i => i.name === 'Chemise') || null;
-      this.updateTotalPrice();
-
-    })
-  };
-
-  //Fonction pour afficher l'item clicker
-  selectItem(item: itemsInterface) {
-    this.selectedItem = item;
-    this.updateTotalPrice();
-  };
-
-  toggleService(serviceName: string) {
-    if (this.selectedServices.includes(serviceName)) {
-      this.selectedServices = this.selectedServices.filter(service => service !== serviceName);
+  //Ajoute ou retire un service de la liste des services sélectionnés
+  toggleService(service: serviceInterface) {
+    const index = this.selectedServices.findIndex(s => s.id === service.id);
+    if (index > -1) {
+      this.selectedServices.splice(index, 1);
     } else {
-      this.selectedServices.push(serviceName);
+      this.selectedServices.push(service);
     }
     this.updateTotalPrice();
   }
 
-
+  //Fonction pour augmenter la quantité
   addQty() {
     this.quantity++;
     this.updateTotalPrice();
   }
 
+  //Fonction pour diminuer la quantité
   removeQty() {
     if (this.quantity > 1) {
       this.quantity--;
@@ -82,27 +90,36 @@ export class CommanderComponent implements OnInit {
     }
   }
 
+  //Fonction pour modifier le prix total
   updateTotalPrice() {
     if (this.selectedItem) {
-      // Prix des services sélectionnés (ajoutez le prix des services)
-      const servicesPrice = this.selectedServices.length * 5; // Par exemple, ajouter 5€ par service
+      const servicesPrice = this.selectedServices.reduce((acc, service) => acc + service.price, 0);
       this.totalPrice = (this.selectedItem.price + servicesPrice) * this.quantity;
     }
   }
+
+  //Ajoute l'item et les services sélectionnés au panier et réinitialise les sélections
   addItemToCart() {
+    if(!this.authService.isLogged()){
+      alert('Veuillez vous connecter');
+      return;
+    }
     if (this.selectedItem) {
       const cartItem: cartItemInterface = {
         item: this.selectedItem,
-        service: this.services.filter(service => this.selectedServices.includes(service.name)),
+        service: this.selectedServices,
         quantity: this.quantity,
         totalPrice: this.totalPrice
       };
 
       this.cartService.addItemToCart(cartItem);
-      // Réinitialiser les valeurs après ajout
-      this.quantity = 1;
-      this.selectedServices = [];
-      this.updateTotalPrice();
+      this.resetSelection();
     }
+  }
+  resetSelection() {
+    this.quantity = 1;
+    this.displayItemsBase();
+    this.selectedServices = [];
+    this.updateTotalPrice();
   }
 }
