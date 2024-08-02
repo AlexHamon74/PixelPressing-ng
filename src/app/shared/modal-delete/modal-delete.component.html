@@ -7,9 +7,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Etes-vous sûr de vouloir supprimer :<br>
-                    {{ (currentItem?.name || currentService?.name || (currentUser?.name + ' ' + currentUser?.firstname)) }}
-                </p>
+                <p>
+                    Êtes-vous sûr de vouloir supprimer :
+                    <span *ngIf="currentItem">{{ currentItem.name }}</span>
+                    <span *ngIf="currentService">{{ currentService.name }}</span>
+                    <span *ngIf="currentUser">{{ currentUser.name }} {{ currentUser.firstname }}</span>
+                    <span *ngIf="currentCartItem">{{ currentCartItem.item.name }}</span>
+                  </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Annuler</button>

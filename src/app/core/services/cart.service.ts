@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { cartItemInterface } from '../../shared/entities';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,12 @@ export class CartService {
       return parsedCart;
     }
     return [];
+  }
+
+  deleteCartItems(item: cartItemInterface): Observable<void>{
+    let currentCart = this.getCartItems();
+    currentCart = currentCart.filter(cartItem => cartItem.item.id !== item.item.id);
+    localStorage.setItem(this.localStorageKey, JSON.stringify(currentCart));
+    return of(void 0);
   }
 }
