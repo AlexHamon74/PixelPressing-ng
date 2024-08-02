@@ -106,10 +106,11 @@ export class CommanderComponent implements OnInit {
     }
     if (this.selectedItem) {
       const cartItem: cartItemInterface = {
+        id: Date.now(),
         item: this.selectedItem,
         service: this.selectedServices,
         quantity: this.quantity,
-        totalPrice: this.totalPrice
+        totalPrice: this.totalPrice,
       };
 
       this.cartService.addItemToCart(cartItem);

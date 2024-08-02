@@ -49,6 +49,7 @@ export interface serviceInterface{
 }
 
 export interface cartItemInterface{
+    id: number;
     item: itemsInterface;
     service: serviceInterface[];
     quantity: number;

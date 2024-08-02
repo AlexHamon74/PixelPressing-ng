@@ -9,9 +9,9 @@ export class CartService {
 
   private localStorageKey = 'cartItems';
 
-  addItemToCart(item: cartItemInterface) {
+  addItemToCart(cartItem: cartItemInterface) {
     const currentCart = this.getCartItems();
-    currentCart.push(item);
+    currentCart.push(cartItem);
     localStorage.setItem(this.localStorageKey, JSON.stringify(currentCart));
   }
 
@@ -24,9 +24,9 @@ export class CartService {
     return [];
   }
 
-  deleteCartItems(item: cartItemInterface): Observable<void>{
+  deleteCartItems(cartItemId: number): Observable<void>{
     let currentCart = this.getCartItems();
-    currentCart = currentCart.filter(cartItem => cartItem.item.id !== item.item.id);
+    currentCart = currentCart.filter(cartItem => cartItem.id !== cartItemId);
     localStorage.setItem(this.localStorageKey, JSON.stringify(currentCart));
     return of(void 0);
   }

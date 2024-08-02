@@ -14,22 +14,24 @@
                   </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                  <tr *ngFor="let item of cartItems">
-                    <th scope="row"><img src="img/{{item.item.image}}" alt="{{item.item.name}}" class="img-custom">{{item.item.name}}</th>
-                    <td>{{item.item.price}}€</td>
-                    <td>{{item.quantity}}</td>
+                  <tr *ngFor="let cartItem of cartItems">
+                    <th scope="row"><img src="img/{{cartItem.item.image}}" alt="{{cartItem.item.name}}" class="img-custom">{{cartItem.item.name}}</th>
+                    <td>{{cartItem.item.price}}€</td>
+                    <td>{{cartItem.quantity}}</td>
                     <td>
                         <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Vos service(s)
                         </button>
                         <ul class="dropdown-menu p-0">
-                          <li *ngFor="let service of item.service"><p class="dropdown-item p-2 m-0 fs-6">{{ service.name }}</p></li>
+                          <li><p class="dropdown-item p-2 m-0 fs-6">Lavage</p></li>
+                          <li><p class="dropdown-item p-2 m-0 fs-6">Repassage</p></li>
+                          <li *ngFor="let service of cartItem.service"><p class="dropdown-item p-2 m-0 fs-6">{{ service.name }}</p></li>
                         </ul>
                       </div>
                     </td>
-                    <th>{{item.totalPrice}}€</th>
-                    <td><button (click)="confirmDelete(item)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">Supprimer</button></td>
+                    <th>{{cartItem.totalPrice}}€</th>
+                    <td><button (click)="confirmDelete(cartItem)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete">Supprimer</button></td>
                 </tr>
                 </tbody>
               </table>

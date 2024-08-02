@@ -52,7 +52,7 @@ export class ModalDeleteComponent {
         this.objectDeleted.emit();
       });
     } else if (this.currentCartItem) {
-      this.cartService.deleteCartItems(this.currentCartItem).subscribe(() => {
+      this.cartService.deleteCartItems(this.currentCartItem.id).subscribe(() => {
         this.objectDeleted.emit();
       });
       location.reload();
