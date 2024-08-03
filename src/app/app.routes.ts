@@ -35,7 +35,7 @@ export const routes: Routes = [
             { path: 'myProfile', component: MyProfileComponent, canActivate: [AuthGuard] },
             { path: 'myProfile-edit', component: MyProfileEditComponent, canActivate: [AuthGuard] },
             { path: 'panier', component: ShoppingCartComponent },
-            { path: 'payement', component: PaymentComponent, canActivate: [AuthGuard] },
+            { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
         ]
     },
     {

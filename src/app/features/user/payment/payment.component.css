@@ -1,0 +1,10 @@
+.payment{
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.payment-card{
+    margin: 120px 0;
+}

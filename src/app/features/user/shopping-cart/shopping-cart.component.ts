@@ -3,11 +3,12 @@ import { cartItemInterface } from '../../../shared/entities';
 import { CartService } from '../../../core/services/cart.service';
 import { NgFor, NgIf } from '@angular/common';
 import { ModalDeleteComponent } from '../../../shared/modal-delete/modal-delete.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
   standalone: true,
-  imports: [NgIf, NgFor, ModalDeleteComponent],
+  imports: [NgIf, NgFor, ModalDeleteComponent, RouterLink],
   templateUrl: './shopping-cart.component.html',
   styleUrl: './shopping-cart.component.css'
 })
