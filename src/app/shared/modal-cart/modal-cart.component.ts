@@ -43,8 +43,9 @@ export class ModalCartComponent implements OnInit {
 
   deleteCartItem(cartItemId: number) {
     this.cartService.deleteCartItems(cartItemId).subscribe(() => {
-      // Met à jour la liste des items après suppression
       this.loadCartItems();
+      location.reload();
+
     });
   }
 
