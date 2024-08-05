@@ -1,46 +1,116 @@
 <section class="payment">
-    <div class="payment-card container shodow rounded-1">
+    <div class="container">
         <div class="row">
-            <div class="col-4">
-                <h2>Votre transaction</h2>
-                <div class="info border-bottom">
-
-                    <div class="shop">
-                        <i class="fa-solid fa-shop"></i> Marchand
-                        <h3>PixelPressing</h3>
-                    </div>
-                    <div class="montant">
-                        <i class="fa-solid fa-coins"></i> Montant
-                        <h3>10€</h3>
-                    </div>
-                    <div class="idNumber">
-                        <i class="fa-solid fa-file-invoice"></i> N° de transaction
-                        <h3>654321654</h3>
-                    </div>
-                </div>
-                <div>
-                    <h2>100% sécurisé</h2><i class="fa-solid fa-lock"></i>
-                    <p>Lorem ipsum dolor sit us dolore cumque nostrum harum, repellat earum accusamus, similique nihil. Rerum, totam voluptatem.</p>
-                </div>
-            </div>
-            <div class="col-8">
-                <div class="logo border-bottom">
-                    image
-                </div>
-
-                <div class="form-payment">
-                    <h2>Votre carte</h2><i class="fa-brands fa-cc-mastercard"></i><i class="fa-brands fa-cc-visa"></i>
-                    <form>
-                        <div class="mb-3">
-                          <label for="cartNumber" class="form-label">VOTRE CARTE</label>
-                          <input type="text" class="form-control" id="cartNumber" placeholder="Numéro de carte">
+            <div class="col-lg-6 col-12">
+                <h2>Vos Informations</h2>
+                <div *ngIf="isLogged();else noLogged">
+                    <div class="mb-4">
+                        <h5>{{user.gender}} {{user.firstname}} {{user.name}}</h5>
+                        <div class="d-flex gap-5">
+                            <h5>{{user.adress}}</h5>
+                            <h5>{{user.birthdate | date:'dd/MM/yyyy'}}</h5>
                         </div>
+                        <h5>{{user.email}}</h5>
+                        <button class="btn btn-primary btn-sm">Modifier mes infos</button>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h2>Mode d'expédition</h2>
+                        <form action="">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                  Sur place
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                  Livraison (10€)
+                                </label>
+                              </div>
+                        </form>
+                    </div>
+                        
+                    <div class="mb-4">
+                        <h2>Paiement</h2>
+                        <form action="" class="border p-4 bg-color-blue-light">
+                            <div class="mb-3">
+                                <span class="input-group-text">Carte de crédit</span>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Numéro de carte">
+                            </div>
+                            <div class="d-flex justify-content-between gap-3">
+                                <div class="mb-3 w-100">
+                                    <input type="text" class="form-control" placeholder="Date d'expiration (MM/AA)">
+                                </div>
+                                <div class="mb-3 w-100">
+                                    <input type="text" class="form-control" placeholder="Code de sécurité">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Nom sur la carte">
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Utiliser l'adresse d'expédition comme adresse de facturation</label>
+                              </div>
+                        </form>
+                        <p>En passant votre commande, vous adhérez aux Conditions Générales, à la Politique de Confidentialité et à la Politique des Cookies de PixelPressing.</p>
+                        <button class="btn btn-primary w-100">Payer ma commande</button>
+                    </div>
+                </div>
+                <ng-template #noLogged>
+                    <button class="btn btn-primary">Connectez-vous</button>
+                </ng-template>
+            </div>
 
-                          <label for="expirationDate" class="form-label">Date d'expiration</label>
-                          <input type="data" class="form-control" id="expirationDate">
 
-                        <button type="submit" class="btn btn-primary">Payer 10,00€</button>
-                      </form>
+
+            <div class="col-lg-6 col-12">
+                <div *ngFor="let cartItem of cartItems" class="row border-bottom py-2">
+                    <div class="col-3">
+                        <img src="img/{{cartItem.item.image}}" alt="{{cartItem.item.name}}" class="img-fluid">
+                        <span class="badge-custom badge rounded-pill badge-notification bg-success">{{ cartItem.quantity }}</span>
+                    </div>
+                    <div class="col-6">
+                        <h5>{{ cartItem.item.name }}</h5>
+                        <div class="dropdown mb-2">
+                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Vos service(s)
+                            </button>
+                            <ul class="dropdown-menu p-0">
+                                <li>
+                                    <p class="dropdown-item p-2 m-0 fs-6">Lavage</p>
+                                </li>
+                                <li>
+                                    <p class="dropdown-item p-2 m-0 fs-6">Repassage</p>
+                                </li>
+                                <li *ngFor="let service of cartItem.service">
+                                    <p class="dropdown-item p-2 m-0 fs-6">{{ service.name }}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <h5>{{ cartItem.item.price }}€</h5>
+                    </div>
+                </div>
+                <div class="col-12 my-5">
+                    <div class="d-flex justify-content-between py-5">
+                        <div>
+                            <h5>Sous-Total :</h5>
+                            <h5 class="my-3">Livraison</h5>
+                            <h4>Total</h4>
+                        </div>
+                        <div>
+                            <h5>{{ totalPrice() }}€</h5>
+                            <h5 class="my-3">10€</h5>
+                            <h4>60€</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
