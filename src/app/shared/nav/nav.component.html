@@ -53,11 +53,14 @@
                 </li>
 
                 <!-- PAGE PANIER -->
-                <li class="nav-item">
-                    <a class="nav-lien-icone" routerLink="panier"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #072366;"></i>Panier</a>
+                <li class="nav-item" (click)="openCartModal()">
+                    <i class="fa-solid fa-cart-shopping fa-xl" style="color: #072366;"></i>
+                    <span class="badge rounded-pill badge-notification bg-danger">{{ cartItemsCount }}</span>
                 </li>
 
             </ul>
         </div>
     </div>
 </nav>
+
+<app-modal-cart></app-modal-cart>

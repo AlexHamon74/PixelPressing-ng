@@ -20,7 +20,6 @@ import { EmployeeUsersEditComponent } from './features/admin/users/employeeUsers
 import { MyProfileComponent } from './features/user/my-profile/my-profile.component';
 import { MyProfileEditComponent } from './features/user/my-profile-edit/my-profile-edit.component';
 import { AuthAdminGuard } from './core/guards/auth-admin.guard';
-import { ShoppingCartComponent } from './features/user/shopping-cart/shopping-cart.component';
 import { PaymentComponent } from './features/user/payment/payment.component';
 
 export const routes: Routes = [
@@ -34,8 +33,7 @@ export const routes: Routes = [
             { path: 'commander', component: CommanderComponent },
             { path: 'myProfile', component: MyProfileComponent, canActivate: [AuthGuard] },
             { path: 'myProfile-edit', component: MyProfileEditComponent, canActivate: [AuthGuard] },
-            { path: 'panier', component: ShoppingCartComponent },
-            { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
+            { path: 'payment', component: PaymentComponent },
         ]
     },
     {

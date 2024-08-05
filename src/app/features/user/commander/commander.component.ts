@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { cartItemInterface, itemsInterface, serviceInterface } from '../../../shared/entities';
 import { ServiceService } from '../../../core/services/service.service';
 import { NgFor, NgIf } from '@angular/common';
 import { ItemService } from '../../../core/services/item.service';
 import { CartService } from '../../../core/services/cart.service';
-import { AuthService } from '../../../core/services/auth.service';
+
 
 @Component({
   selector: 'app-commander',
@@ -28,8 +28,6 @@ export class CommanderComponent implements OnInit {
   serviceService = inject(ServiceService);
   itemService = inject(ItemService);
   cartService = inject(CartService);
-  authService = inject(AuthService);
-
 
   //Méthode appélée lors de l'initialisation du composant
   ngOnInit(): void {
@@ -100,10 +98,6 @@ export class CommanderComponent implements OnInit {
 
   //Ajoute l'item et les services sélectionnés au panier et réinitialise les sélections
   addItemToCart() {
-    if(!this.authService.isLogged()){
-      alert('Veuillez vous connecter');
-      return;
-    }
     if (this.selectedItem) {
       const cartItem: cartItemInterface = {
         id: Date.now(),
@@ -112,7 +106,6 @@ export class CommanderComponent implements OnInit {
         quantity: this.quantity,
         totalPrice: this.totalPrice,
       };
-
       this.cartService.addItemToCart(cartItem);
       this.resetSelection();
     }
@@ -122,5 +115,7 @@ export class CommanderComponent implements OnInit {
     this.displayItemsBase();
     this.selectedServices = [];
     this.updateTotalPrice();
+    location.reload();
+
   }
 }

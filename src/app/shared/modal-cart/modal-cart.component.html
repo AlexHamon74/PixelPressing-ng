@@ -1,0 +1,57 @@
+<div #offcanvasBackdrop class="offcanvas-backdrop" (click)="closeOffcanvas()"></div>
+<div #offcanvasRight class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h3 class="offcanvas-title" id="offcanvasRightLabel">Votre Panier</h3>
+        <button type="button" class="btn-close" (click)="closeOffcanvas()" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div *ngIf="cartItems.length > 0; else noItems">
+            <div class="row border-bottom py-3" *ngFor="let cartItem of cartItems">
+                <div class="col-3">
+                    <img src="img/{{cartItem.item.image}}" alt="{{cartItem.item.name}}" class="img-fluid">
+                </div>
+                <div class="col-6">
+                    <h6>{{cartItem.item.name}}</h6>
+                    <div class="dropdown mb-2">
+                        <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Vos service(s)
+                        </button>
+                        <ul class="dropdown-menu p-0">
+                            <li>
+                                <p class="dropdown-item p-2 m-0 fs-6">Lavage</p>
+                            </li>
+                            <li>
+                                <p class="dropdown-item p-2 m-0 fs-6">Repassage</p>
+                            </li>
+                            <li *ngFor="let service of cartItem.service">
+                                <p class="dropdown-item p-2 m-0 fs-6">{{ service.name }}</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <h6>{{cartItem.item.price}}€</h6>
+                    <i (click)="deleteCartItem(cartItem.id)" class="fa-solid fa-trash fa-lg icone-delete"></i>
+
+                </div>
+                <div class="col-3 d-flex align-items-end juttify-content-end">
+                    <h6>Qté : {{cartItem.quantity}}</h6>
+                </div>
+
+            </div>
+
+
+            <div class="border-bottom d-flex justify-content-between py-5">
+                <h5>Total :</h5>
+                <h5>{{ totalPrice() }}€</h5>
+            </div>
+            <div class="my-4">
+                <button class="btn btn-primary" routerLink="payment">Payement Sécurisé</button>
+            </div>
+        </div>
+
+
+        <ng-template #noItems>
+            <p>Votre panier est vide.</p>
+        </ng-template>
+    </div>
+</div>
