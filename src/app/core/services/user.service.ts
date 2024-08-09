@@ -31,7 +31,7 @@ export class UserService {
   };
 
   //Méthode pour récupérer l'id de l'utilisateur à partir du token
-  getUserId(){
+  getUserId() {
     const token = this.getToken();
     if (token) {
       const tokenPayload: any = jwtDecode(token);
@@ -46,37 +46,39 @@ export class UserService {
     return this.http.get<UserInterface>(this.url + '/users/' + userId);
   };
 
-  // Méthode pour récupérer tous les users
-  fetchAllUser(role?: string): Observable<ApiListResponse<UserInterface>> {
-    return this.http.get<ApiListResponse<UserInterface>>(this.url + '/users').pipe(
-      map((response: ApiListResponse<UserInterface>) => {
-        if (role) {
-          const users = response['hydra:member'];
-          if (Array.isArray(users)) {
-            response['hydra:member'] = users.filter((user: UserInterface) => 
-              user.roles.length === 1 && user.roles.includes(role)
-            );
-          }
-        }
-        return response;
-      })
+
+  // Méthode pour récupérer les users avec le rôle [ROLE_EMPLOYEE]
+  fetchAllEmployees(): Observable<UserInterface[]> {
+    return this.http.get<{ 'hydra:member': UserInterface[] }>(this.url + '/users').pipe(
+      map(response => response['hydra:member']),
+      map(users => users.filter((user: UserInterface) => 
+        user.roles.includes('ROLE_EMPLOYEE')
+      ))
     );
-  };
-
-  // Méthode pour récupérer les users avec le rôle [ROLE_USER]
-  fetchAllCustomers(): Observable<ApiListResponse<UserInterface>> {
-    return this.fetchAllUser('ROLE_USER');
-  };
-
-  //Méthode pour mettre à jour les infos d'u user connecté
-  updateUser(user : UserInterface): Observable<UserInterface> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/ld+json' });
-    return this.http.put<UserInterface>(this.url + '/users/' + user.id, user, {headers});
-  };
-
-  deleteUser(id: number){
-    return this.http.delete<void>(`${this.url}/users/${id}`)
   }
 
-  
+
+  // Méthode pour récupérer les utilisateurs avec uniquement le rôle [ROLE_USER]
+  fetchAllCustomers(): Observable<UserInterface[]> {
+    return this.http.get<{ 'hydra:member': UserInterface[] }>(this.url + '/users').pipe(
+      map(response => response['hydra:member']),
+      map(users => users.filter((user: UserInterface) => 
+        user.roles.includes('ROLE_USER') && user.roles.length === 1
+      ))
+    );
+  }
+
+
+  //Méthode pour mettre à jour les infos du user connecté
+  updateUser(user: UserInterface): Observable<UserInterface> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/ld+json' });
+    return this.http.put<UserInterface>(this.url + '/users/' + user.id, user, { headers });
+  };
+
+  //Méthode pour supprimer un user
+  deleteUser(id: number) {
+    return this.http.delete<void>(this.url + '/users/' + id)
+  }
+
+
 }

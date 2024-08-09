@@ -31,7 +31,7 @@ export class CustomerUsersListComponent implements OnInit {
   //Je récupère mes clients
   getCustomers() {
     this.userService.fetchAllCustomers().subscribe(response => {
-      console.log(this.customers = response['hydra:member']);
+      this.customers = response;
     })
   };
 

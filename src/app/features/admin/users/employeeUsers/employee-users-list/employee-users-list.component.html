@@ -20,14 +20,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">0</th>
-                        <td>bob</td>
-                        <td>test</td>
-                        <td>bob.test.com</td>
-                        <td>rue des potiers</td>
-                        <td>18/05/1999</td> <!-- TODO | date:'dd/MM/yyyy' -->
-                        <td>Mr</td>
+                    <tr *ngFor="let employee of employees">
+                        <th scope="row">{{employee.id}}</th>
+                        <td>{{employee.name}}</td>
+                        <td>{{employee.firstname}}</td>
+                        <td>{{employee.email}}</td>
+                        <td>{{employee.adress}}</td>
+                        <td>{{employee.birthdate| date:'dd/MM/yyyy'}}</td>
+                        <td>{{employee.gender}}</td>
                         <td><button class="btn btn-success">Editer</button></td>
                         <td><button class="btn btn-danger">Supprimer</button></td>
                     </tr>

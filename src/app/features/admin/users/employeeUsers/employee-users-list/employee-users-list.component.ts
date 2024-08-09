@@ -13,8 +13,24 @@ import { UserInterface } from '../../../../../shared/entities';
   templateUrl: './employee-users-list.component.html',
   styleUrl: '../../../admin-style.css'
 })
-export class EmployeeUsersListComponent{
+export class EmployeeUsersListComponent implements OnInit{
 
+  //On définis les variables
+  employees: UserInterface[] = [];
 
+  //On injecte les services
+  userService = inject(UserService);
+
+  //Méthode appelée lors de l'initialisation du composant
+  ngOnInit(): void {
+    this.getEmployees();
+  };
+
+  //On récupère tous les employées
+  getEmployees(){
+    this.userService.fetchAllEmployees().subscribe(response =>
+      this.employees = response
+    )
+  }
 
 }
