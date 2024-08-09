@@ -57,7 +57,6 @@ export class UserService {
     );
   }
 
-
   // Méthode pour récupérer les utilisateurs avec uniquement le rôle [ROLE_USER]
   fetchAllCustomers(): Observable<UserInterface[]> {
     return this.http.get<{ 'hydra:member': UserInterface[] }>(this.url + '/users').pipe(
@@ -68,7 +67,6 @@ export class UserService {
     );
   }
 
-
   //Méthode pour mettre à jour les infos du user connecté
   updateUser(user: UserInterface): Observable<UserInterface> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/ld+json' });
@@ -78,6 +76,11 @@ export class UserService {
   //Méthode pour supprimer un user
   deleteUser(id: number) {
     return this.http.delete<void>(this.url + '/users/' + id)
+  };
+
+  createEmployee(newEmployee: UserInterface): Observable<UserInterface>{
+    const headers = new HttpHeaders({ 'Content-Type': 'application/ld+json' });
+    return this.http.post<UserInterface>(this.url + '/users', newEmployee, {headers});
   }
 
 

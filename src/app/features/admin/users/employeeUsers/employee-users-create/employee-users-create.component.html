@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <h1 class="h2 display-5"> Créer un(e) nouveau Employé(e) </h1>
 
-            <form data-bs-theme="dark">
+            <form data-bs-theme="dark" (ngSubmit)="onSubmit()" [formGroup]="createEmployeeForm">
 
                 <div class="row mb-3">
                     <div class="col-6">
