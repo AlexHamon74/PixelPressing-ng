@@ -28,7 +28,7 @@
                         <td>{{employee.adress}}</td>
                         <td>{{employee.birthdate| date:'dd/MM/yyyy'}}</td>
                         <td>{{employee.gender}}</td>
-                        <td><button class="btn btn-success">Editer</button></td>
+                        <td><button [routerLink]="(['/admin/employee-user-edit', employee.id])" class="btn btn-success">Editer</button></td>
                         <td><button class="btn btn-danger">Supprimer</button></td>
                     </tr>
                 </tbody>

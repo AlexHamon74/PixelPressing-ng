@@ -40,11 +40,18 @@ export class UserService {
     }
   };
 
-  //Méthode pour récupérer un user/id
+  //Méthode pour récupérer un les informations du user connecté
   getUserById(): Observable<UserInterface> {
     const userId = this.getUserId();
     return this.http.get<UserInterface>(this.url + '/users/' + userId);
   };
+
+  //Méthode pour mettre à jour les infos du user connecté
+  updateUser(user: UserInterface): Observable<UserInterface> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/ld+json' });
+    return this.http.put<UserInterface>(this.url + '/users/' + user.id, user, { headers });
+  };
+
 
 
   // Méthode pour récupérer les users avec le rôle [ROLE_EMPLOYEE]
@@ -55,7 +62,7 @@ export class UserService {
         user.roles.includes('ROLE_EMPLOYEE')
       ))
     );
-  }
+  };
 
   // Méthode pour récupérer les utilisateurs avec uniquement le rôle [ROLE_USER]
   fetchAllCustomers(): Observable<UserInterface[]> {
@@ -65,12 +72,6 @@ export class UserService {
         user.roles.includes('ROLE_USER') && user.roles.length === 1
       ))
     );
-  }
-
-  //Méthode pour mettre à jour les infos du user connecté
-  updateUser(user: UserInterface): Observable<UserInterface> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/ld+json' });
-    return this.http.put<UserInterface>(this.url + '/users/' + user.id, user, { headers });
   };
 
   //Méthode pour supprimer un user
@@ -78,10 +79,21 @@ export class UserService {
     return this.http.delete<void>(this.url + '/users/' + id)
   };
 
+  //Méthode pour créer un user
   createEmployee(newEmployee: UserInterface): Observable<UserInterface>{
     const headers = new HttpHeaders({ 'Content-Type': 'application/ld+json' });
     return this.http.post<UserInterface>(this.url + '/users', newEmployee, {headers});
-  }
+  };
+
+  getEmployeeById(id:number): Observable<UserInterface>{
+    return this.http.get<UserInterface>(this.url + '/users/' + id);
+  };
+  
+  editEmployee(updateEmployee: UserInterface): Observable<UserInterface>{
+	  const headers = new HttpHeaders({ 'Content-Type': 'application/ld+json' });
+	  return this.http.put<UserInterface>(this.url + '/users/' + updateEmployee.id, updateEmployee, {headers})
+  };
+
 
 
 }
