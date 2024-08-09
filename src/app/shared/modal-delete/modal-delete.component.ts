@@ -17,7 +17,7 @@ export class ModalDeleteComponent {
 
   @Input() currentItem: itemsInterface | null = null;
   @Input() currentService: serviceInterface | null = null;
-  @Input() currentUser: UserInterface | null = null;
+  @Input() currentCustomer: UserInterface | null = null;
   @Input() currentCartItem: cartItemInterface | null = null;
 
   @Output() objectDeleted = new EventEmitter<void>();
@@ -46,16 +46,23 @@ export class ModalDeleteComponent {
     if (this.currentItem) {
       this.itemService.deleteItem(this.currentItem.id).subscribe(() => {
         this.objectDeleted.emit();
+        location.reload();
       });
     } else if (this.currentService) {
       this.serviceService.deleteService(this.currentService.id).subscribe(() => {
         this.objectDeleted.emit();
+        location.reload();
       });
     } else if (this.currentCartItem) {
       this.cartService.deleteCartItems(this.currentCartItem.id).subscribe(() => {
         this.objectDeleted.emit();
+        location.reload();
       });
-      location.reload();
+    } else if(this.currentCustomer){
+      this.userService.deleteUser(this.currentCustomer.id).subscribe(() => {
+        this.objectDeleted.emit();
+        location.reload();
+      })
     }
   }
 }

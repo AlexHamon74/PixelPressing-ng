@@ -13,20 +13,19 @@
                         <th scope="col">Adresse</th>
                         <th scope="col">Date de naissance</th>
                         <th scope="col">Genre</th>
-                        <th scope="col">Supprimer</th>
-
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">0</th>
-                        <td>bob</td>
-                        <td>test</td>
-                        <td>bob.test.com</td>
-                        <td>rue des potiers</td>
-                        <td>18/05/1999</td> <!-- TODO | date:'dd/MM/yyyy' -->
-                        <td>Mr</td>
-                        <td><button class="btn btn-danger">Supprimer</button></td>
+                    <tr *ngFor="let customer of customers">
+                        <th scope="row">{{customer.id}}</th>
+                        <td>{{customer.name}}</td>
+                        <td>{{customer.firstname}}</td>
+                        <td>{{customer.email}}</td>
+                        <td>{{customer.adress}}</td>
+                        <td>{{customer.birthdate | date:'dd/MM/yyyy'}}</td>
+                        <td>{{customer.gender}}</td>
+                        <td><button (click)="confirmDelete(customer)" data-bs-toggle="modal" class="btn btn-danger" data-bs-target="#modalDelete">Supprimer</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -34,4 +33,5 @@
     </div>
 </div>
 
-
+<app-modal-delete [currentCustomer]="currentCustomer" (itemDeleted)="deleteCustomer()">
+</app-modal-delete>
