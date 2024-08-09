@@ -17,7 +17,7 @@ export class ModalDeleteComponent {
 
   @Input() currentItem: itemsInterface | null = null;
   @Input() currentService: serviceInterface | null = null;
-  @Input() currentCustomer: UserInterface | null = null;
+  @Input() currentUser: UserInterface | null = null;
   @Input() currentCartItem: cartItemInterface | null = null;
 
   @Output() objectDeleted = new EventEmitter<void>();
@@ -39,7 +39,7 @@ export class ModalDeleteComponent {
         backdrop.remove();
       }
     }
-  }
+  };
 
   // Fonction pour supprimer l'élément actuel
   deleteObject() {
@@ -58,11 +58,11 @@ export class ModalDeleteComponent {
         this.objectDeleted.emit();
         location.reload();
       });
-    } else if(this.currentCustomer){
-      this.userService.deleteUser(this.currentCustomer.id).subscribe(() => {
+    } else if(this.currentUser) {
+      this.userService.deleteUser(this.currentUser.id).subscribe(() => {
         this.objectDeleted.emit();
         location.reload();
-      })
+      });
     }
   }
 }

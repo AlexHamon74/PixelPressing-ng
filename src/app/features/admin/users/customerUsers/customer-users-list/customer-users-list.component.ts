@@ -17,7 +17,7 @@ export class CustomerUsersListComponent implements OnInit {
 
   //On définis les variables
   customers: UserInterface[] = [];
-  currentCustomer: UserInterface | null = null;
+  currentUser: UserInterface | null = null;
   @ViewChild(ModalDeleteComponent) modalDeleteComponent!: ModalDeleteComponent;
 
   //On injecte les services
@@ -36,14 +36,14 @@ export class CustomerUsersListComponent implements OnInit {
   };
 
   //Fonction pour définir l'élément actuel à supprimer
-  confirmDelete(customer: UserInterface) {
-    this.currentCustomer = customer;
-  }
+  confirmDelete(user: UserInterface) {
+    this.currentUser = user;
+  };
 
   //Fonction pour supprimer l'élément actuel
-  deleteCustomer() {
-    this.currentCustomer = null;
+  deleteUser() {
+    this.currentUser = null;
     this.getCustomers();
     this.modalDeleteComponent.closeModal();
-  }
+  };
 }

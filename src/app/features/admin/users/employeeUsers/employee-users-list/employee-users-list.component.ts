@@ -13,10 +13,12 @@ import { UserInterface } from '../../../../../shared/entities';
   templateUrl: './employee-users-list.component.html',
   styleUrl: '../../../admin-style.css'
 })
-export class EmployeeUsersListComponent implements OnInit{
+export class EmployeeUsersListComponent implements OnInit {
 
   //On définis les variables
   employees: UserInterface[] = [];
+  currentUser: UserInterface | null = null;
+  @ViewChild(ModalDeleteComponent) modalDeleteComponent!: ModalDeleteComponent;
 
   //On injecte les services
   userService = inject(UserService);
@@ -27,10 +29,22 @@ export class EmployeeUsersListComponent implements OnInit{
   };
 
   //On récupère tous les employées
-  getEmployees(){
+  getEmployees() {
     this.userService.fetchAllEmployees().subscribe(response =>
       this.employees = response
     )
-  }
+  };
+
+  //Fonction pour définir l'élément actuel à supprimer
+  confirmDelete(user: UserInterface) {
+    this.currentUser = user;
+  };
+
+  //Fonction pour supprimer l'élément actuel
+  deleteUser() {
+    this.currentUser = null;
+    this.getEmployees();
+    this.modalDeleteComponent.closeModal();
+  };
 
 }
