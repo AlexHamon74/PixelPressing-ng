@@ -1,37 +1,43 @@
 <section class="payment">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 col-12">
+            <div class="col-lg-6 col-12 order-lg-1 order-2">
                 <h2>Vos Informations</h2>
-                <div *ngIf="isLogged();else noLogged">
+                <div *ngIf="isLogged(); else noLogged">
                     <div class="mb-4">
                         <h5>{{user.gender}} {{user.firstname}} {{user.name}}</h5>
-                        <div class="d-flex gap-5">
-                            <h5>{{user.adress}}</h5>
-                            <h5>{{user.birthdate | date:'dd/MM/yyyy'}}</h5>
-                        </div>
+                        <h5>{{user.adress}}</h5>
                         <h5>{{user.email}}</h5>
                         <button class="btn btn-primary btn-sm">Modifier mes infos</button>
                     </div>
-                    
+
+                    <!-- Partie Mode d'expédition -->
                     <div class="mb-4">
                         <h2>Mode d'expédition</h2>
-                        <form action="">
+                        <form [formGroup]="paymentForm">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                  Sur place
+                                <input class="form-check-input" type="radio" name="deliveryMode" id="pickUp"
+                                    (change)="onDeliveryChange(false)" checked>
+                                <label class="form-check-label" for="pickUp">
+                                    Sur place
                                 </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                  Livraison (10€)
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="deliveryMode" id="delivery"
+                                    (change)="onDeliveryChange(true)">
+                                <label class="form-check-label" for="delivery">
+                                    Livraison (10€)
                                 </label>
-                              </div>
+                            </div>
+                            <div class="my-3" *ngIf="delivery">
+                                <label for="delivery_date" class="form-label">Date de livraison</label>
+                                <input type="datetime-local" class="form-control" id="deliveryDate"
+                                formControlName="deliveryDate">
+                            </div>
                         </form>
                     </div>
-                        
+
+                    <!-- Partie info carte bancaire -->
                     <div class="mb-4">
                         <h2>Paiement</h2>
                         <form action="" class="border p-4 bg-color-blue-light">
@@ -53,33 +59,36 @@
                                 <input type="text" class="form-control" placeholder="Nom sur la carte">
                             </div>
                             <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Utiliser l'adresse d'expédition comme adresse de facturation</label>
-                              </div>
+                                <input type="checkbox" class="form-check-input" id="billingAddressCheck">
+                                <label class="form-check-label" for="billingAddressCheck">Utiliser l'adresse
+                                    d'expédition comme adresse de facturation</label>
+                            </div>
                         </form>
-                        <p>En passant votre commande, vous adhérez aux Conditions Générales, à la Politique de Confidentialité et à la Politique des Cookies de PixelPressing.</p>
-                        <button routerLink="../commande-valide" class="btn btn-primary w-100">Payer ma commande</button>
+                        <p>En passant votre commande, vous adhérez aux Conditions Générales, à la Politique de
+                            Confidentialité et à la Politique des Cookies de PixelPressing.</p>
+                        <button (click)="payOrder()" class="btn btn-primary w-100">Payer ma commande</button>
                     </div>
                 </div>
+
+                <!-- Si user pas connecté -->
                 <ng-template #noLogged>
                     <p>Veuillez vous connecter pour payer votre commande</p>
                     <button routerLink="../login" class="btn btn-primary">Connectez-vous</button>
                 </ng-template>
             </div>
 
-
-
-            <div class="col-lg-6 col-12">
+            <div class="col-lg-6 col-12 order-lg-2 order-1">
                 <div *ngFor="let cartItem of cartItems" class="row border-bottom py-2">
                     <div class="col-3">
                         <img src="img/{{cartItem.item.image}}" alt="{{cartItem.item.name}}" class="img-fluid">
-                        <span class="badge-custom badge rounded-pill badge-notification bg-success">{{ cartItem.quantity }}</span>
+                        <span class="badge-custom badge rounded-pill badge-notification bg-success">{{ cartItem.quantity
+                            }}</span>
                     </div>
                     <div class="col-6">
                         <h5>{{ cartItem.item.name }}</h5>
                         <div class="dropdown mb-2">
-                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
+                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Vos service(s)
                             </button>
                             <ul class="dropdown-menu p-0">
@@ -96,7 +105,7 @@
                         </div>
                     </div>
                     <div class="col-3">
-                        <h5>{{ cartItem.item.price }}€</h5>
+                        <h5>{{ calculateTotalPrice(cartItem) }}€</h5>
                     </div>
                 </div>
                 <div class="col-12 my-5">
@@ -107,9 +116,9 @@
                             <h4>Total</h4>
                         </div>
                         <div>
-                            <h5>{{ totalPrice() }}€</h5>
-                            <h5 class="my-3">10€</h5>
-                            <h4>60€</h4>
+                            <h5>{{ subtotalPrice() }}€</h5>
+                            <h5 class="my-3">{{ delivery ? delivery_price : 0 }}€</h5>
+                            <h4>{{ totalPrice() }}€</h4>
                         </div>
                     </div>
                 </div>

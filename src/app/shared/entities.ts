@@ -8,6 +8,7 @@ export interface Token {
 }
 
 export interface UserInterface {
+    '@id': string;
     id: number;
     email:string;
     name:string;
@@ -56,9 +57,13 @@ export interface cartItemInterface{
     totalPrice: number; 
 }
 
-export interface commandInteface{
-    id: number;
-    user: UserInterface;
-    createdAt: string;
+export interface orderInterface{
+    id?: number;
+    price:number;
     status: string;
+    delivery:boolean;
+    deliveryDate:string |null;
+    commandItems:cartItemInterface[];
+    createdAt: string;
+    user: string;
 }
