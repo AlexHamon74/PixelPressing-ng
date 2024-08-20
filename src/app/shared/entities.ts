@@ -60,10 +60,12 @@ export interface cartItemInterface{
 export interface orderInterface{
     id?: number;
     price:number;
+    subTotal?: number;
     status: string;
     delivery:boolean;
     deliveryDate:string |null;
     commandItems:cartItemInterface[];
-    createdAt: Date;
+    createdAt: string;
     user: string;
+    employee?: string;
 }

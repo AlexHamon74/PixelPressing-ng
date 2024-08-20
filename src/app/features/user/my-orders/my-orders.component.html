@@ -1,0 +1,112 @@
+<section class="orders">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-4">
+                <div class="d-flex gap-4 align-items-center mb-4">
+                    <i class="fa-solid fa-box-open fa-xl"></i>
+                    <h2>Mes commandes</h2>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <p>Form de recherche par date</p>
+            </div>
+        </div>
+
+        <div *ngFor="let order of orders" class="row mb-5 p-4 bg-light-custom border">
+            <div class="col-lg-4 pointer" (click)="selectOrder(order.id!)">
+                <div class="row align-items-center">
+                    <div class="col-10">
+                        <h4>Commandes n° {{order.id}}</h4>
+                        <p>Date : {{order.createdAt}}</p>
+                    </div>
+                    <div class="col-2">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8" *ngIf="selectedOrderId === order.id">
+                <div class="mb-4">
+                    <h5>Statut : {{order.status}}</h5>
+                    <h6 *ngIf="order.delivery">Date de livraion prévu : {{order.deliveryDate}}</h6>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="border bg-white p-4 mb-4">
+                            <h6>Adresse de livraion</h6>
+                            <p class="m-0">{{user.firstname}} {{user.name}}</p>
+                            <p class="m-0">{{user.adress}}</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="border bg-white p-4 mb-4">
+                            <h6>Adresse de facturation</h6>
+                            <p class="m-0">{{user.firstname}} {{user.name}}</p>
+                            <p class="m-0">{{user.adress}}</p>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="border bg-white p-4 mb-4">
+                            <h5 class="mb-4">Mes articles</h5>
+                            <div class="table-responsive">
+
+                                <table class="table text-center table-hover align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Article</th>
+                                            <th scope="col">Prix</th>
+                                            <th scope="col">Quantité</th>
+                                            <th scope="col">Services</th>
+                                            <th scope="col">Sous-total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of order.commandItems">
+                                            <th scope="row">
+                                                <img src="img/{{item.item.image}}" alt="{{item.item.name}}"
+                                                    class="img-custom">
+                                                {{item.item.name}}
+
+                                            </th>
+                                            <td>{{item.item.price}}€</td>
+                                            <td>{{item.quantity}}</td>
+                                            <td>
+                                                <div class="dropdown mb-2">
+                                                    <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Vos service(s)
+                                                    </button>
+                                                    <ul class="dropdown-menu p-0">
+                                                        <li>
+                                                            <p class="dropdown-item p-2 m-0 fs-6">Lavage</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="dropdown-item p-2 m-0 fs-6">Repassage</p>
+                                                        </li>
+                                                        <li *ngFor="let service of item.service">
+                                                            <p class="dropdown-item p-2 m-0 fs-6">{{ service.name }}</p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                            <td>{{item.totalPrice}}€</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="border bg-white p-4 d-flex flex-column align-items-end">
+                            <!-- Appelée ici la fonction calculateTotalOfSubTotal -->
+                            <p>Sous-Total: {{order.subTotal}}€</p>
+                            <p>Livraison: {{order.delivery ? '10€' : '0€'}}</p>
+                            <p class="fw-semibold">Total: {{order.price}}€</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

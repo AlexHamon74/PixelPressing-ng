@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CartService } from '../../../core/services/cart.service';
 import { cartItemInterface, orderInterface, UserInterface } from '../../../shared/entities';
-import { DatePipe, NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../../core/services/user.service';
 import { AuthService } from '../../../core/services/auth.service';
@@ -11,7 +11,7 @@ import { OrderService } from '../../../core/services/order.service';
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [NgIf, NgFor, RouterLink, DatePipe, ReactiveFormsModule],
+  imports: [NgIf, NgFor, RouterLink, ReactiveFormsModule],
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.css'
 })
@@ -84,7 +84,7 @@ loadCartItems() {
   }
   
   payOrder() {
-    const createdAt = new Date();
+    const createdAt = new Date().toISOString();
 
     const newOrder: orderInterface = {
       price: this.totalPrice(),
@@ -93,7 +93,7 @@ loadCartItems() {
       deliveryDate: this.deliveryDate,
       commandItems:this.cartItems,
       createdAt: createdAt,
-      user: this.user['@id'] || `"/api/users/${this.user.id}"`,
+      user: this.user['@id'],
     };
   
     this.orderService.createOrder(newOrder).subscribe(

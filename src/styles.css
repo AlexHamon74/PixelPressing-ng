@@ -32,6 +32,9 @@ p{
 .bg-color-blue-light {
     background-color: #E8EDFF;
 }
+.bg-light-custom{
+  background-color: #F8FAFF;
+}
 
 .color-grey {
     color: #57667E;
