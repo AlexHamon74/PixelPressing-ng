@@ -64,6 +64,6 @@ export interface orderInterface{
     delivery:boolean;
     deliveryDate:string |null;
     commandItems:cartItemInterface[];
-    createdAt: string;
+    createdAt: Date;
     user: string;
 }

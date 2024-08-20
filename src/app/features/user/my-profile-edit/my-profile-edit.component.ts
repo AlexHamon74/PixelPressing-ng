@@ -47,16 +47,24 @@ export class MyProfileEditComponent implements OnInit {
     })
   };
 
+  //Fonction pour convertir une date du format DD/MM/YYYY en YYYY-MM-DD
+  convertDate(date: string): string {
+    const [day, month, year] = date.split('/');
+    return `${year}-${month}-${day}`;
+  }
+
   //On charge les données du user connecté pour pré-remplir le formulaire
   loadUser(): void {
     this.userService.getUserById().subscribe(data => {
+      //Conversion du format de la date
+      const birthdate = this.convertDate(data.birthdate);
       this.myProfileEditForm.patchValue({
         name: data.name,
         firstname: data.firstname,
         email: data.email,
         adress: data.adress,
         gender: data.gender,
-        birthdate: data.birthdate,
+        birthdate: birthdate,
       })
     });
   };

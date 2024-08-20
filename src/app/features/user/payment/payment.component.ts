@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CartService } from '../../../core/services/cart.service';
 import { cartItemInterface, orderInterface, UserInterface } from '../../../shared/entities';
 import { DatePipe, NgFor, NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../../core/services/user.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -30,18 +30,21 @@ export class PaymentComponent implements OnInit {
   authService = inject(AuthService);
   orderService = inject(OrderService);
   fb = inject(FormBuilder);
+  router = inject(Router);
 
   ngOnInit(): void {
     if (this.isLogged()) {
       this.getUser();
     }
     this.loadCartItems();
-  
+    this.initPaymentForm();
+  }
+
+  private initPaymentForm() {
     this.paymentForm = this.fb.group({
       deliveryDate: [this.deliveryDate]
     });
-  
-    // Abonnement aux changements de formulaire pour mettre à jour la date de livraison
+    
     this.paymentForm.get('deliveryDate')?.valueChanges.subscribe(value => {
       this.deliveryDate = value;
     });
@@ -49,26 +52,18 @@ export class PaymentComponent implements OnInit {
 
 loadCartItems() {
   const cartItemsString = localStorage.getItem('cartItems');
-  if (cartItemsString) {
-    this.cartItems = JSON.parse(cartItemsString);
-  } else {
-    this.cartItems = []; // Initialisez avec un tableau vide si rien n'est trouvé
-  }
+  this.cartItems = cartItemsString ? JSON.parse(cartItemsString) : [];
 }
 
   calculateTotalPrice(cartItem: cartItemInterface): number {
-    let total = cartItem.item.price;
-    cartItem.service.forEach(service => {
-      total += service.price;
-    });
-    return total * cartItem.quantity;
+    return cartItem.service.reduce((total, service) => total + service.price, cartItem.item.price) * cartItem.quantity;
   }
 
-  subtotalPrice() {
+  subtotalPrice(): number {
     return this.cartItems.reduce((total, item) => total + item.totalPrice, 0);
   }
 
-  totalPrice() {
+  totalPrice(): number {
     return this.subtotalPrice() + (this.delivery ? this.delivery_price : 0);
   }
 
@@ -78,46 +73,40 @@ loadCartItems() {
     });
   }
 
-  isLogged() {
+  isLogged(): boolean {
     return this.authService.isLogged();
   }
 
   onDeliveryChange(isDelivery: boolean) {
     this.delivery = isDelivery;
-    if (!isDelivery) {
-      this.deliveryDate = null;  // Clear delivery date if delivery is not selected
-      this.paymentForm.get('deliveryDate')?.setValue(null);
-    }
+    this.deliveryDate = isDelivery ? this.deliveryDate : null;
+    this.paymentForm.get('deliveryDate')?.setValue(this.deliveryDate);
   }
   
   payOrder() {
-    const isoDate = this.delivery ? new Date(this.deliveryDate || '').toISOString() : null;
-    const createdAt = new Date().toISOString();  // Ajout de la date actuelle en format ISO
+    const createdAt = new Date();
 
     const newOrder: orderInterface = {
       price: this.totalPrice(),
       status: this.status,
       delivery: this.delivery,
-      deliveryDate: isoDate,
+      deliveryDate: this.deliveryDate,
       commandItems:this.cartItems,
-      createdAt: createdAt,  // Ajout du champ createdAt
-      user: this.user['@id'] || `"/api/users/${this.user.id}"`,  // Utiliser l'IRI de l'utilisateur
+      createdAt: createdAt,
+      user: this.user['@id'] || `"/api/users/${this.user.id}"`,
     };
-    console.log('Prix total :' + this.totalPrice())
-    console.log('Status :' + this.status)
-    console.log('Livraison :' + this.delivery)
-    console.log('Date de livraison : ' + isoDate);
-    console.log(this.cartItems);
-    console.log('Date de création :' + createdAt),
-    console.log('User :' + this.user['@id'] || `"/api/users/${this.user.id}"`)
   
     this.orderService.createOrder(newOrder).subscribe(
       response => {
-        console.log('Order created successfully:', response);
-        // Rediriger ou afficher un message de succès
+        console.log('Commande crée', response);
+        localStorage.removeItem('cartItems');
+        setTimeout(() => {
+          location.reload();
+        }, 1);
+        this.router.navigate(['commande-valide']);
       },
       error => {
-        console.error('Error creating order:', error);
+        console.error('Erreur lors de la création de la commande', error);
       }
     );
   }
