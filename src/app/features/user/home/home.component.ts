@@ -2,11 +2,12 @@ import { NgClass, NgFor } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { categoryInterface } from '../../../shared/entities';
 import { CategoryService } from '../../../core/services/category.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor, NgClass],
+  imports: [NgFor, NgClass, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
