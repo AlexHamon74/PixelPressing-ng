@@ -2,45 +2,49 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgIf],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
 
-  service = inject(AuthService);
+  isSubmitted = false
+
+  authService = inject(AuthService);
   router = inject(Router);
 
-  public registerForm:FormGroup = new FormGroup ({
-    email: new FormControl('', [Validators.required, ]),
-    password: new FormControl('', [Validators.required, ]),
-    name: new FormControl('', [Validators.required, ]),
-    firstname: new FormControl('', [Validators.required, ]),
-    adress: new FormControl('', [Validators.required, ]),
-    gender: new FormControl('', [Validators.required, ]),
-    birthdate: new FormControl('', [Validators.required, ]),
-  })
+  //Initialisation du formulaire avec validations
+  public registerForm: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(/\d/)]),
+    name: new FormControl('', [Validators.required]),
+    firstname: new FormControl('', [Validators.required]),
+    adress: new FormControl('', [Validators.required]),
+    gender: new FormControl('', [Validators.required]),
+    birthdate: new FormControl('', [Validators.required]),
+  });
 
+  //Méthode de soumission du formulaire
   onSubmit() {
+    this.isSubmitted = true;
+
     if (this.registerForm.valid) {
-      this.service.register(this.registerForm.value).subscribe({
-        next: (response) => {
-          console.log('Inscription réussie', response);
-          console.log(this.registerForm.value);
-          this.router.navigate(['login']);
+      this.authService.register(this.registerForm.value).subscribe({
+        next: () => {
+          this.router.navigate(['login']).then(() => location.reload());
         },
-        error: (error) => {
-          console.error('Erreur inscription', error);
-          console.log(this.registerForm.value);
-        }
       });
-    } else {
-      console.log('Formulaire invalide');
-    }
-  }
+    };
+  };
+
+  //Méthode pour vérifier si les champs ont une erreur spécifique
+  public hasError(controlName: string, errorName: string) {
+    return this.registerForm.controls[controlName].hasError(errorName);
+  };
 
 }
