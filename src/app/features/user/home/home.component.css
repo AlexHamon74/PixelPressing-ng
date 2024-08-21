@@ -1,12 +1,12 @@
 /* STYLE SECTION HERO */
-.hero{
+.hero {
     position: relative;
     background-image: url(../../../../../public/img/HeroImg.png);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: top center;
+    background-position: center calc(60px); /* Ajuste en fonction de la hauteur de la navbar */
     width: 100%;
-    height: 88vh;
+    height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
