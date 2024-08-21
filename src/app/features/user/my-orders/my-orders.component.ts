@@ -3,11 +3,13 @@ import { OrderService } from '../../../core/services/order.service';
 import { orderInterface, UserInterface } from '../../../shared/entities';
 import { NgFor, NgIf } from '@angular/common';
 import { UserService } from '../../../core/services/user.service';
+import { FormsModule } from '@angular/forms';
+import { OrderDateFilterPipe } from '../../../core/pipes/order-date-filter.pipe';
 
 @Component({
   selector: 'app-my-orders',
   standalone: true,
-  imports: [NgFor, NgIf],
+  imports: [NgFor, NgIf, FormsModule, OrderDateFilterPipe],
   templateUrl: './my-orders.component.html',
   styleUrl: './my-orders.component.css'
 })
@@ -15,10 +17,12 @@ export class MyOrdersComponent implements OnInit {
 
   orders: orderInterface[] = [];
   user: UserInterface = {} as UserInterface;
+  selectedOrderId: number | null = null;
+  searchDate: string = '';
+
 
   orderService = inject(OrderService);
   userService = inject(UserService);
-  selectedOrderId: number | null = null;
 
   ngOnInit(): void {
     this.getOrders();
