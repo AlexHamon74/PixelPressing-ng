@@ -1,7 +1,7 @@
 <section class="hero">
-    <div class="container">
-        <h1 class="text-white display-1">Pixel Pressing</h1>
-        <p class="p-hero py-4">Service de blanchisserie de qualité dans votre ville</p>
+    <div class="container z-1">
+        <h1 class="text-light display-1">Pixel Pressing</h1>
+        <p class="text-light display-6 py-4">Service de blanchisserie de qualité<br> dans votre ville</p>
         <button class="c-button c-button--gooey"> Commander
             <div class="c-button__blobs">
                 <div></div>
@@ -28,21 +28,21 @@
         <div class="row">
             <div class="col-lg-4 col-12">
                 <div class="text-center mb-4 p-2 hover-effect">
-                    <img src="img/hiw1.png" alt="">
+                    <img src="img/hiw1.png" alt="Logo d'un vêtement">
                     <h3 class="my-4" style="height: 68px;">Nous récupérons vos vêtements</h3>
                     <p class="color-grey">Le processus automatisé démarre dès que vos vêtements entrent dans la machine. Le résultat, ce sont des vêtements brillants!</p>
                 </div>
             </div>
             <div class="col-lg-4 col-12">
                 <div class="text-center mb-4 p-2 hover-effect">
-                    <img src="img/hiw2.png" alt="">
+                    <img src="img/hiw2.png" alt="Logo d'un lavage à la main">
                     <h3 class="my-4" style="height: 68px;">Nous lavons vos vêtements</h3>
                     <p class="color-grey">Le processus automatisé démarre dès que vos vêtements entrent dans la machine. Le résultat, ce sont des vêtements brillants!</p>
                 </div>
             </div>
             <div class="col-lg-4 col-12">
                 <div class="text-center mb-4 p-2 hover-effect">
-                    <img src="img/hiw3.png" alt="">
+                    <img src="img/hiw3.png" alt="Logo d'une boite pour le livraison">
                     <h3 class="my-4" style="height: 68px;">Nous livrons vos vêtements</h3>
                     <p class="color-grey">Le processus automatisé démarre dès que vos vêtements entrent dans la machine. Le résultat, ce sont des vêtements brillants!</p>
                 </div>
@@ -51,20 +51,20 @@
     </div>
 </section>
 
-<section class="services py-5">
+<section class="categories py-5">
     <div class="container">
-        <h2 class="text-center display-5 pb-5">Nos Services</h2>
+        <h2 class="text-center display-5 pb-5">Notre savoir-faire</h2>
         <div class="row row-custom text-white">
 
             <div class="col-lg-6 col-12">
-                <img src="img/service1.png" class="img-fluid w-100" alt="">
+                <img src="img/service1.png" class="img-fluid w-100" alt="Image d'un employée de PixelPressing">
             </div>
 
             <div *ngFor="let categorie of categories; let i = index" 
             [ngClass]="{'col-lg-6 col-12': true, 'order-lg-0 order-1': i === 1}">
                 <div class="position-relative hover-rotate">
-                    <img src="img/service-bg.png" class="img-fluid w-100" alt="">
-                    <div class="service-bg-content text-center">
+                    <img src="img/categorie-bg.png" class="img-fluid w-100 categorie-bg" alt="Image de fond pour les catégorie">
+                    <div class="categorie-bg-content text-center px-3">
                         <img src="img/{{categorie.image}}" class="img-fluid effect" alt="{{categorie.image}}">
                         <h3 class="py-4">{{categorie.name}}</h3>
                         <p>{{categorie.description}}</p>
@@ -73,7 +73,7 @@
             </div>
             
             <div class="col-lg-6 col-12">
-                <img src="img/service2.png" class="img-fluid w-100" alt="">
+                <img src="img/service2.png" class="img-fluid w-100" alt="Image d'un employée de PixelPressing">
             </div>
         </div>
     </div>
@@ -87,23 +87,7 @@
                 <p class="my-4">Nous livrons les marchandises dans les endroits les plus compliqués de la planète</p>
             </div>
             <div class="col-lg-4 col-12 text-lg-end">
-                <button class="c-button c-button--gooey"> 06.06.06.06.06
-                    <div class="c-button__blobs">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </button>
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: block; height: 0; width: 0;">
-                    <defs>
-                        <filter id="goo">
-                            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
-                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
-                                result="goo"></feColorMatrix>
-                            <feBlend in="SourceGraphic" in2="goo"></feBlend>
-                        </filter>
-                    </defs>
-                </svg>
+                <button class="btn-light py-2 px-4 fs-4">06.43.60.07.97</button>
             </div>
         </div>
     </div>
@@ -113,7 +97,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-12">
-                <img src="img/about.png" class="img-fluid" alt="">
+                <img src="img/about.png" class="img-fluid" alt="Photo d'un employée de PixelPressing">
             </div>
             <div class="col-lg-6 col-12">
                 <h2 class="display-5 mb-4">A propos de nous</h2>

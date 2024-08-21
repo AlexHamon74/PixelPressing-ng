@@ -43,14 +43,6 @@
     width: 50%;
 }
 
-.auth {
-    display: inline-block;
-    color: #fff;
-    border-radius: 10px;
-    padding: 8px 10px;
-    font-size: 16px;
-}
-
 .nav-item{
     display: flex;
     align-items: center;

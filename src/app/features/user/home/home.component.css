@@ -4,13 +4,14 @@
     background-image: url(../../../../../public/img/HeroImg.png);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center calc(60px); /* Ajuste en fonction de la hauteur de la navbar */
+    background-position: center calc(60px);
     width: 100%;
     height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .hero::before {
     position: absolute;
     content: '';
@@ -22,49 +23,52 @@
     z-index: 1;
     background-color: rgba(0, 0, 0, 0.3);
 }
-.hero .container {
-    position: relative;
-    z-index: 1;
-}
-.p-hero{
-    color: #fff;
-    font-size: 28px;
-}
-
 
 /* STYLE SECTION HOW IT WORKS */
 .hover-effect {
     transition: box-shadow 0.3s, transform 0.3s;
 }
+
 .hover-effect img {
     transition: transform 0.6s;
 }
+
 .hover-effect:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+
 .hover-effect:hover img {
     transform: rotateY(180deg);
 }
 
 /* STYLE SECTION SERVICES */
-.service-bg-content{
+@media (max-width: 472px) {
+    .categorie-bg{
+        height: 500px;
+    }
+}
+
+.categorie-bg-content {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
 }
+
 .hover-rotate .effect {
     transition: transform 0.6s;
 }
+
 .hover-rotate:hover .effect {
     transform: rotateY(180deg);
 }
+
 .row-custom>* {
     padding-left: 0;
     padding-right: 0;
 }
 
 /* STYLE SECTION CALL */
-.call{
+.call {
     background-image: url(../../../../../public/img/bg-call.png);
     background-size: cover;
     background-position: center;
@@ -73,7 +77,8 @@
     padding: 60px 0;
 }
 
-.clock{
+/* Style de l'image horloge */
+.clock {
     font-size: 120px;
     text-align: center;
     display: block;
