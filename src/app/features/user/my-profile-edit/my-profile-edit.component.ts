@@ -3,17 +3,19 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { UserInterface } from '../../../shared/entities';
 import { UserService } from '../../../core/services/user.service';
 import { Router } from '@angular/router';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-my-profile-edit',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgIf],
   templateUrl: './my-profile-edit.component.html',
   styleUrl: './my-profile-edit.component.css'
 })
 export class MyProfileEditComponent implements OnInit {
 
   //On définis nos variables
+  isSubmitted = false
   myProfileEditForm!: FormGroup;
   user: UserInterface = {} as UserInterface;
 
@@ -40,7 +42,7 @@ export class MyProfileEditComponent implements OnInit {
     this.myProfileEditForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       firstname: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       adress: new FormControl('', [Validators.required]),
       gender: new FormControl('', [Validators.required]),
       birthdate: new FormControl('', [Validators.required]),
@@ -71,6 +73,8 @@ export class MyProfileEditComponent implements OnInit {
 
   //Méthode appelée lors de la soumission du formulaire
   onSubmit() {
+    this.isSubmitted = true;
+
     if (this.myProfileEditForm.valid) {
       const updatedUser: UserInterface = {
         ...this.user,
@@ -81,5 +85,10 @@ export class MyProfileEditComponent implements OnInit {
       });
     }
   }
+
+  //Méthode pour vérifier si les champs ont une erreur spécifique
+  public hasError(controlName: string, errorName: string) {
+    return this.myProfileEditForm.controls[controlName].hasError(errorName);
+  };
 
 }

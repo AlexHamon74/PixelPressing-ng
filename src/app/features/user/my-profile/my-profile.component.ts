@@ -22,13 +22,13 @@ export class MyProfileComponent implements OnInit{
   //Méthode appelée lors de l'initialisation du composant
   ngOnInit(): void {
     this.getUser();
-  }
+  };
 
   //On récupère les informations du user connecté
   getUser(){
     this.userService.getUserById().subscribe(data =>{
       this.user = data;
     })
-  }
+  };
 
 }

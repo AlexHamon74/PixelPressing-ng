@@ -1,54 +1,100 @@
-<section class="myProfile ">
-    <div class="myProfile-card container shadow">
+<section class="myProfile">
+    <div class="container shadow">
+
         <form (ngSubmit)="onSubmit()" [formGroup]="myProfileEditForm">
 
             <div class="row">
-                <div class="myProfile-card-left col-4 py-5 px-lg-5 text-center">
+                <div class="bg col-4 py-5 px-lg-5 text-center">
                     <img src="img/userImage.png" class="img-fluid" alt="User Image">
-                    <div class="py-5">
-                        <label for="name">
-                            <h1>Nom:</h1>
-                        </label>
-                        <input type="text" id="name" class="form-control" formControlName="name">
+                    <div class="py-4 text-light">
+                        
+                        <div class="mb-4">
+                            <label for="name">
+                                <h2>Nom</h2>
+                            </label>
+                            <input type="text" id="name" class="form-control" formControlName="name"
+                            [class.is-invalid]="isSubmitted && myProfileEditForm.controls['name'].invalid">
+                            <div *ngIf="isSubmitted && myProfileEditForm.controls['name'].invalid" class="invalid-feedback">
+                                <small>Le nom est requis</small>
+                            </div>
+                        </div>
 
                         <label for="firstname">
-                            <h2>Prénom:</h2>
+                            <h2>Prénom</h2>
                         </label>
-                        <input type="text" id="firstname" class="form-control" formControlName="firstname">
-
+                        <input type="text" id="firstname" class="form-control" formControlName="firstname"
+                            [class.is-invalid]="isSubmitted && myProfileEditForm.controls['firstname'].invalid">
+                        <div *ngIf="isSubmitted && myProfileEditForm.controls['firstname'].invalid"
+                            class="invalid-feedback">
+                            <small>Le prénom est requis</small>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Valider</button>
+
                 </div>
-                <div class="myProfile-card-right col-8 p-5">
-                    <h3>Mes Informations</h3>
+                <div class="col-8 py-5 px-lg-5 bg-light">
+                    <div class="d-lg-flex align-items-center justify-content-evenly">
+                        <h1>Mes Informations</h1>
+                        <button type="submit" class="btn-dark border-0">Valider</button>
+                    </div>
                     <hr>
+
                     <div class="row">
+
                         <div class="col-lg-6 mb-4">
                             <label for="email">
-                                <h3>Email:</h3>
+                                <h2>Email</h2>
                             </label>
-                            <input type="email" id="email" class="form-control" formControlName="email">
-
+                            <input type="email" id="email" class="form-control" formControlName="email"
+                                [class.is-invalid]="isSubmitted && myProfileEditForm.controls['email'].invalid">
+                            <div *ngIf="isSubmitted && myProfileEditForm.controls['email'].invalid"
+                                class="invalid-feedback">
+                                <small *ngIf="hasError('email', 'required')">L'email est requis.</small>
+                                <small *ngIf="hasError('email', 'email')">L'email n'est pas valide.</small>
+                            </div>
                         </div>
+
                         <div class="col-lg-6 mb-4">
                             <label for="adress">
-                                <h3>Adresse:</h3>
+                                <h2>Adresse</h2>
                             </label>
-                            <input type="text" id="adress" class="form-control" formControlName="adress">
+                            <input type="text" id="adress" class="form-control" formControlName="adress"
+                                [class.is-invalid]="isSubmitted && myProfileEditForm.controls['adress'].invalid">
+                            <div *ngIf="isSubmitted && myProfileEditForm.controls['adress'].invalid"
+                                class="invalid-feedback">
+                                <small>L'adresse est requise</small>
+                            </div>
                         </div>
                     </div>
+
                     <div class="row mb-4">
+
                         <div class="col-lg-6 mb-4">
                             <label for="gender">
-                                <h3>Genre:</h3>
+                                <h2>Genre</h2>
                             </label>
-                            <input type="text" id="gender" class="form-control" formControlName="gender">
+                            <select class="form-select" formControlName="gender"
+                                [class.is-invalid]="isSubmitted && myProfileEditForm.controls['gender'].invalid">
+                                <div *ngIf="isSubmitted && myProfileEditForm.controls['gender'].invalid"
+                                    class="invalid-feedback">
+                                    <small>Le genre est requis</small>
+                                </div>
+                                <option value="" disabled selected>Cliquez pour choisir</option>
+                                <option value="Mr">Mr</option>
+                                <option value="Mme">Mme</option>
+                                <option value="Autre">Autre</option>
+                            </select>
                         </div>
+
                         <div class="col-lg-6 mb-4">
                             <label for="birthdate">
-                                <h3>Date de naissance:</h3>
+                                <h2>Date de naissance</h2>
                             </label>
-                            <input type="date" id="birthdate" class="form-control" formControlName="birthdate">
+                            <input type="date" id="birthdate" class="form-control" formControlName="birthdate"
+                                [class.is-invalid]="isSubmitted && myProfileEditForm.controls['birthdate'].invalid">
+                            <div *ngIf="isSubmitted && myProfileEditForm.controls['birthdate'].invalid"
+                                class="invalid-feedback">
+                                <small>La date de naissance est requise</small>
+                            </div>
                         </div>
                     </div>
                 </div>
