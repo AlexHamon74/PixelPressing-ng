@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Inject, Input, Output, inject } from '@angular/core';
-import { cartItemInterface, itemsInterface, serviceInterface, UserInterface } from '../entities';
+import { cartItemInterface, employeeInterface, itemsInterface, serviceInterface, UserInterface } from '../entities';
 import { ItemService } from '../../core/services/item.service';
 import { ServiceService } from '../../core/services/service.service';
 import { UserService } from '../../core/services/user.service';
 import { CartService } from '../../core/services/cart.service';
 import { NgIf } from '@angular/common';
+import { EmployeeService } from '../../core/services/employee.service';
 
 @Component({
   selector: 'app-modal-delete',
@@ -19,6 +20,7 @@ export class ModalDeleteComponent {
   @Input() currentService: serviceInterface | null = null;
   @Input() currentUser: UserInterface | null = null;
   @Input() currentCartItem: cartItemInterface | null = null;
+  @Input() currentEmployee: employeeInterface | null = null;
 
   @Output() objectDeleted = new EventEmitter<void>();
 
@@ -26,6 +28,7 @@ export class ModalDeleteComponent {
   serviceService = inject(ServiceService);
   userService = inject(UserService);
   cartService = inject(CartService);
+  employeeService = inject(EmployeeService);
 
   //Fonction pour fermer la modal
   closeModal() {
@@ -58,8 +61,13 @@ export class ModalDeleteComponent {
         this.objectDeleted.emit();
         location.reload();
       });
-    } else if(this.currentUser) {
+    } else if (this.currentUser) {
       this.userService.deleteUser(this.currentUser.id).subscribe(() => {
+        this.objectDeleted.emit();
+        location.reload();
+      });
+    } else if (this.currentEmployee) {
+      this.employeeService.deleteEmployee(this.currentEmployee.id).subscribe(() => {
         this.objectDeleted.emit();
         location.reload();
       });

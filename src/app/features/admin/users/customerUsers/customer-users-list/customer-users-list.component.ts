@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { SideNavAdminComponent } from '../../../../../shared/side-nav-admin/side-nav-admin.component';
 import { ModalDeleteComponent } from '../../../../../shared/modal-delete/modal-delete.component';
-import { DatePipe, NgFor } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { UserInterface } from '../../../../../shared/entities';
 import { UserService } from '../../../../../core/services/user.service';
 
@@ -9,7 +9,7 @@ import { UserService } from '../../../../../core/services/user.service';
 @Component({
   selector: 'app-customer-users-list',
   standalone: true,
-  imports: [SideNavAdminComponent, ModalDeleteComponent, NgFor, DatePipe],
+  imports: [SideNavAdminComponent, ModalDeleteComponent, NgFor],
   templateUrl: './customer-users-list.component.html',
   styleUrl: '../../../admin-style.css'
 })
@@ -30,7 +30,7 @@ export class CustomerUsersListComponent implements OnInit {
 
   //Je récupère mes clients
   getCustomers() {
-    this.userService.fetchAllCustomers().subscribe(response => {
+    this.userService.fetchAll().subscribe(response => {
       this.customers = response;
     })
   };

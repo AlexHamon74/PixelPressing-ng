@@ -26,7 +26,7 @@
                         <td>{{employee.firstname}}</td>
                         <td>{{employee.email}}</td>
                         <td>{{employee.adress}}</td>
-                        <td>{{employee.birthdate| date:'dd/MM/yyyy'}}</td>
+                        <td>{{employee.birthdate}}</td>
                         <td>{{employee.gender}}</td>
                         <td><button [routerLink]="(['/admin/employee-user-edit', employee.id])" class="btn btn-success">Editer</button></td>
                         <td><button (click)="confirmDelete(employee)" data-bs-toggle="modal" class="btn btn-danger" data-bs-target="#modalDelete">Supprimer</button></td>
@@ -37,7 +37,7 @@
     </div>
 </div>
 
-<app-modal-delete [currentUser]="currentUser" (userDeleted)="deleteUser()">
+<app-modal-delete [currentEmployee]="currentEmployee" (employeeDeleted)="deleteEmployee()">
 </app-modal-delete>
 
 

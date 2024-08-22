@@ -1,8 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SideNavAdminComponent } from '../../../../../shared/side-nav-admin/side-nav-admin.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserService } from '../../../../../core/services/user.service';
 import { Router } from '@angular/router';
+import { EmployeeService } from '../../../../../core/services/employee.service';
 
 @Component({
   selector: 'app-employee-users-create',
@@ -17,7 +17,7 @@ export class EmployeeUsersCreateComponent{
 createEmployeeForm!:FormGroup;
 
 //On injecte les services
-userService = inject(UserService);
+employeeService = inject(EmployeeService);
 router = inject(Router);
 
 //Methode appelée lors de l'initialisation du composant
@@ -35,7 +35,6 @@ initializeForm(){
     gender: new FormControl('', [Validators.required]),
     birthdate: new FormControl('', [Validators.required]),
     adress: new FormControl('', [Validators.required]),
-    
   });
 };
 
@@ -45,7 +44,7 @@ onSubmit(){
     ...this.createEmployeeForm.value,
     roles: ['ROLE_EMPLOYEE'] // Ajoute le rôle ROLE_EMPLOYEE
   };
-  this.userService.createEmployee(formData).subscribe({
+  this.employeeService.createEmployee(formData).subscribe({
     next: () => {
       this.router.navigate(['/admin/employee-user-list']);
     }

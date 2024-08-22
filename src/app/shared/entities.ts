@@ -19,10 +19,15 @@ export interface UserInterface {
     roles: string[];
 }
 
-export interface ApiListResponse<T> {
-    '@id': string;
-    'hydra:totalItems': number;
-    'hydra:member': T[];
+export interface employeeInterface {
+    id: number;
+    email:string;
+    name:string;
+    firstname:string;
+    gender:string;
+    adress:string;
+    birthdate:string;
+    roles: string[];
 }
 
 export interface itemsInterface {
