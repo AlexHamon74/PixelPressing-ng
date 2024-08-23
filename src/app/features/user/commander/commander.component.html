@@ -8,7 +8,8 @@
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
                             <div class="mb-4 img-container-xl">
-                                <img src="img/{{selectedItem?.image}}" alt="Image de l'article selectionné" class="img-fluid">
+                                <img src="img/{{selectedItem?.image}}" alt="Image de l'article selectionné"
+                                    class="img-fluid">
                             </div>
                         </div>
                         <div class="col-12 d-flex justify-content-center">
@@ -24,7 +25,8 @@
                                     <input class="form-check-input" type="checkbox" id="{{service.id}}"
                                         [checked]="selectedServices.includes(service)"
                                         (change)="toggleService(service)">
-                                    <p><label class="form-check-label" for="{{service.id}}">{{service.name}}</label>
+                                    <p><label class="form-check-label" for="{{service.id}}">{{service.name}}
+                                            ({{service.price}}€)</label>
                                     <p></p>
                                 </div>
                             </form>
@@ -43,7 +45,9 @@
                             <button (click)="addItemToCart()" type="submit" class="btn-dark border-0 mb-4">Ajouter au
                                 panier | {{totalPrice}}€</button>
                         </div>
-
+                        <p class="text-center">Le prix de chaque article inclut déjà les services de lavage et de repassage. Vous n'avez
+                            donc aucun frais supplémentaire à prévoir, tout est compris pour vous offrir un service
+                            complet et sans souci.</p>
                     </div>
                 </div>
             </div>
@@ -56,7 +60,8 @@
                         <div class="col-lg-6 col-4 d-flex justify-content-center align-items-center"
                             *ngFor="let item of items">
                             <div class="mb-4 img-container">
-                                <img (click)="selectItem(item)" src="img/{{item.image}}" alt="Image des tous les articles disponible" class="p-3 img-fluid">
+                                <img (click)="selectItem(item)" src="img/{{item.image}}"
+                                    alt="Image des tous les articles disponible" class="p-3 img-fluid">
                             </div>
                         </div>
                     </div>
