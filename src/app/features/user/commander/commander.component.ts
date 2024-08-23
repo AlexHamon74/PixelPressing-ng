@@ -59,12 +59,13 @@ export class CommanderComponent implements OnInit {
   //Fonction pour afficher l'item clicker
   selectItem(item: itemsInterface) {
     this.selectedItem = item;
+    this.selectedServices = [];
     this.updateTotalPrice();
   };
   
   //Ajoute ou retire un service de la liste des services sélectionnés
   toggleService(service: serviceInterface) {
-    const index = this.selectedServices.findIndex(service => service.id === service.id);
+    const index = this.selectedServices.findIndex(s => s.id === service.id);
     if (index > -1) {
       this.selectedServices.splice(index, 1);
     } else {

@@ -35,11 +35,17 @@ export class ModalCartComponent implements OnInit {
     this.cartItems = this.cartService.getCartItems();
   };
 
+  subTotalPrice(item: cartItemInterface): number{
+    const itemTotal = item.item.price + item.service.reduce((total, service) => total + service.price, 0);
+    return itemTotal * item.quantity;
+  }
+
   //On calcule le prix total du panier
   totalPrice(): number {
-    return this.cartItems.reduce((total, item) => total + item.totalPrice, 0);
+    return this.cartItems.reduce((total, item) => total + this.subTotalPrice(item), 0);
   };
 
+  //Fonction pour supprimer un item
   deleteCartItem(cartItemId: number) {
     this.cartService.deleteCartItems(cartItemId).subscribe(() => {
       this.loadCartItems();

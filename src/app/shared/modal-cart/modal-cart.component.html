@@ -8,7 +8,7 @@
     <div class="offcanvas-body">
 
         <div *ngIf="cartItems.length > 0; else noItems">
-            <div class="row border-bottom pb-4" *ngFor="let cartItem of cartItems">
+            <div class="row border-bottom py-4" *ngFor="let cartItem of cartItems">
                 <div class="col-3">
                     <img src="img/{{cartItem.item.image}}" alt="{{cartItem.item.name}}" class="img-fluid">
                 </div>
@@ -27,13 +27,14 @@
                                 <p class="dropdown-item m-0">Repassage</p>
                             </li>
                             <li *ngFor="let service of cartItem.service">
-                                <p class="dropdown-item m-0">{{ service.name }}</p>
+                                <p class="dropdown-item m-0">{{ service.name }} ({{service.price}}€)</p>
                             </li>
                         </ul>
                     </div>
-                    <h3 class="fs-5">{{cartItem.item.price}}€</h3>
+                    <h3 class="fs-5">{{ subTotalPrice(cartItem) }}€</h3>
+
                     <i (click)="deleteCartItem(cartItem.id)" class="fa-solid fa-trash-can fa-lg icone-delete"
-                        style="color: #ff0000;"></i>
+                        style="color: #6785FF;"></i>
                 </div>
 
                 <div class="col-3 d-flex align-items-end">

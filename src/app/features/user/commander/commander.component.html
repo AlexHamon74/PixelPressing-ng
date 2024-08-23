@@ -8,7 +8,7 @@
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
                             <div class="mb-4 img-container-xl">
-                                <img src="img/{{selectedItem?.image}}" alt="" class="img-fluid">
+                                <img src="img/{{selectedItem?.image}}" alt="Image de l'article selectionné" class="img-fluid">
                             </div>
                         </div>
                         <div class="col-12 d-flex justify-content-center">
@@ -18,41 +18,45 @@
                         </div>
 
                         <div class="col-6 mb-4 d-flex justify-content-center">
-                                <form>
-                                    <h3>Service</h3>
-                                    <div *ngFor="let service of services" class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="{{service.id}}"
+                            <form>
+                                <h3>Service</h3>
+                                <div *ngFor="let service of services" class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="{{service.id}}"
                                         [checked]="selectedServices.includes(service)"
                                         (change)="toggleService(service)">
-                                        <p><label class="form-check-label" for="{{service.id}}">{{service.name}}</label><p></p>
-                                    </div>
-                                </form>
+                                    <p><label class="form-check-label" for="{{service.id}}">{{service.name}}</label>
+                                    <p></p>
+                                </div>
+                            </form>
                         </div>
 
                         <div class="col-6 mb-4 d-flex justify-content-center flex-column text-center">
-                                <h3>Quantité</h3>
-                                <div class="d-flex justify-content-center">
-                                    <button (click)="removeQty()" class="btn-dark border-0 px-3 py-2">-</button>
-                                    <p class="m-0 px-3 py-2">{{quantity}}</p>
-                                    <button (click)="addQty()" class="btn-dark border-0 px-3 py-2">+</button>
-                                </div>
+                            <h3>Quantité</h3>
+                            <div class="d-flex justify-content-center">
+                                <button (click)="removeQty()" class="btn-dark border-0 px-3 py-2">-</button>
+                                <p class="m-0 px-3 py-2">{{quantity}}</p>
+                                <button (click)="addQty()" class="btn-dark border-0 px-3 py-2">+</button>
+                            </div>
                         </div>
 
                         <div class="col-12 d-flex justify-content-center">
-                            <button (click)="addItemToCart()" type="submit" class="btn-dark border-0 mb-4">Ajouter au panier | {{totalPrice}}€</button>
+                            <button (click)="addItemToCart()" type="submit" class="btn-dark border-0 mb-4">Ajouter au
+                                panier | {{totalPrice}}€</button>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-12">
+            <div class="col-lg-4 col-12 text-center">
                 <div class="mb-4">
-                    <h2 class="mb-4">Choisissez votre article</h2>
+                    <h2>Choisissez votre article</h2>
+                    <i class="fa-solid fa-chevron-down fa-lg mb-4"></i>
                     <div class="row">
-                        <div class="col-lg-6 col-4" *ngFor="let item of items">
+                        <div class="col-lg-6 col-4 d-flex justify-content-center align-items-center"
+                            *ngFor="let item of items">
                             <div class="mb-4 img-container">
-                                <img (click)="selectItem(item)" src="img/{{item.image}}" alt="" class="p-3 img-fluid">
+                                <img (click)="selectItem(item)" src="img/{{item.image}}" alt="Image des tous les articles disponible" class="p-3 img-fluid">
                             </div>
                         </div>
                     </div>
