@@ -15,7 +15,8 @@ h6 {
 
 p,
 a,
-button {
+button,
+label {
   font-family: "Space Mono", monospace;
   text-decoration: none;
 }

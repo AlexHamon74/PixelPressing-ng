@@ -1,8 +1,12 @@
 .payment{
-    margin: 120px 0;
+    margin: 120px 0 60px 0;
 }
 
 .badge-custom{
     position: absolute;
     margin-left: -20px;
+    background-color: #6785FF;
+}
+.border-custom{
+    border-right: 1px solid #072366;
 }

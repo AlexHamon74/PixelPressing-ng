@@ -1,25 +1,31 @@
 <section class="payment">
     <div class="container">
         <div class="row">
+            <h1 class="display-4 text-center mb-5">Récapitulatif de votre commande</h1>
             <div class="col-lg-6 col-12 order-lg-1 order-2">
-                <h2>Vos Informations</h2>
-                <div *ngIf="isLogged(); else noLogged">
-                    <div class="mb-4">
-                        <h5>{{user.gender}} {{user.firstname}} {{user.name}}</h5>
-                        <h5>{{user.adress}}</h5>
-                        <h5>{{user.email}}</h5>
-                        <button class="btn btn-primary btn-sm">Modifier mes infos</button>
+
+                <!-- PARTIE INFORMATIONS -->
+                <div *ngIf="isLogged(); else noLogged" class="mb-5">
+                    <div class="d-flex gap-3 align-items-center">
+                        <div class="">
+                            <h2>Adresse de facturation</h2>
+                            <p class="m-0">{{user.firstname}} {{user.name}}</p>
+                            <p>{{user.adress}}</p>
+                        </div>
+                        <div>
+                            <button class="btn-dark border-0 h-auto">Modifier mes infos</button>
+                        </div>
                     </div>
 
                     <!-- Partie Mode d'expédition -->
-                    <div class="mb-4">
+                    <div class="mb-5">
                         <h2>Mode d'expédition</h2>
                         <form [formGroup]="paymentForm">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="deliveryMode" id="pickUp"
                                     (change)="onDeliveryChange(false)" checked>
                                 <label class="form-check-label" for="pickUp">
-                                    Sur place
+                                    Retrait sur place
                                 </label>
                             </div>
                             <div class="form-check">
@@ -30,17 +36,22 @@
                                 </label>
                             </div>
                             <div class="my-3" *ngIf="delivery">
-                                <label for="delivery_date" class="form-label">Date de livraison</label>
-                                <input type="date" class="form-control" id="deliveryDate"
-                                formControlName="deliveryDate">
+                                <label for="deliveryDate" class="form-label">Date de livraison</label>
+                                <input type="date" class="form-control w-50" id="deliveryDate"
+                                    formControlName="deliveryDate"
+                                    [class.is-invalid]="isSubmitted && paymentForm.controls['deliveryDate'].invalid">
+                                <div *ngIf="isSubmitted && paymentForm.controls['deliveryDate'].invalid"
+                                    class="invalid-feedback">
+                                    <small>La date de livraison est requise</small>
+                                </div>
                             </div>
                         </form>
                     </div>
 
                     <!-- Partie info carte bancaire -->
-                    <div class="mb-4">
+                    <div class="mb-5">
                         <h2>Paiement</h2>
-                        <form action="" class="border p-4 bg-color-blue-light">
+                        <form (ngSubmit)="onSubmit()" [formGroup]="paymentForm">
                             <div class="mb-3">
                                 <span class="input-group-text">Carte de crédit</span>
                             </div>
@@ -55,21 +66,16 @@
                                     <input type="text" class="form-control" placeholder="Code de sécurité">
                                 </div>
                             </div>
-                            <div class="mb-3">
+                            <div>
                                 <input type="text" class="form-control" placeholder="Nom sur la carte">
                             </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="billingAddressCheck">
-                                <label class="form-check-label" for="billingAddressCheck">Utiliser l'adresse
-                                    d'expédition comme adresse de facturation</label>
-                            </div>
+                            <button type="submit" class="btn-dark border-0 my-4 w-100">Payer ma commande</button>
                         </form>
+
                         <p>En passant votre commande, vous adhérez aux Conditions Générales, à la Politique de
                             Confidentialité et à la Politique des Cookies de PixelPressing.</p>
-                        <button (click)="payOrder()" class="btn btn-primary w-100">Payer ma commande</button>
                     </div>
                 </div>
-
                 <!-- Si user pas connecté -->
                 <ng-template #noLogged>
                     <p>Veuillez vous connecter pour payer votre commande</p>
@@ -77,19 +83,21 @@
                 </ng-template>
             </div>
 
+            <!-- Partie items -->
             <div class="col-lg-6 col-12 order-lg-2 order-1">
-                <div *ngFor="let cartItem of cartItems" class="row border-bottom py-2">
+                <h2>Vos articles</h2>
+                <div *ngFor="let cartItem of cartItems" class="row py-3">
                     <div class="col-3">
-                        <img src="img/{{cartItem.item.image}}" alt="{{cartItem.item.name}}" class="img-fluid">
-                        <span class="badge-custom badge rounded-pill badge-notification bg-success">{{ cartItem.quantity
+                        <img src="img/{{cartItem.item.image}}" alt="{{cartItem.item.name}}" class="img-fluid w-75">
+                        <span class="badge-custom badge rounded-pill badge-notification">{{ cartItem.quantity
                             }}</span>
                     </div>
                     <div class="col-6">
                         <h5>{{ cartItem.item.name }}</h5>
                         <div class="dropdown mb-2">
-                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
+                            <button class="btn-dark dropdown-toggle border-0 py-1" type="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                Vos service(s)
+                                Vos services
                             </button>
                             <ul class="dropdown-menu p-0">
                                 <li>
@@ -99,16 +107,17 @@
                                     <p class="dropdown-item p-2 m-0 fs-6">Repassage</p>
                                 </li>
                                 <li *ngFor="let service of cartItem.service">
-                                    <p class="dropdown-item p-2 m-0 fs-6">{{ service.name }}</p>
+                                    <p class="dropdown-item p-2 m-0 fs-6">{{ service.name }} ({{service.price}}€)</p>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-3">
-                        <h5>{{ calculateTotalPrice(cartItem) }}€</h5>
+                        <h5>{{ itemSubTotalPrice(cartItem) }}€</h5>
                     </div>
                 </div>
-                <div class="col-12 my-5">
+
+                <div class="col-12">
                     <div class="d-flex justify-content-between py-5">
                         <div>
                             <h5>Sous-Total :</h5>
