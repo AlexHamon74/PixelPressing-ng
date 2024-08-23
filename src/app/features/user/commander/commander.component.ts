@@ -39,23 +39,11 @@ export class CommanderComponent implements OnInit {
   getItems() {
     this.itemService.fetchAll().subscribe(data => {
       this.items = data;
-      this.displayItemsBase()
+      this.setDefaultItem()
       this.updateTotalPrice();
-      
     })
   };
 
-  //Affiche la chemise
-  displayItemsBase(){
-    this.selectedItem = this.items.find(i => i.name === 'Chemise') || null;
-  }
-  
-  //Fonction pour afficher l'item clicker
-  selectItem(item: itemsInterface) {
-    this.selectedItem = item;
-    this.updateTotalPrice();
-  };
-  
   //On récupère tous les services
   getServices() {
     this.serviceService.fetchAll().subscribe(data => {
@@ -63,22 +51,33 @@ export class CommanderComponent implements OnInit {
     })
   };
 
+  //Affiche la chemise de base
+  setDefaultItem(){
+    this.selectedItem = this.items.find(item => item.name === 'Chemise') || null;
+  };
+  
+  //Fonction pour afficher l'item clicker
+  selectItem(item: itemsInterface) {
+    this.selectedItem = item;
+    this.updateTotalPrice();
+  };
+  
   //Ajoute ou retire un service de la liste des services sélectionnés
   toggleService(service: serviceInterface) {
-    const index = this.selectedServices.findIndex(s => s.id === service.id);
+    const index = this.selectedServices.findIndex(service => service.id === service.id);
     if (index > -1) {
       this.selectedServices.splice(index, 1);
     } else {
       this.selectedServices.push(service);
     }
     this.updateTotalPrice();
-  }
+  };
 
   //Fonction pour augmenter la quantité
   addQty() {
     this.quantity++;
     this.updateTotalPrice();
-  }
+  };
 
   //Fonction pour diminuer la quantité
   removeQty() {
@@ -86,15 +85,15 @@ export class CommanderComponent implements OnInit {
       this.quantity--;
       this.updateTotalPrice();
     }
-  }
+  };
 
   //Fonction pour modifier le prix total
   updateTotalPrice() {
     if (this.selectedItem) {
-      const servicesPrice = this.selectedServices.reduce((acc, service) => acc + service.price, 0);
+      const servicesPrice = this.selectedServices.reduce((somme, service) => somme + service.price, 0);
       this.totalPrice = (this.selectedItem.price + servicesPrice) * this.quantity;
     }
-  }
+  };
 
   //Ajoute l'item et les services sélectionnés au panier et réinitialise les sélections
   addItemToCart() {
@@ -109,13 +108,15 @@ export class CommanderComponent implements OnInit {
       this.cartService.addItemToCart(cartItem);
       this.resetSelection();
     }
-  }
+  };
+
   resetSelection() {
     this.quantity = 1;
-    this.displayItemsBase();
+    this.setDefaultItem();
     this.selectedServices = [];
     this.updateTotalPrice();
     location.reload();
 
-  }
+  };
+
 }

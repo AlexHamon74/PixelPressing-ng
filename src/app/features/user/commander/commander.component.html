@@ -1,54 +1,63 @@
-<section class="commander bg-light">
-    <section class="commander-card container shadow p-lg-4 p-3">
-        <h1 class="display-5">Commander en ligne</h1><hr>
+<section class="commander">
+    <div class="container">
+        <h1 class="text-center mb-5 display-4">Commander en ligne</h1>
         <div class="row">
-            <div class="col-4 p-lg-5">
-                <div class="mb-4">
-                    <div class="image border" *ngIf="selectItem">
-                        <img src="img/{{selectedItem?.image}}" alt="" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-            <div class="col-8 p-lg-5">
-                <h2>{{selectedItem?.name}}</h2>
-                <h3>{{selectedItem?.price}}€</h3>
 
-                <form >
-                    <div class="mb-3">
-                        <h5><label for="">Service :</label><br></h5>
-                        <div *ngFor="let service of services" class="form-check form-check-inline">
-                            <input
-                            class="form-check-input"
-                            type="checkbox"
-                            id="{{service.id}}"
-                            [checked]="selectedServices.includes(service)"
-                            (change)="toggleService(service)"
-                          >
-                            <label class="form-check-label" for="{{service.id}}">{{service.name}}</label>
+            <div class="col-lg-8 col-12">
+                <div class="border-custom mb-4">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                            <div class="mb-4 img-container-xl">
+                                <img src="img/{{selectedItem?.image}}" alt="" class="img-fluid">
+                            </div>
                         </div>
-                    
+                        <div class="col-12 d-flex justify-content-center">
+                            <div class="mb-4">
+                                <h2>{{selectedItem?.name}} | {{selectedItem?.price}}€</h2>
+                            </div>
+                        </div>
+
+                        <div class="col-6 mb-4 d-flex justify-content-center">
+                                <form>
+                                    <h3>Service</h3>
+                                    <div *ngFor="let service of services" class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="{{service.id}}"
+                                        [checked]="selectedServices.includes(service)"
+                                        (change)="toggleService(service)">
+                                        <p><label class="form-check-label" for="{{service.id}}">{{service.name}}</label><p></p>
+                                    </div>
+                                </form>
+                        </div>
+
+                        <div class="col-6 mb-4 d-flex justify-content-center flex-column text-center">
+                                <h3>Quantité</h3>
+                                <div class="d-flex justify-content-center">
+                                    <button (click)="removeQty()" class="btn-dark border-0 px-3 py-2">-</button>
+                                    <p class="m-0 px-3 py-2">{{quantity}}</p>
+                                    <button (click)="addQty()" class="btn-dark border-0 px-3 py-2">+</button>
+                                </div>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-center">
+                            <button (click)="addItemToCart()" type="submit" class="btn-dark border-0 mb-4">Ajouter au panier | {{totalPrice}}€</button>
+                        </div>
+                        
                     </div>
-                </form>
-                <h3>Quantité</h3>
-                <button (click)="addQty()" class="border">+</button>
-                <p>{{quantity}}</p>
-                <button (click)="removeQty()" class="border">-</button>
-
-                <h3>Total: {{totalPrice}}€</h3>
-
-
-                <button (click)="addItemToCart()" type="submit" class="btn btn-primary">Ajouter au panier</button>
-                <p>Lorem ipsum dolor sit amelorum sunt, enim vero! Nostrum quam ratione dolores, illo odit quos.</p>
+                </div>
             </div>
-        </div>
-        <div class="item-choice">
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-6" *ngFor="let item of items">
-                    <div class="mb-4">
-                        <img (click)="selectItem(item)" src="img/{{item.image}}" alt="" class="img-fluid img-choice">
+
+            <div class="col-lg-4 col-12">
+                <div class="mb-4">
+                    <h2 class="mb-4">Choisissez votre article</h2>
+                    <div class="row">
+                        <div class="col-lg-6 col-4" *ngFor="let item of items">
+                            <div class="mb-4 img-container">
+                                <img (click)="selectItem(item)" src="img/{{item.image}}" alt="" class="p-3 img-fluid">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </section>
