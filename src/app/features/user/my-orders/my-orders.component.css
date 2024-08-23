@@ -1,5 +1,5 @@
 .orders{
-    margin: 120px 0;
+    padding: 120px 0 60px 0;
 }
 .pointer{
     cursor: pointer;
@@ -9,4 +9,13 @@
     max-height: 50px;
     vertical-align: middle;
     margin-right: 10px;
+}
+.border-custom-dark{
+    border: 1px solid #072366;
+}
+.border-custom-light{
+    border: 1px solid #6785FF;
+}
+table{
+    --bs-table-bg: none;
 }

@@ -1,23 +1,27 @@
-<section class="orders">
+<section class="orders bg-light">
     <div class="container">
-        <div class="row mb-5">
-            <div class="col-lg-4">
-                <div class="d-flex gap-4 align-items-center mb-4">
-                    <i class="fa-solid fa-box-open fa-xl"></i>
-                    <h2>Mes commandes</h2>
+
+        <!-- Partie titre et filtre -->
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <div class="mb-4">
+                    <div class="d-flex gap-4 align-items-center">
+                        <i class="fa-solid fa-box-open fa-2xl"></i>
+                        <h1 class="display-4">Mes commandes</h1>
+                    </div>
+                    <input type="date" [(ngModel)]="searchDate" class="form-control my-4">
                 </div>
             </div>
-            <div class="col-lg-8">
-                <input type="date" [(ngModel)]="searchDate" class="form-control">
-            </div>
         </div>
+
         <div *ngIf="orders.length > 0; else noOrders">
 
-            <div *ngFor="let order of (orders | orderDateFilter: searchDate)" class="row mb-5 p-4 bg-light-custom border">
+            <div *ngFor="let order of (orders | orderDateFilter: searchDate)"
+                class="row mb-5 p-4 bg-white shadow mx-1">
                 <div class="col-lg-4 pointer" (click)="selectOrder(order.id!)">
                     <div class="row align-items-center">
                         <div class="col-10">
-                            <h4>Commandes n° {{order.id}}</h4>
+                            <h2 class="fs-4">Commandes n° {{order.id}}</h2>
                             <p>Date : {{order.createdAt}}</p>
                         </div>
                         <div class="col-2">
@@ -28,31 +32,34 @@
 
                 <div class="col-lg-8" *ngIf="selectedOrderId === order.id">
                     <div class="mb-4">
-                        <h5>Statut : {{order.status}}</h5>
-                        <h6 *ngIf="order.delivery">Date de livraion prévu : {{order.deliveryDate}}</h6>
+                        <h2 class="fs-4">Statut : {{order.status}}</h2>
+                        <p *ngIf="order.delivery; else noDelivery">Date de livraion prévu : {{order.deliveryDate}}</p>
+                        <ng-template #noDelivery>
+                            <p>Commande à venir chercher sur place</p>
+                        </ng-template>
                     </div>
 
                     <div class="row">
                         <div class="col-6">
-                            <div class="border bg-white p-4 mb-4">
-                                <h6>Adresse de livraion</h6>
+                            <div class="border-custom-dark bg-light p-4 mb-4">
+                                <h3 class="fs-6">Adresse de livraion</h3>
                                 <p class="m-0">{{user.firstname}} {{user.name}}</p>
                                 <p class="m-0">{{user.adress}}</p>
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="border bg-white p-4 mb-4">
-                                <h6>Adresse de facturation</h6>
+                            <div class="border-custom-dark bg-light p-4 mb-4">
+                                <h3 class="fs-6">Adresse de facturation</h3>
                                 <p class="m-0">{{user.firstname}} {{user.name}}</p>
                                 <p class="m-0">{{user.adress}}</p>
                             </div>
                         </div>
                         <div class="col-12">
-                            <div class="border bg-white p-4 mb-4">
-                                <h5 class="mb-4">Mes articles</h5>
+                            <div class="border-custom-dark bg-light p-4 mb-4">
+                                <h3 class="fs-6 mb-4">Mes articles</h3>
                                 <div class="table-responsive">
 
-                                    <table class="table text-center table-hover align-middle">
+                                    <table class="table text-center align-middle">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Article</th>
@@ -68,13 +75,12 @@
                                                     <img src="img/{{item.item.image}}" alt="{{item.item.name}}"
                                                         class="img-custom">
                                                     {{item.item.name}}
-
                                                 </th>
                                                 <td>{{item.item.price}}€</td>
                                                 <td>{{item.quantity}}</td>
                                                 <td>
                                                     <div class="dropdown mb-2">
-                                                        <button class="btn btn-primary dropdown-toggle btn-sm"
+                                                        <button class="btn-light border-0 py-2 dropdown-toggle"
                                                             type="button" data-bs-toggle="dropdown"
                                                             aria-expanded="false">
                                                             Vos service(s)
@@ -88,6 +94,7 @@
                                                             </li>
                                                             <li *ngFor="let service of item.service">
                                                                 <p class="dropdown-item p-2 m-0 fs-6">{{ service.name }}
+                                                                    ({{service.price}}€)
                                                                 </p>
                                                             </li>
                                                         </ul>
@@ -99,9 +106,9 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
+                        </div>  
                         <div class="col-12">
-                            <div class="border bg-white p-4 d-flex flex-column align-items-end">
+                            <div class="border-custom-dark bg-light p-4 d-flex flex-column align-items-end">
                                 <p>Sous-Total: {{order.subTotal}}€</p>
                                 <p>Livraison: {{order.delivery ? '10€' : '0€'}}</p>
                                 <p class="fw-semibold">Total: {{order.price}}€</p>
@@ -112,7 +119,7 @@
             </div>
         </div>
         <ng-template #noOrders>
-            <h5>Vous n'avez pour le moment aucune commande.</h5>
+            <h2>Vous n'avez pour le moment aucune commande.</h2>
         </ng-template>
     </div>
 </section>

@@ -35,7 +35,7 @@ export class MyOrdersComponent implements OnInit {
       this.orders.forEach(order => {
         order.subTotal = this.calculateTotalOfSubTotal(order);
       });
-    })
+    });
   };
 
   getUser() {
