@@ -45,7 +45,8 @@
                             <button (click)="addItemToCart()" type="submit" class="btn-dark border-0 mb-4">Ajouter au
                                 panier | {{totalPrice}}€</button>
                         </div>
-                        <p class="text-center">Le prix de chaque article inclut déjà les services de lavage et de repassage. Vous n'avez
+                        <p class="text-center">Le prix de chaque article inclut déjà les services de lavage et de
+                            repassage. Vous n'avez
                             donc aucun frais supplémentaire à prévoir, tout est compris pour vous offrir un service
                             complet et sans souci.</p>
                     </div>
@@ -55,10 +56,14 @@
             <div class="col-lg-4 col-12 text-center">
                 <div class="mb-4">
                     <h2>Choisissez votre article</h2>
-                    <i class="fa-solid fa-chevron-down fa-lg mb-4"></i>
+                    <select class="form-select w-50 mx-auto" [(ngModel)]="selectedCategoryName">
+                        <option value="all">Filtrez par catégorie</option>
+                        <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down fa-lg my-4"></i>
                     <div class="row">
                         <div class="col-lg-6 col-4 d-flex justify-content-center align-items-center"
-                            *ngFor="let item of items">
+                            *ngFor="let item of items | filterItemByCategory:selectedCategoryName">
                             <div class="mb-4 img-container">
                                 <img (click)="selectItem(item)" src="img/{{item.image}}"
                                     alt="Image des tous les articles disponible" class="p-3 img-fluid">
@@ -67,6 +72,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>
