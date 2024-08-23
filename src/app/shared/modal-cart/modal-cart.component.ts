@@ -1,6 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { ModalDeleteComponent } from '../modal-delete/modal-delete.component';
 import { RouterLink } from '@angular/router';
 import { cartItemInterface } from '../entities';
 import { CartService } from '../../core/services/cart.service';
@@ -8,7 +7,7 @@ import { CartService } from '../../core/services/cart.service';
 @Component({
   selector: 'app-modal-cart',
   standalone: true,
-  imports: [NgIf, NgFor, ModalDeleteComponent, RouterLink],
+  imports: [NgIf, NgFor, RouterLink],
   templateUrl: './modal-cart.component.html',
   styleUrl: './modal-cart.component.css'
 })
@@ -29,26 +28,24 @@ export class ModalCartComponent implements OnInit {
   //Méthode appelée lors de l'initialisation du composant
   ngOnInit(): void {
     this.loadCartItems();
-  }
+  };
 
   //On récupère les CartItems
   loadCartItems() {
     this.cartItems = this.cartService.getCartItems();
-  }
+  };
 
   //On calcule le prix total du panier
-  totalPrice() {
+  totalPrice(): number {
     return this.cartItems.reduce((total, item) => total + item.totalPrice, 0);
-  }
+  };
 
   deleteCartItem(cartItemId: number) {
     this.cartService.deleteCartItems(cartItemId).subscribe(() => {
       this.loadCartItems();
       location.reload();
-
     });
-  }
-
+  };
 
   openOffcanvas() {
     const offcanvasElement = this.offcanvasRight.nativeElement;
@@ -57,8 +54,7 @@ export class ModalCartComponent implements OnInit {
     this.renderer.setStyle(offcanvasElement, 'transform', 'translateX(0)');
     this.offcanvasRight.nativeElement.classList.add('show');
     this.offcanvasBackdrop.nativeElement.classList.add('show');
-
-  }
+  };
 
   closeOffcanvas() {
     const offcanvasElement = this.offcanvasRight.nativeElement;
@@ -67,7 +63,6 @@ export class ModalCartComponent implements OnInit {
     this.renderer.setStyle(offcanvasElement, 'transform', 'translateX(100%)');
     this.offcanvasRight.nativeElement.classList.remove('show');
     this.offcanvasBackdrop.nativeElement.classList.remove('show');
-
-  }
+  };
 
 }
