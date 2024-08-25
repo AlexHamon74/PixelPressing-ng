@@ -23,6 +23,7 @@ import { AuthAdminGuard } from './core/guards/auth-admin.guard';
 import { PaymentComponent } from './features/user/payment/payment.component';
 import { OrderValidatedComponent } from './features/user/order-validated/order-validated.component';
 import { MyOrdersComponent } from './features/user/my-orders/my-orders.component';
+import { OurServicesComponent } from './features/user/our-services/our-services.component';
 
 export const routes: Routes = [
     {
@@ -30,6 +31,7 @@ export const routes: Routes = [
         component: UserComponent,
         children: [
             { path: '', component: HomeComponent },
+            { path: 'services', component: OurServicesComponent },
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent },
             { path: 'commander', component: CommanderComponent },

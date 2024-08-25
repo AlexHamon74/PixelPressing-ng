@@ -1,0 +1,36 @@
+<section class="services">
+    <div class="container">
+        <h1 class="display-4 mb-5 text-center">Nos services</h1>
+
+        <div class="service-card d-lg-flex p-3 gap-5 shadow mb-5">
+            <div>
+                <img src="img/lavage.webp" alt="Service de Lavage" class="img-fluid mb-4" style="max-width: 200px;">
+            </div>
+            <div>
+                <h2>Lavage</h2>
+                <p>Offrez à vos vêtements un lavage professionnel et soigné. Nous utilisons des machines de pointe et des détergents de haute qualité pour garantir un nettoyage en profondeur tout en préservant les fibres et les couleurs de vos vêtements. Votre linge ressortira frais, propre et doux au toucher.</p>
+            </div>
+        </div>
+
+        <div class="service-card d-lg-flex p-3 gap-5 shadow mb-5">
+            <div class="order-2">
+                <img src="img/repassage.webp" alt="Service de Repassage" class="img-fluid mb-4" style="max-width: 200px;">
+            </div>
+            <div>
+                <h2>Repassage</h2>
+                <p>Confiez-nous vos vêtements pour un repassage impeccable. Nos experts maîtrisent les techniques de repassage pour éliminer tous les plis, même les plus tenaces, et redonner à vos vêtements une allure nette et soignée. Vous profiterez d’un gain de temps considérable et d’un rendu impeccable.</p>
+            </div>
+        </div>
+
+        <div *ngFor="let service of services; let i = index" class="service-card d-lg-flex p-3 gap-5 shadow mb-5">
+            <div [ngClass]="{'': true, 'order-2': i === 1}">
+                <img src="img/{{service.image}}" alt="Service de {{service.name}}" class="img-fluid mb-4" style="max-width: 200px;">
+            </div>
+            <div>
+                <h2>{{service.name}}</h2>
+                <p>{{service.description}}</p>
+                <p>{{service.price}}€</p>
+            </div>
+        </div>
+    </div>
+</section>
