@@ -73,6 +73,7 @@ export class CommanderComponent implements OnInit {
   selectItem(item: itemsInterface) {
     this.selectedItem = item;
     this.selectedServices = [];
+    this.quantity = 1;
     this.updateTotalPrice();
   };
 
