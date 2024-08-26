@@ -1,0 +1,52 @@
+<div class="wrapper">
+    <app-side-nav-admin></app-side-nav-admin>
+    <div class="main p-4 bg-dark">
+        <div class="container-fluid table-responsive">
+            <h1 class="h2 display-5 text-light mb-5">Commandes</h1>
+            <table class="table-dark table text-center table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Client</th>
+                        <th scope="col">Articles</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Date de livraison</th>
+                        <th scope="col">Employée</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Editer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of orders">
+                        <th scope="row">{{order.id}}</th>
+                        <td>{{order.user.firstname}} {{order.user.name}}</td>
+                        <td>
+                            <div class="dropdown mb-2" *ngFor="let item of order.commandItems">
+                                <button class="dropdown-toggle btn-dark p-1 border-0" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    {{ item.item.name }} x{{ item.quantity }}
+                                </button>
+                                <ul class="dropdown-menu p-0">
+                                    <li>
+                                        <p class="dropdown-item p-2 m-0 fs-6">Lavage</p>
+                                    </li>
+                                    <li>
+                                        <p class="dropdown-item p-2 m-0 fs-6">Repassage</p>
+                                    </li>
+                                    <li *ngFor="let service of item.service">
+                                        <p class="dropdown-item p-2 m-0 fs-6">{{ service.name }}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td>{{order.price}}€</td>
+                        <td>{{ order.deliveryDate ? order.deliveryDate : 'Pas de livraison' }}</td>
+                        <td>{{ order.employee ? (order.employee.firstname + ' ' + order.employee.name) : 'null' }}</td>
+                        <td>{{order.status}}</td>
+                        <td><button [routerLink]="(['/admin/order-edit', order.id])" class="btn btn-primary">Editer</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

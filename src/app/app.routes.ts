@@ -24,6 +24,8 @@ import { PaymentComponent } from './features/user/payment/payment.component';
 import { OrderValidatedComponent } from './features/user/order-validated/order-validated.component';
 import { MyOrdersComponent } from './features/user/my-orders/my-orders.component';
 import { OurServicesComponent } from './features/user/our-services/our-services.component';
+import { OrdersListComponent } from './features/admin/orders/orders-list/orders-list.component';
+import { OrdersEditComponent } from './features/admin/orders/orders-edit/orders-edit.component';
 
 export const routes: Routes = [
     {
@@ -61,6 +63,9 @@ export const routes: Routes = [
             { path: 'service-list', component: ServiceListComponent, canActivate: [AuthAdminGuard] },
             { path: 'service-create', component: ServiceCreateComponent, canActivate: [AuthAdminGuard] },
             { path: 'service-edit/:id', component: ServiceEditComponent, canActivate: [AuthAdminGuard] },
+
+            { path: 'order-list', component: OrdersListComponent, canActivate: [AuthAdminGuard] },
+            { path: 'order-edit/:id', component: OrdersEditComponent, canActivate: [AuthAdminGuard] },
         ]
     },
       {path:'**', redirectTo:'/' },

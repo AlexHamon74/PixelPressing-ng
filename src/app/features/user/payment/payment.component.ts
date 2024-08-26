@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CartService } from '../../../core/services/cart.service';
-import { cartItemInterface, orderInterface, UserInterface } from '../../../shared/entities';
+import { cartItemInterface, newOrderInterface, orderInterface, UserInterface } from '../../../shared/entities';
 import { NgFor, NgIf } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../../core/services/user.service';
@@ -21,7 +21,7 @@ export class PaymentComponent implements OnInit {
   cartItems: cartItemInterface[] = [];
   user: UserInterface = {} as UserInterface;
   delivery_price: number = 10;
-  status = 'En attente de prise en charge';
+  status = 'En attente de réception des articles';
   delivery: boolean = false;
   deliveryDate: string | null = null;
   paymentForm!: FormGroup;
@@ -94,7 +94,7 @@ export class PaymentComponent implements OnInit {
       return;
     }
     const createdAt = new Date().toISOString();
-    const newOrder: orderInterface = {
+    const newOrder: newOrderInterface = {
       price: this.totalPrice(),
       status: this.status,
       delivery: this.delivery,

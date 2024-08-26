@@ -17,6 +17,7 @@ export interface UserInterface {
     adress:string;
     birthdate:string;
     roles: string[];
+    orders: orderInterface[];
 }
 
 export interface employeeInterface {
@@ -68,9 +69,21 @@ export interface orderInterface{
     subTotal?: number;
     status: string;
     delivery:boolean;
-    deliveryDate:string |null;
+    deliveryDate:string | null;
+    commandItems:cartItemInterface[];
+    createdAt: string;
+    user: UserInterface;
+    employee?: UserInterface;
+}
+
+export interface newOrderInterface{
+    id?: number;
+    price:number;
+    subTotal?: number;
+    status: string;
+    delivery:boolean;
+    deliveryDate:string | null;
     commandItems:cartItemInterface[];
     createdAt: string;
     user: string;
-    employee?: string;
 }

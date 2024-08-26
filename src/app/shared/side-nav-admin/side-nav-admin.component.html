@@ -42,9 +42,15 @@
             </a>
         </li>
         <li class="sidebar-item mb-5">
-            <a href="#" class="sidebar-link">
+            <a [routerLink]="['/admin/order-list']" class="sidebar-link">
                 <i class="fa-solid fa-basket-shopping"></i>
                 <span>Commandes</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a [routerLink]="['/']" class="sidebar-link">
+                <i class="fa-solid fa-globe"></i>
+                <span>Page d'accueil</span>
             </a>
         </li>
         <li class="sidebar-item">
