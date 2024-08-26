@@ -21,6 +21,7 @@ export interface UserInterface {
 }
 
 export interface employeeInterface {
+    '@id': string;
     id: number;
     email:string;
     name:string;
@@ -86,4 +87,18 @@ export interface newOrderInterface{
     commandItems:cartItemInterface[];
     createdAt: string;
     user: string;
+}
+
+export interface editOrderInterface{
+    id?: number;
+    price:number;
+    subTotal?: number;
+    status: string;
+    delivery:boolean;
+    deliveryDate:string | null;
+    commandItems:cartItemInterface[];
+    createdAt: string;
+    user: string;
+    employee?: string;
+
 }
