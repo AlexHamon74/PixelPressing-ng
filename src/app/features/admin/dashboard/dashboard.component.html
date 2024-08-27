@@ -1,58 +1,61 @@
 <div class="wrapper">
     <app-side-nav-admin></app-side-nav-admin>
-    <div class="main p-4">
+    <div class="main bg-light p-4">
         <div class="text-center">
-            <h1 class="mb-5 h2 display-5"> Dashboard de PixelPressing </h1>
+            <h1 class="mb-5 h2 display-5">Dashboard de PixelPressing</h1>
             <div class="container">
                 <div class="row">
 
-                    <div class="col-lg-4">
-                        <div class="mb-5 d-flex justify-content-evenly align-items-center p-2 bg-primary-subtle shadow">
-                            <div class="text-start">
+                    <div class="col-lg-6">
+                        <div class="mb-5 d-lg-flex justify-content-evenly align-items-center p-2 bg-primary-subtle shadow">
+                            <div class="text-lg-start text-center">
                                 <h2>Clients</h2>
-                                <h3>12</h3>
+                                <h3>{{ totalClients }}</h3>
                             </div>
                             <div>
                                 <i class="fa-regular fa-id-card fa-2xl"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="mb-5 d-flex justify-content-evenly align-items-center p-2 bg-success-subtle shadow">
-                            <div class="text-start">
-                                <h2>Oseille</h2>
-                                <h3>20 €</h3>
+
+                    <div class="col-lg-6">
+                        <div class="mb-5 d-lg-flex justify-content-evenly align-items-center p-2 bg-success-subtle shadow">
+                            <div class="text-lg-start text-center">
+                                <h2>Employées</h2>
+                                <h3>{{ totalEmployees }}</h3>
                             </div>
                             <div>
-                                <i class="fa-solid fa-money-check-dollar fa-2xl"></i>
+                                <i class="fa-solid fa-user-tie fa-2xl"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="mb-5 d-flex justify-content-evenly align-items-center p-2 bg-warning-subtle shadow">
-                            <div class="text-start">
-                                <h2>Commandes</h2>
-                                <h3>8</h3>
+
+                    <div class="col-lg-6">
+                        <div class="mb-5 d-lg-flex justify-content-evenly align-items-center p-2 bg-warning-subtle shadow">
+                            <div class="text-lg-start text-center">
+                                <h2>Commandes terminées</h2>
+                                <h3>{{ completedOrders }}</h3>
                             </div>
                             <div>
                                 <i class="fa-solid fa-cart-shopping fa-2xl"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <div class="mb-5 d-flex justify-content-evenly align-items-center p-4 bg-danger-subtle shadow">
-                            <div class="">
+
+                    <div class="col-lg-6">
+                        <div class="mb-5 d-lg-flex justify-content-evenly align-items-center p-2 bg-danger-subtle shadow">
+                            <div class="text-lg-start text-center">
                                 <h2>Commandes en cours</h2>
-                                <h3>1</h3>
+                                <h3>{{ ongoingOrders }}</h3>
                             </div>
                             <div>
                                 <i class="fa-solid fa-truck-fast fa-2xl"></i>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-
