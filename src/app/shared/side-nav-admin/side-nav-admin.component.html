@@ -14,7 +14,7 @@
                 <span>Dashboard</span>
             </a>
         </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item" *ngIf="isAdmin()">
             <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth"
                 aria-expanded="false" aria-controls="auth">
                 <i class="fa-solid fa-users"></i>
@@ -29,13 +29,13 @@
                 </li>
             </ul>
         </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item" *ngIf="isAdmin()">
             <a [routerLink]="['/admin/item-list']" class="sidebar-link">
                 <i class="fa-solid fa-shirt"></i>
                 <span>Articles</span>
             </a>
         </li>
-        <li class="sidebar-item">
+        <li class="sidebar-item" *ngIf="isAdmin()">
             <a [routerLink]="['/admin/service-list']" class="sidebar-link">
                 <i class="fa-solid fa-hand-holding-heart"></i>
                 <span>Services</span>

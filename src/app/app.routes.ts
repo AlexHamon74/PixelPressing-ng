@@ -26,6 +26,7 @@ import { MyOrdersComponent } from './features/user/my-orders/my-orders.component
 import { OurServicesComponent } from './features/user/our-services/our-services.component';
 import { OrdersListComponent } from './features/admin/orders/orders-list/orders-list.component';
 import { OrdersEditComponent } from './features/admin/orders/orders-edit/orders-edit.component';
+import { AuthAdminOrEmployeeGuard } from './core/guards/auth-admin-or-employee.guard';
 
 export const routes: Routes = [
     {
@@ -48,7 +49,7 @@ export const routes: Routes = [
         path: 'admin',
         component: AdminComponent,
         children: [
-            { path: 'dashboard', component: DashboardComponent, canActivate: [AuthAdminGuard] },
+            { path: 'dashboard', component: DashboardComponent, canActivate: [AuthAdminOrEmployeeGuard] },
 
             { path: 'customer-user-list', component: CustomerUsersListComponent, canActivate: [AuthAdminGuard] },
 
@@ -64,8 +65,8 @@ export const routes: Routes = [
             { path: 'service-create', component: ServiceCreateComponent, canActivate: [AuthAdminGuard] },
             { path: 'service-edit/:id', component: ServiceEditComponent, canActivate: [AuthAdminGuard] },
 
-            { path: 'order-list', component: OrdersListComponent, canActivate: [AuthAdminGuard] },
-            { path: 'order-edit/:id', component: OrdersEditComponent, canActivate: [AuthAdminGuard] },
+            { path: 'order-list', component: OrdersListComponent, canActivate: [AuthAdminOrEmployeeGuard] },
+            { path: 'order-edit/:id', component: OrdersEditComponent, canActivate: [AuthAdminOrEmployeeGuard] },
         ]
     },
       {path:'**', redirectTo:'/' },

@@ -1,11 +1,11 @@
-import { CanActivate, Router } from "@angular/router";
-import { AuthService } from "../services/auth.service";
-import { inject, Injectable } from "@angular/core";
-import { UserService } from "../services/user.service";
+import { inject, Injectable } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthAdminGuard implements CanActivate {
+export class AuthAdminOrEmployeeGuard implements CanActivate {
   router = inject(Router);
   authService = inject(AuthService);
   userService = inject(UserService);
@@ -14,8 +14,8 @@ export class AuthAdminGuard implements CanActivate {
   canActivate(): boolean {
     if (this.authService.isLogged()) {
       const userRoles = this.userService.getUserRoles();
-      // Vérifie si l'utilisateur a le rôle ROLE_ADMIN
-      if (userRoles.includes('ROLE_ADMIN')){
+      // Vérifie si l'utilisateur a le rôle ROLE_EMPLOYEE ou ROLE_ADMIN
+      if (userRoles.includes('ROLE_EMPLOYEE') || userRoles.includes('ROLE_ADMIN')) {
         return true;
       } else {
         // Redirection vers une page non autorisée ou un autre traitement
@@ -28,4 +28,4 @@ export class AuthAdminGuard implements CanActivate {
       return false;
     }
   }
-}
+};
