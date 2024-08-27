@@ -4,12 +4,14 @@ import { ModalDeleteComponent } from '../../../../../shared/modal-delete/modal-d
 import { NgFor } from '@angular/common';
 import { UserInterface } from '../../../../../shared/entities';
 import { UserService } from '../../../../../core/services/user.service';
+import { FilterUsersPipe } from '../../../../../core/pipes/filter-users.pipe';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-customer-users-list',
   standalone: true,
-  imports: [SideNavAdminComponent, ModalDeleteComponent, NgFor],
+  imports: [SideNavAdminComponent, ModalDeleteComponent, NgFor, FilterUsersPipe, FormsModule],
   templateUrl: './customer-users-list.component.html',
   styleUrl: '../../../admin-style.css'
 })
@@ -18,6 +20,7 @@ export class CustomerUsersListComponent implements OnInit {
   //On définis les variables
   customers: UserInterface[] = [];
   currentUser: UserInterface | null = null;
+  searchText: string = '';
   @ViewChild(ModalDeleteComponent) modalDeleteComponent!: ModalDeleteComponent;
 
   //On injecte les services

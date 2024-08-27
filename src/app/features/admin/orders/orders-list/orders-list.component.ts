@@ -4,17 +4,20 @@ import { NgClass, NgFor } from '@angular/common';
 import { orderInterface } from '../../../../shared/entities';
 import { OrderService } from '../../../../core/services/order.service';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { FilterOrdersPipe } from '../../../../core/pipes/filter-orders.pipe';
 
 @Component({
   selector: 'app-orders-list',
   standalone: true,
-  imports: [SideNavAdminComponent, NgFor, RouterLink, NgClass],
+  imports: [SideNavAdminComponent, NgFor, RouterLink, NgClass, FilterOrdersPipe, FormsModule],
   templateUrl: './orders-list.component.html',
   styleUrl: '../../admin-style.css'
 })
 export class OrdersListComponent implements OnInit {
 
   orders: orderInterface[] = [];
+  searchText: string = '';
 
   orderService = inject(OrderService);
 

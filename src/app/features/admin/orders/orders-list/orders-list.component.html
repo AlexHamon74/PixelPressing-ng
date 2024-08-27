@@ -2,7 +2,10 @@
     <app-side-nav-admin></app-side-nav-admin>
     <div class="main p-4 bg-dark">
         <div class="container-fluid table-responsive">
-            <h1 class="h2 display-5 text-light mb-5">Commandes</h1>
+            <h1 class="h2 display-5 text-light">Commandes</h1>
+
+            <input type="text" class="form-control my-4 w-50" placeholder="Rechercher par nom ou prénom du client" [(ngModel)]="searchText" data-bs-theme="dark">
+
             <table class="table-dark table text-center align-middle">
                 <thead>
                     <tr>
@@ -17,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let order of orders">
+                    <tr *ngFor="let order of orders | filterOrders: searchText">
                         <th scope="row">{{order.id}}</th>
                         <td>{{order.user.firstname}} {{order.user.name}}</td>
                         <td>

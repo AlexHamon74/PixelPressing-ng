@@ -40,12 +40,14 @@ export class UserService {
     }
   };
 
-  // Méthode pour récupérer tous les utilisateurs
-  fetchAll(): Observable<UserInterface[]> {
-    return this.http.get<any>(`${this.url}/users`).pipe(
-      map(response => response['hydra:member'])
-    );
-  };
+// Méthode pour récupérer tous les utilisateurs sauf ceux avec le rôle "ROLE_ADMIN"
+fetchAll(): Observable<UserInterface[]> {
+  return this.http.get<any>(`${this.url}/users`).pipe(
+    map(response => response['hydra:member']),
+    map(users => users.filter((user: UserInterface) => !user.roles.includes('ROLE_ADMIN')))
+  );
+}
+
 
   //Méthode pour récupérer un les informations du user connecté
   getUserById(): Observable<UserInterface> {
