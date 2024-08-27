@@ -3,7 +3,7 @@
     <div class="main p-4 bg-dark">
         <div class="container-fluid table-responsive">
             <h1 class="h2 display-5 text-light mb-5">Commandes</h1>
-            <table class="table-dark table text-center table-hover align-middle">
+            <table class="table-dark table text-center align-middle">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -42,7 +42,7 @@
                         <td>{{order.price}}€</td>
                         <td>{{ order.deliveryDate ? order.deliveryDate : 'Pas de livraison' }}</td>
                         <td>{{ order.employee ? (order.employee.firstname + ' ' + order.employee.name) : 'null' }}</td>
-                        <td>{{order.status}}</td>
+                        <td [ngClass]="getStatusClass(order.status)">{{order.status}}</td>
                         <td><button [routerLink]="(['/admin/order-edit', order.id])" class="btn btn-primary">Editer</button></td>
                     </tr>
                 </tbody>

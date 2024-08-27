@@ -14,7 +14,7 @@ import { OrderService } from '../../../../core/services/order.service';
   templateUrl: './orders-edit.component.html',
   styleUrl: '../../admin-style.css'
 })
-export class OrdersEditComponent implements OnInit{
+export class OrdersEditComponent implements OnInit {
 
   employees: employeeInterface[] = [];
   editOrderForm!: FormGroup;
@@ -31,7 +31,7 @@ export class OrdersEditComponent implements OnInit{
     this.loadOrder();
   };
 
-  getEmployees(){
+  getEmployees() {
     this.employeeService.fetchAll().subscribe(data => {
       this.employees = data;
     })
@@ -51,23 +51,19 @@ export class OrdersEditComponent implements OnInit{
         (order: orderInterface) => {
           this.currentOrder = order;
           this.editOrderForm.patchValue({
-            employee: order.employee ? order.employee.toString() : '',
+            employee: `/api/employees/${order.employee?.id}`,
             status: order.status,
           });
-          console.log(order.deliveryDate, order.createdAt, order.user['@id'])
         },
-        (error) => {
-          console.error('Error fetching order', error);
-        }
       );
-    }
-  }
+    };
+  };
 
-    //Fonction pour convertir une date du format DD/MM/YYYY en YYYY-MM-DD
-    convertDate(date: string): string {
-      const [day, month, year] = date.split('/');
-      return `${year}-${month}-${day}`;
-    }
+  //Fonction pour convertir une date du format DD/MM/YYYY en YYYY-MM-DD
+  convertDate(date: string): string {
+    const [day, month, year] = date.split('/');
+    return `${year}-${month}-${day}`;
+  };
 
   onSubmit(): void {
     if (this.editOrderForm.valid && this.currentOrder) {
@@ -92,7 +88,7 @@ export class OrdersEditComponent implements OnInit{
       });
     } else {
       alert("Le formulaire n'est pas valide.");
-  
     }
-  }
+  };
+
 }

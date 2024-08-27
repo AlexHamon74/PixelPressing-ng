@@ -29,4 +29,21 @@ export class OrdersListComponent implements OnInit {
     })
   };
 
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'En attente de réception des articles':
+        return 'bg-danger';
+      case 'En cours de lavage':
+        return 'bg-warning';
+      case 'Prêt à être récupéré':
+        return 'bg-info'; 
+      case 'En cours de livraison':
+        return 'bg-info';
+      case 'Livré':
+        return 'bg-success'; 
+      default:
+        return 'bg-secondary';
+    }
+  };
+
 }
