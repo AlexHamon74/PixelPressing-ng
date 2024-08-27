@@ -13,7 +13,7 @@ import { NgIf } from '@angular/common';
 })
 export class RegisterComponent {
 
-  isSubmitted = false
+  isSubmitted = false;
 
   authService = inject(AuthService);
   router = inject(Router);

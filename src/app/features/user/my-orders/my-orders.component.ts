@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { OrderService } from '../../../core/services/order.service';
-import { newOrderInterface, orderInterface, UserInterface } from '../../../shared/entities';
+import { orderInterface, UserInterface } from '../../../shared/entities';
 import { NgFor, NgIf } from '@angular/common';
 import { UserService } from '../../../core/services/user.service';
 import { FormsModule } from '@angular/forms';

@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SideNavAdminComponent } from '../../../../shared/side-nav-admin/side-nav-admin.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { editOrderInterface, employeeInterface, orderInterface } from '../../../../shared/entities';
 import { EmployeeService } from '../../../../core/services/employee.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { OrderService } from '../../../../core/services/order.service';
 @Component({
   selector: 'app-orders-edit',
   standalone: true,
-  imports: [SideNavAdminComponent, ReactiveFormsModule, NgFor],
+  imports: [SideNavAdminComponent, ReactiveFormsModule, NgFor, NgIf],
   templateUrl: './orders-edit.component.html',
   styleUrl: '../../admin-style.css'
 })
@@ -19,6 +19,7 @@ export class OrdersEditComponent implements OnInit {
   employees: employeeInterface[] = [];
   editOrderForm!: FormGroup;
   currentOrder!: orderInterface | undefined;
+  isSubmitted = false;
 
   employeeService = inject(EmployeeService);
   activatedRoute = inject(ActivatedRoute);
@@ -51,7 +52,7 @@ export class OrdersEditComponent implements OnInit {
         (order: orderInterface) => {
           this.currentOrder = order;
           this.editOrderForm.patchValue({
-            employee: `/api/employees/${order.employee?.id}`,
+            employee: order.employee ? `/api/employees/${order.employee?.id}` : null,
             status: order.status,
           });
         },
@@ -66,6 +67,7 @@ export class OrdersEditComponent implements OnInit {
   };
 
   onSubmit(): void {
+    this.isSubmitted = true;
     if (this.editOrderForm.valid && this.currentOrder) {
       const formValues = this.editOrderForm.value;
 
@@ -91,9 +93,12 @@ export class OrdersEditComponent implements OnInit {
       this.orderService.editOrder(updatedOrder).subscribe(() => {
         this.router.navigate(['/admin/order-list']);
       });
-    } else {
-      alert("Le formulaire n'est pas valide.");
     }
+  };
+
+  //Méthode pour vérifier si les champs ont une erreur spécifique
+  public hasError(controlName: string, errorName: string) {
+    return this.editOrderForm.controls[controlName].hasError(errorName);
   };
 
 }

@@ -5,29 +5,42 @@
             <h1 class="h2 display-5"> Editer une commande </h1>
             <form [formGroup]="editOrderForm" (ngSubmit)="onSubmit()" data-bs-theme="dark">
 
-                <div class="mb-3">
-                    <label for="employee">Employé(e)</label>
-                    <select id="employee" formControlName="employee" class="form-select">
-                        <option disabled [ngValue]="null">Choisissez un employé(e)</option>
-                        <option *ngFor="let employee of employees" ngValue="/api/employees/{{employee.id}}">
-                            {{employee.firstname}} {{employee.name}}
-                        </option>
-                    </select>
+                <div class="row">
+                    <div class="col-lg-6 col-12 mb-3">
+                        <label for="employee">Employé(e)</label>
+                        <select id="employee" formControlName="employee" class="form-select"
+                        [class.is-invalid]="isSubmitted && editOrderForm.controls['employee'].invalid">
+                            <option disabled selected [ngValue]="null">Choisissez un employé(e)</option>
+                            <option *ngFor="let employee of employees" [value]="employee['@id']">
+                                {{employee.firstname}} {{employee.name}}
+                            </option>
+                        </select>
+                        <div *ngIf="isSubmitted && editOrderForm.controls['employee'].invalid"
+                        class="invalid-feedback">
+                        <small>L'employé(e) est requis(e)</small>
+                    </div>
+                    </div>
+                    
+                    <div class="col-lg-6 col-12 mb-3">
+                        <label for="status">Status</label>
+                        <select id="status" formControlName="status" class="form-select"
+                        [class.is-invalid]="isSubmitted && editOrderForm.controls['status'].invalid">
+                            <option disabled selected [ngValue]="null">Choisissez un status</option>
+                            <option>En attente de réception des articles</option>
+                            <option>En cours de lavage</option>
+                            <option>Prêt à être récupéré</option>
+                            <option>En cours de livraison</option>
+                            <option>Livré</option>
+                        </select>
+                        <div *ngIf="isSubmitted && editOrderForm.controls['status'].invalid"
+                        class="invalid-feedback">
+                        <small>Le status est requise</small>
+                    </div>
+                    </div>
                 </div>
-
-                <div class="mb-3">
-                    <label for="status">Status</label>
-                    <select id="status" formControlName="status" class="form-select">
-                        <option disabled [ngValue]="null">Choisissez un status</option>
-                        <option>En attente de réception des articles</option>
-                        <option>En cours de lavage</option>
-                        <option>Prêt à être récupéré</option>
-                        <option>En cours de livraison</option>
-                        <option>Livré</option>
-                    </select>
-                </div>
-
+                    
                 <button class="btn btn-primary" type="submit">Valider</button>
+
             </form>
 
         </div>

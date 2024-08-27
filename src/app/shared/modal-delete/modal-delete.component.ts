@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { cartItemInterface, employeeInterface, itemsInterface, serviceInterface, UserInterface } from '../entities';
 import { ItemService } from '../../core/services/item.service';
 import { ServiceService } from '../../core/services/service.service';

@@ -26,7 +26,7 @@ p {
 }
 
 
-
+/* Couleur du site */
 .color-blue {
   color: #072366;
 }
@@ -47,73 +47,8 @@ p {
   color: #57667E;
 }
 
-
-/* Style du bouton principal */
-.c-button {
-  font-size: 22px;
-  padding: 12px 24px;
-  display: inline-block;
-  vertical-align: middle;
-  position: relative;
-  z-index: 1;
-}
-
-.c-button--gooey {
-  color: #072366;
-  letter-spacing: 2px;
-  border: 2px solid #072366;
-  border-radius: 0;
-  position: relative;
-  transition: all 0.7s ease;
-  border-radius: 50px;
-}
-
-.c-button--gooey .c-button__blobs {
-  height: 100%;
-  filter: url(#goo);
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: -1px;
-  z-index: -1;
-  border-radius: 50px;
-}
-
-.c-button--gooey .c-button__blobs div {
-  background-color: #072366;
-  width: 34%;
-  height: 100%;
-  border-radius: 100%;
-  position: absolute;
-  transform: scale(1.4) translateY(125%) translateZ(0);
-  transition: all 0.7s ease;
-}
-
-.c-button--gooey .c-button__blobs div:nth-child(1) {
-  left: -5%;
-}
-
-.c-button--gooey .c-button__blobs div:nth-child(2) {
-  left: 30%;
-  transition-delay: 60ms;
-}
-
-.c-button--gooey .c-button__blobs div:nth-child(3) {
-  left: 66%;
-  transition-delay: 25ms;
-}
-
-.c-button--gooey:hover {
-  color: #fff;
-}
-
-.c-button--gooey:hover .c-button__blobs div {
-  transform: scale(1.4) translateY(0) translateZ(0);
-}
-
-/* Style bouton secondaire */
-.btn-dark{
+/* Style boutons */
+.btn-dark {
   background-color: #072366;
   display: inline-block;
   color: #fff;
@@ -121,11 +56,13 @@ p {
   padding: 8px 10px;
   font-size: 16px;
 }
-.btn-dark:hover{
+
+.btn-dark:hover {
   opacity: 0.9;
   transition: 0.2s;
 }
-.btn-light{
+
+.btn-light {
   background-color: #6785FF;
   display: inline-block;
   color: #fff;
@@ -133,7 +70,8 @@ p {
   padding: 8px 10px;
   font-size: 16px;
 }
-.btn-light:hover{
+
+.btn-light:hover {
   opacity: 0.9;
   transition: 0.2s;
 }

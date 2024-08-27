@@ -3,8 +3,7 @@ import { RouterLink } from '@angular/router';
 import { SideNavAdminComponent } from '../../../../shared/side-nav-admin/side-nav-admin.component';
 import { ItemService } from '../../../../core/services/item.service';
 import { NgFor } from '@angular/common';
-import { categoryInterface, itemsInterface } from '../../../../shared/entities';
-import { CategoryService } from '../../../../core/services/category.service';
+import { itemsInterface } from '../../../../shared/entities';
 import { ModalDeleteComponent } from '../../../../shared/modal-delete/modal-delete.component';
 
 @Component({

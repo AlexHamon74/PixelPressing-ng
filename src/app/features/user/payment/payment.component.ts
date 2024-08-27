@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CartService } from '../../../core/services/cart.service';
-import { cartItemInterface, newOrderInterface, orderInterface, UserInterface } from '../../../shared/entities';
+import { cartItemInterface, newOrderInterface, UserInterface } from '../../../shared/entities';
 import { NgFor, NgIf } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../../core/services/user.service';

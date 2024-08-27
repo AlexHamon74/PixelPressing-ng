@@ -6,23 +6,24 @@ import { Router } from '@angular/router';
 import { categoryInterface } from '../../../../shared/entities';
 import { Subscription } from 'rxjs';
 import { CategoryService } from '../../../../core/services/category.service';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-item-create',
   standalone: true,
-  imports: [SideNavAdminComponent, ReactiveFormsModule, NgFor],
+  imports: [SideNavAdminComponent, ReactiveFormsModule, NgFor, NgIf],
   templateUrl: './item-create.component.html',
   styleUrl: '../../admin-style.css'
 
 })
-export class ItemCreateComponent implements OnInit, OnDestroy{
-  
+export class ItemCreateComponent implements OnInit, OnDestroy {
+
   //On déclare les variables
   createItemForm!: FormGroup;
   dataCategories !: Subscription;
   categories: categoryInterface[] = [];
-  
+  isSubmitted = false;
+
   //On inject les services
   router = inject(Router);
   itemService = inject(ItemService);
@@ -44,29 +45,33 @@ export class ItemCreateComponent implements OnInit, OnDestroy{
     this.createItemForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       category: new FormControl('', [Validators.required]),
-      price: new FormControl('', [Validators.required]),
+      price: new FormControl('', [Validators.required, Validators.pattern(/\d/)]),
       image: new FormControl('', [Validators.required])
     });
   };
 
   //Je recupere les categories pour les afficher dans le select du formulaire
-  getCategories(){
+  getCategories() {
     this.dataCategories = this.categoryService.fetchAll().subscribe(data => {
-    this.categories = data })
+      this.categories = data
+    })
   };
 
   //On soumet le formulaire pour créer un nouvel item
   onSubmit() {
-    if(this.createItemForm.valid){
+    this.isSubmitted = true;
+    if (this.createItemForm.valid) {
       this.itemService.createItem(this.createItemForm.value).subscribe({
         next: () => {
           this.router.navigate(['/admin/item-list']);
         },
       });
-    }else{
-      alert('Il y a un probleme');
     }
+  };
 
+  //Méthode pour vérifier si les champs ont une erreur spécifique
+  public hasError(controlName: string, errorName: string) {
+    return this.createItemForm.controls[controlName].hasError(errorName);
   };
 
 }

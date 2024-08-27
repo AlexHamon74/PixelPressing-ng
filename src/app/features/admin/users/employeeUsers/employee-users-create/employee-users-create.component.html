@@ -8,65 +8,93 @@
 
                 <div class="row mb-3">
                     <div class="col-6">
-                        <label for="name">Nom</label>
-                        <input id="name" type="text" formControlName="name" class="form-control">
-                    </div>
-                    <div class="col-6">
                         <label for="firstname">Prénom</label>
-                        <input id="firstname" type="text" formControlName="firstname" class="form-control">
+                        <input id="firstname" type="text" formControlName="firstname" class="form-control"
+                            [class.is-invalid]="isSubmitted && createEmployeeForm.controls['firstname'].invalid">
+                        <div *ngIf="isSubmitted && createEmployeeForm.controls['firstname'].invalid"
+                            class="invalid-feedback">
+                            <small>Le prénom est requis</small>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <label for="name">Nom</label>
+                        <input id="name" type="text" formControlName="name" class="form-control"
+                            [class.is-invalid]="isSubmitted && createEmployeeForm.controls['name'].invalid">
+                        <div *ngIf="isSubmitted && createEmployeeForm.controls['name'].invalid"
+                            class="invalid-feedback">
+                            <small>Le nom est requis</small>
+                        </div>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-6">
                         <label for="email">Email</label>
-                        <input id="email" type="email" formControlName="email" class="form-control">
-                    </div>
-                    <div class="col-6">
-                        <label for="password">Password</label>
-                        <input id="password" type="password" formControlName="password" class="form-control">
-                    </div>
-                </div>
-
-                <div class="row mb-4">
-                    <div class="col-lg-6 col-12">
-                        <div class="mb-lg-0 mb-3">
-                            <label>Gender</label>
-                            <div class="d-flex gap-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" id="genderMr" name="gender"
-                                    formControlName="gender" value="Mr">
-                                    <label class="form-check-label" for="genderMr">Mr</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" id="genderMme" name="gender"
-                                    formControlName="gender" value="Mme">
-                                    <label class="form-check-label" for="genderMme">Mme</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" id="genderAutre" name="gender"
-                                    formControlName="gender" value="Autre">
-                                    <label class="form-check-label" for="genderAutre">Autre</label>
-                                </div>
-                            </div>
+                        <input id="email" type="email" formControlName="email" class="form-control"
+                            [class.is-invalid]="isSubmitted && createEmployeeForm.controls['email'].invalid">
+                        <div *ngIf="isSubmitted && createEmployeeForm.controls['email'].invalid"
+                            class="invalid-feedback">
+                            <small *ngIf="hasError('email', 'required')">L'email est requis.</small>
+                            <small *ngIf="hasError('email', 'email')">L'email n'est pas valide.</small>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-12">
-                        <label for="birthdate">Birthdate</label>
-                        <input type="date" id="birthdate" class="form-control" formControlName=birthdate>
+
+                    <div class="col-6">
+                        <label for="password">Password</label>
+                        <input id="password" type="password" formControlName="password" class="form-control"
+                            [class.is-invalid]="isSubmitted && createEmployeeForm.controls['password'].invalid">
+                        <div *ngIf="isSubmitted && createEmployeeForm.controls['password'].invalid"
+                            class="invalid-feedback">
+                            <small *ngIf="hasError('password', 'required')">Le mot de passe est requis.</small>
+                            <small *ngIf="hasError('password', 'minlength')">Le mot de passe doit contenir au moins
+                                6 caractères.</small><br>
+                            <small *ngIf="hasError('password', 'pattern')">Le mot de passe doit contenir au moins un
+                                chiffre.</small>
+                        </div>
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="adress">Adress</label>
-                    <input type="text" id="adress" class="form-control" formControlName=adress>
+                <div class="row mb-3">
+                    <div class="col-lg-6 col-12 mb-lg-0 mb-3">
+                        <label>Genre</label>
+                        <select class="form-select" formControlName="gender"
+                            [class.is-invalid]="isSubmitted && createEmployeeForm.controls['gender'].invalid">
+                            <option value="" disabled selected>Cliquez pour choisir</option>
+                            <option value="Mr">Mr</option>
+                            <option value="Mme">Mme</option>
+                            <option value="Autre">Autre</option>
+                        </select>
+                        <div *ngIf="isSubmitted && createEmployeeForm.controls['gender'].invalid"
+                            class="invalid-feedback">
+                            <small>Le genre est requis</small>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-12">
+                        <label for="birthdate">Birthdate</label>
+                        <input type="date" id="birthdate" class="form-control" formControlName=birthdate
+                            [class.is-invalid]="isSubmitted && createEmployeeForm.controls['birthdate'].invalid">
+                        <div *ngIf="isSubmitted && createEmployeeForm.controls['birthdate'].invalid"
+                            class="invalid-feedback">
+                            <small>La date de naissance est requise</small>
+                        </div>
+
+                    </div>
                 </div>
 
+                <div class="col-12 mb-3">
+                    <label for="adress">Adress</label>
+                    <input type="text" id="adress" class="form-control" formControlName=adress
+                        [class.is-invalid]="isSubmitted && createEmployeeForm.controls['adress'].invalid">
+                    <div *ngIf="isSubmitted && createEmployeeForm.controls['adress'].invalid" class="invalid-feedback">
+                        <small>L'adresse est requise</small>
+                    </div>
+
+                </div>
 
                 <button class="btn btn-primary" type="submit">Valider</button>
             </form>
-
-
 
         </div>
     </div>

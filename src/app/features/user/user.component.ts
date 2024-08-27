@@ -9,7 +9,6 @@ import { FooterComponent } from '../../shared/footer/footer.component';
   standalone: true,
   imports: [RouterLink, NavComponent, RouterOutlet, FooterComponent],
   template: '<app-nav /> <router-outlet /> <app-footer />',
-  styleUrl: 'user.component.css'
 })
 export class UserComponent {
 

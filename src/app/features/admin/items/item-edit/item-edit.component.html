@@ -5,31 +5,54 @@
             <h1 class="h2 display-5"> Editer un article </h1>
             <form [formGroup]="editItemForm" (ngSubmit)="onSubmit()" data-bs-theme="dark">
 
-                <div class="mb-3">
-                    <label for="name">Nom</label>
-                    <input id="name" type="text" formControlName="name" class="form-control">
+                <div class="row">
+                    <div class="col-lg-6 col-12 mb-3">
+                        <label for="name">Nom</label>
+                        <input id="name" type="text" formControlName="name" class="form-control"
+                            [class.is-invalid]="isSubmitted && editItemForm.controls['name'].invalid">
+                        <div *ngIf="isSubmitted && editItemForm.controls['name'].invalid" class="invalid-feedback">
+                            <small>Le nom est requis</small>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6 col-12 mb-3">
+                        <label for="category">Categorie</label>
+                        <select id="category" formControlName="category" class="form-select"
+                            [class.is-invalid]="isSubmitted && editItemForm.controls['category'].invalid">
+                            <option disabled selected>Open this select menu</option>
+                            <option *ngFor="let category of categories" value="/api/categories/{{category.id}}">{{
+                                category.name }}</option>
+                        </select>
+                        <div *ngIf="isSubmitted && editItemForm.controls['category'].invalid" class="invalid-feedback">
+                            <small>La catégorie est requise</small>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="category">Categorie</label>
-                    <select id="category" formControlName="category" class="form-select">
-                        <option disabled selected>Open this select menu</option>
-                        <option *ngFor="let category of categories" value="/api/categories/{{category.id}}">{{
-                            category.name }}</option>
-                    </select>
-                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-12 mb-3">
+                        <label for="price">Prix</label>
+                        <input id="price" type="number" formControlName="price" class="form-control"
+                            [class.is-invalid]="isSubmitted && editItemForm.controls['price'].invalid">
+                        <div *ngIf="isSubmitted && editItemForm.controls['price'].invalid" class="invalid-feedback">
+                            <small *ngIf="hasError('price', 'required')">Le prix est requis.</small>
+                            <small *ngIf="hasError('price', 'pattern')">Le prix n'est pas valide.</small>
+                        </div>
+                    </div>
 
-                <div class="mb-3">
-                    <label for="price">Prix</label>
-                    <input id="price" type="number" formControlName="price" class="form-control">
-                </div>
-
-                <div class="mb-3">
-                    <label for="image">Image</label>
-                    <input id="image" type="text" formControlName="image" class="form-control">
+                    <div class="col-lg-6 col-12 mb-3">
+                        <label for="image">Image</label>
+                        <input id="image" type="text" formControlName="image" class="form-control"
+                            [class.is-invalid]="isSubmitted && editItemForm.controls['image'].invalid">
+                        <div *ngIf="isSubmitted && editItemForm.controls['image'].invalid" class="invalid-feedback">
+                            <small>L'image est requise</small>
+                        </div>
+                    </div>
                 </div>
 
                 <button class="btn btn-primary" type="submit">Valider</button>
+
             </form>
 
         </div>

@@ -4,19 +4,21 @@ import { SideNavAdminComponent } from '../../../../shared/side-nav-admin/side-na
 import { ServiceService } from '../../../../core/services/service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { serviceInterface } from '../../../../shared/entities';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-service-edit',
   standalone: true,
-  imports: [ReactiveFormsModule, SideNavAdminComponent],
+  imports: [ReactiveFormsModule, SideNavAdminComponent, NgIf],
   templateUrl: './service-edit.component.html',
   styleUrl: '../../admin-style.css'
 })
-export class ServiceEditComponent implements OnInit{
+export class ServiceEditComponent implements OnInit {
 
   //On déclare les variables
   editServiceForm!: FormGroup;
   serviceId: any;
+  isSubmitted = false;
 
   //On inject les services
   serviceService = inject(ServiceService);
@@ -31,18 +33,18 @@ export class ServiceEditComponent implements OnInit{
   };
 
   //On initialize le formulaire
-  initializeForm(): void{
+  initializeForm(): void {
     this.editServiceForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       image: new FormControl('', [Validators.required]),
-      price: new FormControl('', [Validators.required]),
+      price: new FormControl('', [Validators.required, Validators.pattern(/\d/)]),
     });
   };
 
   //On charge les données d'un article spécifique pour pré-remplir le formulaire de modification
-  loadService(): void{
-    this.serviceService.getServiceById(this.serviceId!).subscribe(service =>{
+  loadService(): void {
+    this.serviceService.getServiceById(this.serviceId!).subscribe(service => {
       this.editServiceForm.patchValue({
         name: service.name,
         description: service.description,
@@ -53,14 +55,20 @@ export class ServiceEditComponent implements OnInit{
   };
 
   //Fonction appelée lors de la soumission du formulaire
-  onSubmit(){
-    if(this.editServiceForm.valid){
+  onSubmit() {
+    this.isSubmitted = true;
+    if (this.editServiceForm.valid) {
       const updateService: serviceInterface = this.editServiceForm.value;
       updateService.id = this.serviceId!;
-      this.serviceService.editService(updateService).subscribe(() =>{
+      this.serviceService.editService(updateService).subscribe(() => {
         this.router.navigate(['/admin/service-list'])
       });
     };
+  };
+
+  //Méthode pour vérifier si les champs ont une erreur spécifique
+  public hasError(controlName: string, errorName: string) {
+    return this.editServiceForm.controls[controlName].hasError(errorName);
   };
 
 }

@@ -6,12 +6,12 @@ import { categoryInterface, itemsInterface } from '../../../../shared/entities';
 import { CategoryService } from '../../../../core/services/category.service';
 import { ItemService } from '../../../../core/services/item.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-item-edit',
   standalone: true,
-  imports: [SideNavAdminComponent, ReactiveFormsModule, NgFor],
+  imports: [SideNavAdminComponent, ReactiveFormsModule, NgFor, NgIf],
   templateUrl: './item-edit.component.html',
   styleUrl: '../../admin-style.css'
 
@@ -23,6 +23,7 @@ export class ItemEditComponent implements OnInit, OnDestroy {
   itemId: any;
   categories: categoryInterface[] = [];
   dataCategories!: Subscription;
+  isSubmitted = false;
 
   //On inject les services
   router = inject(Router);
@@ -48,7 +49,7 @@ export class ItemEditComponent implements OnInit, OnDestroy {
     this.editItemForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       category: new FormControl('', [Validators.required]),
-      price: new FormControl('', [Validators.required]),
+      price: new FormControl('', [Validators.required, Validators.pattern(/\d/)]),
       image: new FormControl('', [Validators.required])
     });
   };
@@ -74,15 +75,20 @@ export class ItemEditComponent implements OnInit, OnDestroy {
 
   //On soumet le formulaire de modification
   onSubmit(): void {
-    if (this.editItemForm.valid) {
+    this.isSubmitted = true;
 
+    if (this.editItemForm.valid) {
       const updatedItem: itemsInterface = this.editItemForm.value;
       updatedItem.id = this.itemId!;
       this.itemService.updateItem(updatedItem).subscribe(() => {
         this.router.navigate(['/admin/item-list']);
       });
-    } else {
-      alert("Le formulaire n'est pas valide.")
-    };
+    }
   };
+
+  //Méthode pour vérifier si les champs ont une erreur spécifique
+  public hasError(controlName: string, errorName: string) {
+    return this.editItemForm.controls[controlName].hasError(errorName);
+  };
+
 }

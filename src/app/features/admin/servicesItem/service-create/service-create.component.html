@@ -2,32 +2,58 @@
     <app-side-nav-admin></app-side-nav-admin>
     <div class="main p-4 bg-dark text-light">
         <div class="container-fluid">
-            <h1 class="h2 display-5"> Créer un nouveau Service </h1>
+            <h1 class="h2 display-5">Créer un nouveau Service</h1>
 
             <form [formGroup]="createServiceForm" (ngSubmit)="onSubmit()" data-bs-theme="dark">
 
-                    <div class="mb-3">
+                <div class="row">
+                    <div class="col-lg-6 col-12 mb-3">
                         <label for="name">Nom</label>
-                        <input id="name" type="text" formControlName="name" class="form-control">
+                        <input id="name" type="text" formControlName="name" class="form-control"
+                            [class.is-invalid]="isSubmitted && createServiceForm.controls['name'].invalid">
+                        <div *ngIf="isSubmitted && createServiceForm.controls['name'].invalid" class="invalid-feedback">
+                            <small>Le nom est requis</small>
+                        </div>
+
                     </div>
 
-                    <div class="mb-3">
+                    <div class="col-lg-6 col-12 mb-3">
                         <label for="description">Description</label>
-                        <input id="description" type="text" formControlName="description" class="form-control">
+                        <textarea id="description" type="text" rows="4" formControlName="description" class="form-control"
+                            [class.is-invalid]="isSubmitted && createServiceForm.controls['description'].invalid"></textarea>
+                        <div *ngIf="isSubmitted && createServiceForm.controls['description'].invalid"
+                            class="invalid-feedback">
+                            <small>La description est requise</small>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="mb-3">
-                        <label for="image">Image</label>
-                        <input id="image" type="text" formControlName="image" class="form-control">
-                    </div>
-                      
-
-                    <div class="mb-3">
+                <div class="row">
+                    <div class="col-lg-6 col-12 mb-3">
                         <label for="price">Prix</label>
-                        <input id="price" type="number" formControlName="price" class="form-control">
+                        <input id="price" type="number" formControlName="price" class="form-control"
+                            [class.is-invalid]="isSubmitted && createServiceForm.controls['price'].invalid">
+                        <div *ngIf="isSubmitted && createServiceForm.controls['price'].invalid"
+                            class="invalid-feedback">
+                            <small *ngIf="hasError('price', 'required')">Le prix est requis.</small>
+                            <small *ngIf="hasError('price', 'pattern')">Le prix n'est pas valide.</small>
+                        </div>
+
                     </div>
+
+                    <div class="col-lg-6 col-12 mb-3">
+                        <label for="image">Image</label>
+                        <input id="image" type="text" formControlName="image" class="form-control"
+                            [class.is-invalid]="isSubmitted && createServiceForm.controls['image'].invalid">
+                        <div *ngIf="isSubmitted && createServiceForm.controls['image'].invalid"
+                            class="invalid-feedback">
+                            <small>L'image est requise</small>
+                        </div>
+                    </div>
+                </div>
 
                 <button class="btn btn-primary" type="submit">Valider</button>
+
             </form>
 
         </div>
