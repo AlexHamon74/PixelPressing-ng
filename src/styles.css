@@ -25,24 +25,7 @@ p {
   font-size: 18px;
 }
 
-
-/* Couleur du site */
-.color-blue {
-  color: #072366;
-}
-
-.bg-color-dark-blue {
-  background-color: #072366;
-}
-
-.bg-color-blue {
-  background-color: #6785FF;
-}
-
-.bg-color-blue-light {
-  background-color: #E8EDFF;
-}
-
+/* Couleur de certains <p> du site */
 .color-grey {
   color: #57667E;
 }

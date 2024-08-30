@@ -56,12 +56,12 @@
         <h2 class="text-center display-5 pb-5">Notre savoir-faire</h2>
         <div class="row row-custom text-white">
 
-            <div class="col-lg-6 col-12">
+            <div class="col-lg-6 col-12 px-lg-0 px-2">
                 <img src="img/service1.webp" class="img-fluid w-100" alt="Image d'un employée de PixelPressing">
             </div>
 
             <div *ngFor="let categorie of categories; let i = index" 
-            [ngClass]="{'col-lg-6 col-12': true, 'order-lg-0 order-1': i === 1}">
+            [ngClass]="{'col-lg-6 col-12 px-lg-0 px-2': true, 'order-lg-0 order-1': i === 1}">
                 <div class="position-relative hover-rotate">
                     <img src="img/categorie-bg.webp" class="img-fluid w-100 categorie-bg" alt="Image de fond pour les catégorie">
                     <div class="categorie-bg-content text-center px-3">
@@ -72,7 +72,7 @@
                 </div>
             </div>
             
-            <div class="col-lg-6 col-12">
+            <div class="col-lg-6 col-12 px-lg-0 px-2">
                 <img src="img/service2.webp" class="img-fluid w-100" alt="Image d'un employée de PixelPressing">
             </div>
         </div>
@@ -87,7 +87,7 @@
                 <p class="my-4">Pour tout autre service ou besoin particulier, n'hésitez pas à nous appeler ! Nous sommes là pour répondre à vos demandes.</p>
             </div>
             <div class="col-lg-4 col-12 text-lg-end">
-                <a class="btn-light py-2 px-4 fs-4">06.43.60.07.97</a>
+                <a class="btn-light fs-4">06.43.60.07.97</a>
             </div>
         </div>
     </div>
