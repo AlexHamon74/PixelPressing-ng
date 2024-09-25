@@ -93,29 +93,24 @@ export class PaymentComponent implements OnInit {
     if (this.delivery && this.paymentForm.invalid) {
       return;
     }
-    const createdAt = new Date().toISOString();
+    
     const newOrder: newOrderInterface = {
       price: this.totalPrice(),
       status: this.status,
       delivery: this.delivery,
       deliveryDate: this.delivery ? this.paymentForm.get('deliveryDate')?.value : null,
       commandItems: this.cartItems,
-      createdAt: createdAt,
+      createdAt: new Date().toISOString(),
       user: this.user['@id'],
     };
 
-    this.orderService.createOrder(newOrder).subscribe(
-      response => {
-        console.log('Commande créée', response);
+    this.orderService.createOrder(newOrder).subscribe(() => {
         localStorage.removeItem('cartItems');
         setTimeout(() => {
           location.reload();
         }, 1);
         this.router.navigate(['commande-valide']);
       },
-      error => {
-        console.error('Erreur lors de la création de la commande', error);
-      }
     );
   };
 

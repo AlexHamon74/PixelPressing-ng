@@ -36,16 +36,16 @@ export class ServiceListComponent implements OnInit{
     });
   };
 
-    //Fonction pour définir l'élément actuel à supprimer
-    confirmDelete(service: serviceInterface) {
-      this.currentService = service;
-    }
-  
-    //Fonction pour supprimer l'élément actuel
-    onServiceDeleted() {
-      this.getServices();
-      this.modalDeleteComponent.closeModal();
-    }
+  //Fonction pour définir l'élément actuel à supprimer
+  confirmDelete(service: serviceInterface) {
+    this.currentService = service;
+  }
+
+  //Fonction pour supprimer l'élément actuel
+  onServiceDeleted() {
+    this.getServices();
+    this.modalDeleteComponent.closeModal();
+  }
 
 
 }
