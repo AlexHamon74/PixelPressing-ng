@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div *ngIf="user.commands.length > 0; else noCommands">
+        <div *ngIf="user && user.commands && user.commands.length > 0; else noCommands">
 
             <div *ngFor="let command of user.commands"
                 class="row mb-5 p-4 bg-white shadow mx-1">

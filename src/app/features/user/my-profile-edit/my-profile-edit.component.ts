@@ -78,7 +78,8 @@ export class MyProfileEditComponent implements OnInit {
     if (this.myProfileEditForm.valid) {
       const updatedUser: UserInterface = {
         ...this.user,
-        ...this.myProfileEditForm.value
+        ...this.myProfileEditForm.value,
+        commands: this.user.commands.map(command => `/api/commands/${command.id}`)
       };
       this.userService.updateUser(updatedUser).subscribe(() => {
         this.router.navigate(['/myProfile']);
