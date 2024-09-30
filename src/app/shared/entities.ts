@@ -17,7 +17,7 @@ export interface UserInterface {
     adress:string;
     birthdate:string;
     roles: string[];
-    orders: orderInterface[];
+    commands: commandInterface[];
 }
 
 export interface employeeInterface {
@@ -64,7 +64,7 @@ export interface cartItemInterface{
     totalPrice: number; 
 }
 
-export interface orderInterface{
+export interface commandInterface{
     id?: number;
     price:number;
     subTotal?: number;
@@ -77,7 +77,7 @@ export interface orderInterface{
     employee?: UserInterface;
 }
 
-export interface newOrderInterface{
+export interface newCommandInterface{
     id?: number;
     price:number;
     subTotal?: number;
@@ -89,7 +89,7 @@ export interface newOrderInterface{
     user: string;
 }
 
-export interface editOrderInterface{
+export interface editCommandInterface{
     id?: number;
     price:number;
     subTotal?: number;

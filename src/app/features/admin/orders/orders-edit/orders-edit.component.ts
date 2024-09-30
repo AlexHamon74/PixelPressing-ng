@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { SideNavAdminComponent } from '../../../../shared/side-nav-admin/side-nav-admin.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
-import { editOrderInterface, employeeInterface, orderInterface } from '../../../../shared/entities';
+import { commandInterface, editCommandInterface, employeeInterface} from '../../../../shared/entities';
 import { EmployeeService } from '../../../../core/services/employee.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from '../../../../core/services/order.service';
@@ -18,7 +18,7 @@ export class OrdersEditComponent implements OnInit {
 
   employees: employeeInterface[] = [];
   editOrderForm!: FormGroup;
-  currentOrder!: orderInterface | undefined;
+  currentOrder!: commandInterface | undefined;
   isSubmitted = false;
 
   employeeService = inject(EmployeeService);
@@ -49,7 +49,7 @@ export class OrdersEditComponent implements OnInit {
     const orderId = this.activatedRoute.snapshot.paramMap.get('id');
     if (orderId) {
       this.orderService.fetchById(orderId).subscribe(
-        (order: orderInterface) => {
+        (order: commandInterface) => {
           this.currentOrder = order;
           this.editOrderForm.patchValue({
             employee: order.employee ? `/api/employees/${order.employee?.id}` : null,
@@ -79,7 +79,7 @@ export class OrdersEditComponent implements OnInit {
       }
       const createdAtConvert = this.convertDate(this.currentOrder.createdAt);
 
-      const updatedOrder: editOrderInterface = {
+      const updatedOrder: editCommandInterface = {
         id: this.currentOrder.id,
         price: this.currentOrder.price,
         status: formValues.status,

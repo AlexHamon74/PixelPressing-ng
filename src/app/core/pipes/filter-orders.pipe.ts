@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { orderInterface } from '../../shared/entities';
+import { commandInterface } from '../../shared/entities';
 
 @Pipe({
   name: 'filterOrders',
@@ -7,7 +7,7 @@ import { orderInterface } from '../../shared/entities';
 })
 export class FilterOrdersPipe implements PipeTransform {
 
-  transform(orders: orderInterface[], searchText: string): orderInterface[] {
+  transform(orders: commandInterface[], searchText: string): commandInterface[] {
     if (!orders || !searchText) {
       return orders;
     }

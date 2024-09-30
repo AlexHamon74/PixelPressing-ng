@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SideNavAdminComponent } from '../../../shared/side-nav-admin/side-nav-admin.component';
-import { employeeInterface, orderInterface, UserInterface } from '../../../shared/entities';
+import { commandInterface, employeeInterface, UserInterface } from '../../../shared/entities';
 import { OrderService } from '../../../core/services/order.service';
 import { UserService } from '../../../core/services/user.service';
 import { EmployeeService } from '../../../core/services/employee.service';
@@ -14,7 +14,7 @@ import { EmployeeService } from '../../../core/services/employee.service';
 })
 export class DashboardComponent implements OnInit {
 
-  orders: orderInterface[] = [];
+  orders: commandInterface[] = [];
   users: UserInterface[] = [];
   employees: employeeInterface[] = [];
 

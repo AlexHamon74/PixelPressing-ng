@@ -63,7 +63,7 @@ export class NavComponent implements OnInit {
   };
 
   //Méthode pour savoir si le user est un admin ou un employée
-  isAdmin() {
+  isAdminOrEmployee() {
     const roles = this.userService.getUserRoles();
     return roles.includes('ROLE_ADMIN') || roles.includes('ROLE_EMPLOYEE');
   };

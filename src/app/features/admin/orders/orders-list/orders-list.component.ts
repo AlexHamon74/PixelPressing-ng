@@ -1,11 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SideNavAdminComponent } from '../../../../shared/side-nav-admin/side-nav-admin.component';
 import { NgClass, NgFor } from '@angular/common';
-import { orderInterface } from '../../../../shared/entities';
 import { OrderService } from '../../../../core/services/order.service';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FilterOrdersPipe } from '../../../../core/pipes/filter-orders.pipe';
+import { commandInterface } from '../../../../shared/entities';
 
 @Component({
   selector: 'app-orders-list',
@@ -16,7 +16,7 @@ import { FilterOrdersPipe } from '../../../../core/pipes/filter-orders.pipe';
 })
 export class OrdersListComponent implements OnInit {
 
-  orders: orderInterface[] = [];
+  orders: commandInterface[] = [];
   searchText: string = '';
 
   orderService = inject(OrderService);

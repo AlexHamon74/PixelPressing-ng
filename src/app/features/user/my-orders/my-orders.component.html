@@ -1,7 +1,7 @@
 <section class="orders bg-light">
     <div class="container">
 
-        <!-- Partie titre et filtre -->
+        <!-- Partie titre -->
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
                 <div class="mb-4">
@@ -9,20 +9,19 @@
                         <i class="fa-solid fa-box-open fa-2xl"></i>
                         <h1 class="display-4">Mes commandes</h1>
                     </div>
-                    <input type="date" [(ngModel)]="searchDate" class="form-control my-4">
                 </div>
             </div>
         </div>
 
-        <div *ngIf="orders.length > 0; else noOrders">
+        <div *ngIf="user.commands.length > 0; else noCommands">
 
-            <div *ngFor="let order of (orders | orderDateFilter: searchDate)"
+            <div *ngFor="let command of user.commands"
                 class="row mb-5 p-4 bg-white shadow mx-1">
-                <div class="col-lg-4 pointer" (click)="selectOrder(order.id!)">
+                <div class="col-lg-4 pointer" (click)="selectOrder(command.id!)">
                     <div class="row align-items-center">
                         <div class="col-10">
-                            <h2 class="fs-4">Commandes n° {{order.id}}</h2>
-                            <p>Date : {{order.createdAt}}</p>
+                            <h2 class="fs-4">Commandes n° {{command.id}}</h2>
+                            <p>Date : {{command.createdAt}}</p>
                         </div>
                         <div class="col-2">
                             <i class="fa-solid fa-chevron-right"></i>
@@ -30,10 +29,10 @@
                     </div>
                 </div>
 
-                <div class="col-lg-8" *ngIf="selectedOrderId === order.id">
+                <div class="col-lg-8" *ngIf="selectedCommandId === command.id">
                     <div class="mb-4">
-                        <h2 class="fs-4">Statut : {{order.status}}</h2>
-                        <p *ngIf="order.delivery; else noDelivery">Date de livraion prévu : {{order.deliveryDate}}</p>
+                        <h2 class="fs-4">Statut : {{command.status}}</h2>
+                        <p *ngIf="command.delivery; else noDelivery">Date de livraion prévu : {{command.deliveryDate}}</p>
                         <ng-template #noDelivery>
                             <p>Commande à venir chercher sur place</p>
                         </ng-template>
@@ -70,7 +69,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let item of order.commandItems">
+                                            <tr *ngFor="let item of command.commandItems">
                                                 <th scope="row">
                                                     <img src="img/{{item.item.image}}" alt="{{item.item.name}}"
                                                         class="img-custom">
@@ -109,16 +108,16 @@
                         </div>  
                         <div class="col-12">
                             <div class="border-custom-dark bg-light p-4 d-flex flex-column align-items-end">
-                                <p>Sous-Total: {{order.subTotal}}€</p>
-                                <p>Livraison: {{order.delivery ? '10€' : '0€'}}</p>
-                                <p class="fw-semibold">Total: {{order.price}}€</p>
+                                <p>Total des prix: {{ calculateTotalOfSubTotal(command) }}€</p>
+                                <p>Livraison: {{command.delivery ? '10€' : '0€'}}</p>
+                                <p class="fw-semibold">Total: {{command.price}}€</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <ng-template #noOrders>
+        <ng-template #noCommands>
             <h2>Vous n'avez pour le moment aucune commande.</h2>
         </ng-template>
     </div>

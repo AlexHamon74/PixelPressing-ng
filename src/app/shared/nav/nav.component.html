@@ -24,7 +24,7 @@
                 </li>
 
                 <!-- PAGE DASHBOARD -->
-                <li class="nav-item" *ngIf="isLogged() && isAdmin()">
+                <li class="nav-item" *ngIf="isLogged() && isAdminOrEmployee()">
                     <a class="nav-lien" routerLink="admin/dashboard">Dashboard</a>
                 </li>
             </ul>
