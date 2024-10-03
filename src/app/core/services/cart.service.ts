@@ -42,10 +42,10 @@ export class CartService {
   }
 
   deleteCartItems(cartItemId: number): Observable<void>{
-    let currentCart = this.getCartItems();
-    currentCart = currentCart.filter(cartItem => cartItem.id !== cartItemId);
-    localStorage.setItem(this.localStorageKey, JSON.stringify(currentCart));
-    this.cartItemsCountSubject.next(currentCart.length);
+    const cartItems = this.getCartItems();
+    const updatedCartItems = cartItems.filter(item => item.id !== cartItemId);
+    localStorage.setItem(this.localStorageKey, JSON.stringify(updatedCartItems));
+    this.cartItemsCountSubject.next(updatedCartItems.length);
     return of(void 0);
   }
 
